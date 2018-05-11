@@ -18,6 +18,11 @@ import javafx.scene.control.Label;
  */
 public class CarteController implements Initializable {
     
+    @FXML
+    public void on_mouse_moved() {
+        
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
