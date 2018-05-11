@@ -8,7 +8,6 @@ package risk;
 
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -34,8 +33,7 @@ public class Risk extends Application {
         stage.show();
         
         try {
-            BufferedImage image = 
-              ImageIO.read(this.getClass().getResource("/ressources/image_fixed.png"));
+            BufferedImage image = ImageIO.read(this.getClass().getResource("/ressources/image_fixed.png"));
             ImageAssets.marchThroughImage(image);
         } catch (IOException e) {
           System.err.println(e.getMessage());

@@ -13,7 +13,6 @@ import java.awt.image.BufferedImage;
  */
 public class ImageAssets {
     
-
   public static void printPixelARGB(int pixel) {
     int alpha = (pixel >> 24) & 0xff;
     int red = (pixel >> 16) & 0xff;
