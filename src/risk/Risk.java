@@ -21,7 +21,7 @@ public class Risk extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/Carte.fxml"));
         
         Scene scene = new Scene(root);
         
