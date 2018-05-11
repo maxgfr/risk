@@ -5,22 +5,22 @@
  */
 package model;
 
+import java.awt.Color;
+
 /**
  *
  * @author golfier
  */
-public class Couleur {
+public class Pixel {
     
-    private int a;
-    private int r;
-    private int g;
-    private int b;
-    
-    Couleur(int a, int r, int g, int b) {
-        this.a = a;
-        this.r = r;
-        this.g = g;
-        this.b = b;
+    public int x;
+    public int y;
+    public Color color;
+          
+    public Pixel (int x, int y, Color color) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
     }
     
 }
