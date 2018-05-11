@@ -34,7 +34,7 @@ public class Risk extends Application {
         
         try {
             BufferedImage image = ImageIO.read(this.getClass().getResource("/ressources/image_fixed.png"));
-            ImageAssets.marchThroughImage(image);
+            ImageAssets.imageProcess(image);
         } catch (IOException e) {
           System.err.println(e.getMessage());
         }

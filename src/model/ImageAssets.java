@@ -6,6 +6,8 @@
 package model;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -20,19 +22,37 @@ public class ImageAssets {
     int blue = (pixel) & 0xff;
     System.out.println("argb: " + alpha + ", " + red + ", " + green + ", " + blue);
   }
+  
+  public static void addPixel(int pixel, int i, int j, List<Couleur> list) {      
+    int alpha = (pixel >> 24) & 0xff;
+    int red = (pixel >> 16) & 0xff;
+    int green = (pixel >> 8) & 0xff;
+    int blue = (pixel) & 0xff;
+    Couleur couleur = new Couleur (alpha,red,green,blue);
+    if(!list.contains(couleur)) {
+        list.add(couleur);
+    }
+  }
 
-  public static void marchThroughImage(BufferedImage image) {
+  public static void imageProcess(BufferedImage image) {
     int w = image.getWidth();
     int h = image.getHeight();
-    System.out.println("width, height: " + w + ", " + h);
-
+    System.out.println("Width, Height: " + w + ", " + h);
+    
+    List<Couleur> maListeDeCouleur = new ArrayList<Couleur>();
+    
     for (int i = 0; i < h; i++) {
-      for (int j = 0; j < w; j++) {
-        System.out.println("x,y: " + j + ", " + i);
-        int pixel = image.getRGB(j, i);
-        printPixelARGB(pixel);
-        System.out.println("");
-      }
+        for (int j = 0; j < w; j++) {
+            //System.out.println("x,y: " + j + ", " + i);
+            
+            int pixel = image.getRGB(j, i);
+            
+            addPixel(pixel, i, j, maListeDeCouleur);
+            
+        }
     }
+    
+    System.out.println("Il y a " + maListeDeCouleur.size() + " couleurs différentes.");
+    
   }
 }
