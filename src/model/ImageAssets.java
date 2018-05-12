@@ -24,13 +24,22 @@ public class ImageAssets {
     System.out.println("argb: " + alpha + ", " + red + ", " + green + ", " + blue);
   }
   
+<<<<<<< Updated upstream
   public static void addPixel(int pixel, int i, int j, List<Color> list, List<Pixel> listPixel) {      
+=======
+  public static void addPixel(int pixel, int i, int j, List<Color> list) {      
+>>>>>>> Stashed changes
     int alpha = (pixel >> 24) & 0xff;
     int red = (pixel >> 16) & 0xff;
     int green = (pixel >> 8) & 0xff;
     int blue = (pixel) & 0xff;
+<<<<<<< Updated upstream
     Color couleur = new Color (alpha,red,green,blue);
     Pixel pixl = new Pixel (i, j, couleur);
+=======
+    
+    Color couleur = new Color(alpha, red, green, blue);
+>>>>>>> Stashed changes
     if(!list.contains(couleur)) {
         list.add(couleur);
     } 
@@ -42,8 +51,12 @@ public class ImageAssets {
     int h = image.getHeight();
     System.out.println("Width, Height: " + w + ", " + h);
     
+<<<<<<< Updated upstream
     List<Color> maListeDeColor = new ArrayList<Color>();
     List<Pixel> maListeDePixel = new ArrayList<Pixel>();
+=======
+    List<Color> colorList = new ArrayList<Color>();
+>>>>>>> Stashed changes
     
     for (int i = 0; i < h; i++) {
         for (int j = 0; j < w; j++) {
@@ -51,12 +64,20 @@ public class ImageAssets {
             
             int pixel = image.getRGB(j, i);
             
+<<<<<<< Updated upstream
             addPixel(pixel, i, j, maListeDeColor, maListeDePixel);
+=======
+            addPixel(pixel, i, j, colorList);
+>>>>>>> Stashed changes
             
         }
     }
     
+<<<<<<< Updated upstream
     System.out.println("Il y a " + maListeDeColor.size() + " couleurs différentes.");
+=======
+    System.out.println("Il y a " + colorList.size() + " couleurs différentes.");
+>>>>>>> Stashed changes
     
   }
 }
