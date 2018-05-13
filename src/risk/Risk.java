@@ -33,7 +33,7 @@ public class Risk extends Application {
         stage.show();
         
         try {
-            BufferedImage image = ImageIO.read(this.getClass().getResource("/ressources/image_fixed_2.png"));
+            BufferedImage image = ImageIO.read(this.getClass().getResource("/ressources/image_fixed2.png"));
             ImageAssets.imageProcess(image);
         } catch (IOException e) {
           System.err.println(e.getMessage());

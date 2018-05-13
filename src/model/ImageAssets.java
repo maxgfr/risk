@@ -30,7 +30,6 @@ public class ImageAssets {
     int red = (pixel >> 16) & 0xff;
     int green = (pixel >> 8) & 0xff;
     int blue = (pixel) & 0xff;
-    System.out.println(alpha+"   "+red+"   "+green+"   "+blue);
     Color couleur = new Color (alpha,red,green,blue);*/
     Color couleur = new Color (pixel);
     Pixel pixl = new Pixel (i, j, couleur);
