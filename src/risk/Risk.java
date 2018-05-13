@@ -24,8 +24,6 @@ import model.ImageAssets;
  */
 public class Risk extends Application {
     
-    public static Game game;
-    
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/view/Launch.fxml"));
@@ -34,13 +32,7 @@ public class Risk extends Application {
         
         stage.setScene(scene);
         stage.show();
-        
-        try {
-            BufferedImage image = ImageIO.read(this.getClass().getResource("/ressources/image_fixed2.png"));
-            ImageAssets.imageProcess(image);
-        } catch (IOException e) {
-          System.err.println(e.getMessage());
-        }
+      
     }
 
     /**
