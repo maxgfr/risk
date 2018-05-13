@@ -1,4 +1,4 @@
-package risk;
+package main;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -22,7 +22,7 @@ import model.ImageAssets;
  *
  * @author golfier
  */
-public class Risk extends Application {
+public class Main extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {

@@ -44,6 +44,31 @@ public class CarteController implements Initializable {
         } catch (IOException e) {
           System.err.println(e.getMessage());
         }
+        
+        /*this.imageView.setOnMouseMoved(event -> { try {
+
+            // AWT Robot and Color to trace pixel information
+            Robot robot = new Robot();
+            Color color = robot.getPixelColor((int) event.getScreenX(), (int) event.getScreenY());
+
+            // Initializing pixel info
+            String xPos = Integer.toString((int) event.getX());
+            String yPos = Integer.toString((int) event.getY());
+            String colorRed = Integer.toString(color.getRed());
+            String colorBlue = Integer.toString(color.getBlue());
+            String colorGreen = Integer.toString(color.getGreen());
+            String hexColor = String.format("#%02X%02X%02X", color.getRed(), color.getGreen(), color.getBlue());
+
+            // Unify and format the information
+            String pixelInfo = "X: " + xPos + " Y: " + yPos + " | "
+                    + "r: " + colorRed + " g: " + colorGreen +
+                    " b: " + colorBlue + " | " + hexColor;
+
+            // Pass it on to the MainApp
+            this.mainApp.getPixelInfo().setInfoString(pixelInfo);
+
+        } catch (Exception ignore){}});*/
+
     }    
     
 }
