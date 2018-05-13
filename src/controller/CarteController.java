@@ -12,6 +12,7 @@ import java.awt.Robot;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,6 +21,7 @@ import javafx.scene.image.ImageView;
 import javax.imageio.ImageIO;
 import model.Game;
 import model.ImageAssets;
+import model.Territory;
 
 /**
  *
@@ -39,9 +41,10 @@ public class CarteController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println("initialize");
-        try {
+        
+         try {
             BufferedImage image = ImageIO.read(this.getClass().getResource("/ressources/image_fixed2.png"));
-            ImageAssets.imageProcess(image, game.getMaListeDeColor(), game.getMaListeDePixel());
+            List<Territory> territories = ImageAssets.imageProcess(image);
         } catch (IOException e) {
           System.err.println(e.getMessage());
         }
@@ -52,7 +55,7 @@ public class CarteController implements Initializable {
             Robot robot = new Robot();
             Color color = robot.getPixelColor((int) event.getScreenX(), (int) event.getScreenY());
             
-            //System.out.println(color);
+            System.out.println(color);
             
             game.tellTerritory(color);
 

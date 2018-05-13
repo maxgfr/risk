@@ -1,35 +1,15 @@
 package main;
-
-import java.util.*;
-import java.awt.Color;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
-
-<<<<<<< HEAD
-=======
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
->>>>>>> c9ef155be9636dff536db55d762ece7791219682
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-<<<<<<< HEAD
-=======
-import javax.imageio.ImageIO;
-import model.Game;
-import model.ImageAssets;
-import model.Pixel;
-import model.Territory;
->>>>>>> c9ef155be9636dff536db55d762ece7791219682
-
 /**
  *
  * @author golfier
@@ -44,13 +24,7 @@ public class Main extends Application {
         
         stage.setScene(scene);
         stage.show();
-        
-        try {
-            BufferedImage image = ImageIO.read(this.getClass().getResource("/ressources/image_fixed2.png"));
-            List<Territory> territories = ImageAssets.imageProcess(image);
-        } catch (IOException e) {
-          System.err.println(e.getMessage());
-        }
+       
     }
 
     /**
