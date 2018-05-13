@@ -5,14 +5,18 @@
  */
 package controller;
 
+import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.Robot;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javax.imageio.ImageIO;
 import model.Game;
 import model.ImageAssets;
@@ -27,13 +31,10 @@ public class CarteController implements Initializable {
     private static Game game = Game.getInstance();
     
     @FXML
-    public void on_mouse_moved() {
-        Point p = MouseInfo.getPointerInfo().getLocation();
-        int x = p.x;
-        int y = p.y;
-        System.out.println("Position x : " + x + "\nPosition y : "+ y+ "\n\n");
-        game.tellTerritory(x, y);
-    }
+    ImageView imageView;
+    
+    @FXML
+    Image image;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -45,11 +46,15 @@ public class CarteController implements Initializable {
           System.err.println(e.getMessage());
         }
         
-        /*this.imageView.setOnMouseMoved(event -> { try {
+        this.imageView.setOnMouseMoved(event -> { try {
 
             // AWT Robot and Color to trace pixel information
             Robot robot = new Robot();
             Color color = robot.getPixelColor((int) event.getScreenX(), (int) event.getScreenY());
+            
+            //System.out.println(color);
+            
+            game.tellTerritory(color);
 
             // Initializing pixel info
             String xPos = Integer.toString((int) event.getX());
@@ -58,16 +63,17 @@ public class CarteController implements Initializable {
             String colorBlue = Integer.toString(color.getBlue());
             String colorGreen = Integer.toString(color.getGreen());
             String hexColor = String.format("#%02X%02X%02X", color.getRed(), color.getGreen(), color.getBlue());
-
+            
             // Unify and format the information
             String pixelInfo = "X: " + xPos + " Y: " + yPos + " | "
                     + "r: " + colorRed + " g: " + colorGreen +
                     " b: " + colorBlue + " | " + hexColor;
+            //System.out.println(pixelInfo);
 
-            // Pass it on to the MainApp
-            this.mainApp.getPixelInfo().setInfoString(pixelInfo);
-
-        } catch (Exception ignore){}});*/
+            } catch (Exception ignore) {
+                ignore.printStackTrace();
+            }
+        });
 
     }    
     

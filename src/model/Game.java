@@ -95,20 +95,16 @@ public class Game {
         this.finished = finished;
     }
     
-    public void tellTerritory(int x, int y) {
+    public void tellTerritory(Color color) {
         boolean find = false;
         for (Iterator<Pixel> it = maListeDePixel.iterator(); it.hasNext();) {
             Pixel pixel = it.next();
-            //System.out.println(pixel.x + " - "+ pixel.y);
-            //System.out.println(pixel.color);
-            if (pixel.x == x && pixel.y == y) {
-                Color col = pixel.color;
-                find = true;
-                System.out.println(col);    
+            if (pixel.color == color) {
+                System.out.println("Color find");    
             }
         }
         if (!find) {
-            System.out.println("no_color");  
+            System.out.println("Color not find");  
         }
         
     }
