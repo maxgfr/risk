@@ -39,12 +39,12 @@ public class LaunchController implements Initializable {
     @FXML
     public void onCreateButton (ActionEvent event) {
         try {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/view/SelectJoueur.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
-        Stage stage = new Stage();
-        stage.setTitle("Selectionnez un nombre de joueur");
-        stage.setScene(scene);
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/view/SelectJoueur.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+            Stage stage = new Stage();
+            stage.setTitle("Selectionnez un nombre de joueur");
+            stage.setScene(scene);
         stage.show();
         } catch (IOException e) {
             e.printStackTrace();

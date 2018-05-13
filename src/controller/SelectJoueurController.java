@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -36,7 +37,7 @@ public class SelectJoueurController implements Initializable {
     
     @FXML
     VBox myVBox;
-
+  
     /**
      * Initializes the controller class.
      */
@@ -59,26 +60,28 @@ public class SelectJoueurController implements Initializable {
         }
         Button b_final = new Button("Valider le nom des joueurs");
         b_final.setId("b_final");
-        //b_final.setOnAction("b_final");
+        b_final.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+               CarteView();
+            }
+        });
         myVBox.getChildren().add(b_final);
         myButton.setDisable(true);
-        
-        /*GridPane root = new GridPane();
-    root.setHgap(10);
-    root.setVgap(10);
+       
+    }
     
-    Button btn = new Button("Add TextField");
-    root.add(btn, 0, 0);
-    btn.setOnAction(e -> {
-        textField[i] = new TextField();
-        root.add(textField[i], 5, i);
-        i = i + 1;
-
-    });
-
-    final Scene scene = new Scene(root, 500, 400);
-    primaryStage.setScene(scene);
-    primaryStage.show();*/
+     public void CarteView() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/view/Carte.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setTitle("Carte");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
 }
