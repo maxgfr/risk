@@ -20,7 +20,18 @@ public class Game {
     private List<Pixel> maListeDePixel = new ArrayList<Pixel>();
     private boolean finished;
     
-    public Game () {
+    private static Game instance = null;
+    
+
+    public static Game getInstance() {
+       if(instance == null) {
+          instance = new Game();
+       }
+       return instance;
+    }
+    
+    
+    protected Game () {
         list_player = new ArrayList<Player>();
         maListeDeColor = new ArrayList<Color>();
         maListeDePixel = new ArrayList<Pixel>();

@@ -37,7 +37,7 @@ public class CarteController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Game game = new Game();
+        Game game = Game.getInstance();
         try {
             BufferedImage image = ImageIO.read(this.getClass().getResource("/ressources/image_fixed2.png"));
             ImageAssets.imageProcess(image, game.getMaListeDeColor(), game.getMaListeDePixel());
