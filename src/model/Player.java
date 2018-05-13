@@ -17,14 +17,12 @@ public class Player {
 	private String name;
 	private int id;
 	private List<Territory> mTerritories;
-	private List<Card> cards;
 	private int nbSold;
 	
 	Player(String name, int id) {
 		this.name = name;
 		this.id = id;
 		mTerritories = new ArrayList<Territory>();
-                cards = new ArrayList<Card>();
                 nbSold = 0;
 	}
 	
@@ -52,14 +50,6 @@ public class Player {
 		mTerritories.remove(t);
 	}
 
-        public void setCard(Card c){
-            cards.add(c);
-        }
-
-        public List<Card> getCard(){
-            return cards;
-        }
-	
 	public void addArmies(int a){
 		nbSold += a;
 	}
