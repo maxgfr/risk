@@ -24,7 +24,7 @@ import model.ImageAssets;
 public class CarteController implements Initializable {
     
     
-    private static Game game;
+    private static Game game = Game.getInstance();
     
     @FXML
     public void on_mouse_moved() {
@@ -32,12 +32,12 @@ public class CarteController implements Initializable {
         int x = p.x;
         int y = p.y;
         System.out.println("Position x : " + x + "\nPosition y : "+ y+ "\n\n");
-        
+        game.tellTerritory(x, y);
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Game game = Game.getInstance();
+        System.out.println("initialize");
         try {
             BufferedImage image = ImageIO.read(this.getClass().getResource("/ressources/image_fixed2.png"));
             ImageAssets.imageProcess(image, game.getMaListeDeColor(), game.getMaListeDePixel());

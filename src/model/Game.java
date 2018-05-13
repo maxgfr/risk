@@ -7,6 +7,7 @@ package model;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -92,6 +93,17 @@ public class Game {
      */
     public void setFinished(boolean finished) {
         this.finished = finished;
+    }
+    
+    public void tellTerritory(int x, int y) {
+        for (Iterator<Pixel> it = maListeDePixel.iterator(); it.hasNext();) {
+            Pixel pixel = it.next();
+            if (pixel.x == x && pixel.y == y) {
+                Color col = pixel.color;
+                System.out.println(col);    
+            }
+        }
+        System.out.println("no_color");  
     }
     
 }

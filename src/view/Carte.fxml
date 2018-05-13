@@ -8,7 +8,7 @@
    <center>
       <ImageView layoutY="18.0" nodeOrientation="INHERIT" onMouseMoved="#on_mouse_moved" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../ressources/image_fixed_2.png" />
+            <Image url="@../ressources/image_fixed2.png" />
          </image>
       </ImageView>
    </center>
