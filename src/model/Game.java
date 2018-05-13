@@ -16,8 +16,8 @@ import java.util.List;
 public class Game {
     
     private List<Player> list_player;
-    private List<Color> maListeDeColor = new ArrayList<Color>();
-    private List<Pixel> maListeDePixel = new ArrayList<Pixel>();
+    private List<Color> maListeDeColor;
+    private List<Pixel> maListeDePixel;
     private boolean finished;
     
     private static Game instance = null;
