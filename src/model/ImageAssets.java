@@ -24,12 +24,15 @@ public class ImageAssets {
     System.out.println("argb: " + alpha + ", " + red + ", " + green + ", " + blue);
   }
   
-  public static void addPixel(int pixel, int i, int j, List<Color> list, List<Pixel> listPixel) {      
-    int alpha = (pixel >> 24) & 0xff;
+  public static void addPixel(int pixel, int i, int j, List<Color> list, List<Pixel> listPixel) {
+    
+    /*int alpha = (pixel >> 24) & 0xff;
     int red = (pixel >> 16) & 0xff;
     int green = (pixel >> 8) & 0xff;
     int blue = (pixel) & 0xff;
-    Color couleur = new Color (alpha,red,green,blue);
+    System.out.println(alpha+"   "+red+"   "+green+"   "+blue);
+    Color couleur = new Color (alpha,red,green,blue);*/
+    Color couleur = new Color (pixel);
     Pixel pixl = new Pixel (i, j, couleur);
     if(!list.contains(couleur)) {
         list.add(couleur);
