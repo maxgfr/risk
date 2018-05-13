@@ -45,6 +45,7 @@ public class CarteController implements Initializable {
          try {
             BufferedImage image = ImageIO.read(this.getClass().getResource("/ressources/image_fixed2.png"));
             List<Territory> territories = ImageAssets.imageProcess(image);
+            game.setMaListeDeTerritoire(territories);
         } catch (IOException e) {
           System.err.println(e.getMessage());
         }
@@ -57,7 +58,7 @@ public class CarteController implements Initializable {
             
             System.out.println(color);
             
-            game.tellTerritory(color);
+            game.tellTerritory((int) event.getScreenX(), (int) event.getScreenY());
 
             // Initializing pixel info
             String xPos = Integer.toString((int) event.getX());

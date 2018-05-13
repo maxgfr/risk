@@ -19,6 +19,7 @@ public class Game {
     private List<Player> list_player;
     private List<Color> maListeDeColor;
     private List<Pixel> maListeDePixel;
+    private List<Territory> maListeDeTerritoire;
     private boolean finished;
     
     private static Game instance = null;
@@ -36,6 +37,7 @@ public class Game {
         list_player = new ArrayList<Player>();
         maListeDeColor = new ArrayList<Color>();
         maListeDePixel = new ArrayList<Pixel>();
+        maListeDeTerritoire = new ArrayList<Territory>();
         finished = false;
     }
 
@@ -95,18 +97,38 @@ public class Game {
         this.finished = finished;
     }
     
-    public void tellTerritory(Color color) {
+    public void tellTerritory(int x, int y) {
         boolean find = false;
-        for (Iterator<Pixel> it = maListeDePixel.iterator(); it.hasNext();) {
-            Pixel pixel = it.next();
-            if (pixel.color == color) {
-                System.out.println("Color find");    
+        for (Iterator<Territory> it = getMaListeDeTerritoire().iterator(); it.hasNext();) {
+            Territory territory = it.next();
+            List<Pixel> listPixel = territory.getListPixel();
+            for (Pixel p : listPixel) {
+                if (p.x == x && p.y == y) {
+                    System.out.println("Territory find");    
+                    find = true;
+                }
             }
+           
         }
         if (!find) {
-            System.out.println("Color not find");  
+            System.out.println("Territory not find");  
         }
         
     }
+
+    /**
+     * @return the maListeDeTerritoire
+     */
+    public List<Territory> getMaListeDeTerritoire() {
+        return maListeDeTerritoire;
+    }
+
+    /**
+     * @param maListeDeTerritoire the maListeDeTerritoire to set
+     */
+    public void setMaListeDeTerritoire(List<Territory> maListeDeTerritoire) {
+        this.maListeDeTerritoire = maListeDeTerritoire;
+    }
+
     
 }
