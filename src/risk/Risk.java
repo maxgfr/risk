@@ -15,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
+import model.Game;
 import model.ImageAssets;
 
 /**
@@ -22,6 +23,8 @@ import model.ImageAssets;
  * @author golfier
  */
 public class Risk extends Application {
+    
+    public static Game game;
     
     @Override
     public void start(Stage stage) throws Exception {

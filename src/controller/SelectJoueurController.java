@@ -13,6 +13,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
@@ -72,6 +73,8 @@ public class SelectJoueurController implements Initializable {
     
      public void CarteView() {
         try {
+            Stage stg = (Stage) myButton.getScene().getWindow();
+            stg.close();  
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/view/Carte.fxml"));
             Scene scene = new Scene(fxmlLoader.load());

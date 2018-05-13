@@ -45,7 +45,9 @@ public class LaunchController implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Selectionnez un nombre de joueur");
             stage.setScene(scene);
-        stage.show();
+            stage.show();
+            Stage stg = (Stage) closeButton.getScene().getWindow();
+            stg.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -53,9 +55,7 @@ public class LaunchController implements Initializable {
     
     @FXML
     public void onCloseButton (ActionEvent event) {
-         // get a handle to the stage
         Stage stage = (Stage) closeButton.getScene().getWindow();
-        // do what you have to do
         stage.close();
     }
     
