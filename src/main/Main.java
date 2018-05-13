@@ -1,4 +1,4 @@
-package risk;
+package main;
 
 import java.util.*;
 import java.awt.Color;
@@ -19,6 +19,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
+import model.Game;
 import model.ImageAssets;
 import model.Pixel;
 import model.Territory;
@@ -27,7 +28,7 @@ import model.Territory;
  *
  * @author golfier
  */
-public class Risk extends Application {
+public class Main extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {

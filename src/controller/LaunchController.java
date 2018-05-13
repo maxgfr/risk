@@ -13,8 +13,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -39,13 +37,15 @@ public class LaunchController implements Initializable {
     @FXML
     public void onCreateButton (ActionEvent event) {
         try {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/view/SelectJoueur.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
-        Stage stage = new Stage();
-        stage.setTitle("Selectionnez un nombre de joueur");
-        stage.setScene(scene);
-        stage.show();
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/view/SelectJoueur.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+            Stage stage = new Stage();
+            stage.setTitle("Selectionnez un nombre de joueur");
+            stage.setScene(scene);
+            stage.show();
+            Stage stg = (Stage) closeButton.getScene().getWindow();
+            stg.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -53,9 +53,7 @@ public class LaunchController implements Initializable {
     
     @FXML
     public void onCloseButton (ActionEvent event) {
-         // get a handle to the stage
         Stage stage = (Stage) closeButton.getScene().getWindow();
-        // do what you have to do
         stage.close();
     }
     
