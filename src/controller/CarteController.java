@@ -14,10 +14,18 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import javafx.application.Application;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+
 import javax.imageio.ImageIO;
 
 import model.ColorUtils;
@@ -42,50 +50,28 @@ public class CarteController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println("initialize");
         
          try {
             BufferedImage image = ImageIO.read(this.getClass().getResource("/ressources/image_fixed2.png"));
             List<Territory> territories = ImageAssets.imageProcess(image);
             game.setMaListeDeTerritoire(territories);
+            
+        	
         } catch (IOException e) {
           System.err.println(e.getMessage());
         }
         
         this.imageView.setOnMouseMoved(event -> { try {
 
-            // AWT Robot and Color to trace pixel information
-            Robot robot = new Robot();
-            Color color = robot.getPixelColor((int) event.getX(), (int) event.getY());
-            
-            
-            ColorUtils utils = new ColorUtils();
-            System.out.println(utils.getColorNameFromColor(color));
-            System.out.print(" x : " + event.getX() + " y: " + event.getY());
-            
-            //game.tellTerritory((int) event.getX(), (int) event.getY());
-            
-            
-
-            // Initializing pixel info
-            String xPos = Integer.toString((int) event.getX());
-            String yPos = Integer.toString((int) event.getY());
-            String colorRed = Integer.toString(color.getRed());
-            String colorBlue = Integer.toString(color.getBlue());
-            String colorGreen = Integer.toString(color.getGreen());
-            String hexColor = String.format("#%02X%02X%02X", color.getRed(), color.getGreen(), color.getBlue());
-            
-            // Unify and format the information
-            String pixelInfo = "X: " + xPos + " Y: " + yPos + " | "
-                    + "r: " + colorRed + " g: " + colorGreen +
-                    " b: " + colorBlue + " | " + hexColor;
-            //System.out.println(pixelInfo);
-
+            Territory terr = game.tellTerritory((int) event.getX(), (int) event.getY());
+            if (terr != null){
+            		imageView.setImage(SwingFXUtils.toFXImage(ImageAssets.colorTerritoire(SwingFXUtils.fromFXImage(image, null), terr, Color.BLUE), null));
+            }
             } catch (Exception ignore) {
                 ignore.printStackTrace();
             }
         });
 
-    }    
-    
+    }
+
 }

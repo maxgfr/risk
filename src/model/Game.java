@@ -97,22 +97,18 @@ public class Game {
         this.finished = finished;
     }
     
-    public void tellTerritory(int x, int y) {
-        boolean find = false;
+    public Territory tellTerritory(int x, int y) {
         for (Iterator<Territory> it = getMaListeDeTerritoire().iterator(); it.hasNext();) {
             Territory territory = it.next();
             List<Pixel> listPixel = territory.getListPixel();
             for (Pixel p : listPixel) {
                 if (p.y == y && p.x == x) {
-                    System.out.println("Territory founded");    
-                    find = true;
+                	return territory;
                 }
                 
             }
         }
-        if (!find) {
-            System.out.println("Territory not founded");  
-        }
+		return null;
         
     }
 

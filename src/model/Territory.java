@@ -31,11 +31,5 @@ public class Territory {
 	    	return pixelList;
 	    }
 
-	    public string Name {
 
-
-
-
-
-	}
 }
