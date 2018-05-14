@@ -19,6 +19,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javax.imageio.ImageIO;
+
+import model.ColorUtils;
 import model.Game;
 import model.ImageAssets;
 import model.Territory;
@@ -54,11 +56,16 @@ public class CarteController implements Initializable {
 
             // AWT Robot and Color to trace pixel information
             Robot robot = new Robot();
-            Color color = robot.getPixelColor((int) event.getScreenX(), (int) event.getScreenY());
+            Color color = robot.getPixelColor((int) event.getX(), (int) event.getY());
             
-            System.out.println(color);
             
-            game.tellTerritory((int) event.getScreenX(), (int) event.getScreenY());
+            ColorUtils utils = new ColorUtils();
+            System.out.println(utils.getColorNameFromColor(color));
+            System.out.print(" x : " + event.getX() + " y: " + event.getY());
+            
+            //game.tellTerritory((int) event.getX(), (int) event.getY());
+            
+            
 
             // Initializing pixel info
             String xPos = Integer.toString((int) event.getX());

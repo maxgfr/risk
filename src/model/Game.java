@@ -103,15 +103,15 @@ public class Game {
             Territory territory = it.next();
             List<Pixel> listPixel = territory.getListPixel();
             for (Pixel p : listPixel) {
-                if (p.x == x && p.y == y) {
-                    System.out.println("Territory find");    
+                if (p.y == y && p.x == x) {
+                    System.out.println("Territory founded");    
                     find = true;
                 }
+                
             }
-           
         }
         if (!find) {
-            System.out.println("Territory not find");  
+            System.out.println("Territory not founded");  
         }
         
     }
