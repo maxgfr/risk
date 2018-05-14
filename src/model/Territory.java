@@ -30,4 +30,12 @@ public class Territory {
 	    public List<Pixel> getListPixel(){
 	    	return pixelList;
 	    }
+
+	    public string Name {
+
+
+
+
+
+	}
 }
