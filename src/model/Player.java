@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class Player {
     private int id;
     private List<Territory> mTerritories;
     private int nbSold;
+    public Color color;
 
     public Player(String name, int id) {
             this.name = name;
