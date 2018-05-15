@@ -5,8 +5,10 @@
  */
 package model;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -18,10 +20,16 @@ public class Player {
     private int id;
     private List<Territory> mTerritories;
     private int nbSold;
+    public Color color;
 
-    public Player(String name, int id) {
-            this.name = name;
+    public Player(int id, String name) {
             this.id = id;
+            if(name.isEmpty()) {
+                this.name = randomName();
+            } else {
+                this.name = name;
+            }
+            this.color = randomColor();
             mTerritories = new ArrayList<Territory>();
             nbSold = 0;
     }
@@ -64,6 +72,26 @@ public class Player {
 
     public void looseArmy(){
         nbSold--;
+    }
+    
+    private String randomName() {
+        Random r = new Random();
+        String value="";
+        char random_Char ;
+        for(int i=0; i<10;i++) { 
+            random_Char = (char) (48 + r.nextInt(74));
+            value=value+random_Char;
+        }
+        return value;
+    }
+    
+    private Color randomColor() {
+        Random rand = new Random();
+        float r = rand.nextFloat();
+        float g = rand.nextFloat();
+        float b = rand.nextFloat();
+        Color randomColor = new Color(r, g, b);
+        return randomColor;
     }
 
 	
