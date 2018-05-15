@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="myVBox" fx:controller="controller.SelectJoueurController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="myVBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SelectJoueurController">
    <children>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de Joueur (2-6)" />
-      <Slider fx:id="mySlider" min="2" blockIncrement="1"  majorTickUnit="1" max="6" minorTickCount="1" showTickLabels="true" />
-      <Button fx:id="myButton" onAction="#onValidateButton" mnemonicParsing="false" text="Valider" />
+      <Slider fx:id="mySlider" blockIncrement="1" majorTickUnit="1" max="6" min="2" minorTickCount="1" showTickLabels="true" snapToTicks="true" />
+      <Button fx:id="myButton" mnemonicParsing="false" onAction="#onValidateButton" text="Valider" />
    </children>
 </VBox>
