@@ -12,7 +12,7 @@
 <VBox fx:id="myVBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SelectJoueurController">
    <children>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de Joueur (2-6)" />
-      <Slider fx:id="mySlider" blockIncrement="1" majorTickUnit="1" max="6" min="2" minorTickCount="1" showTickLabels="true" snapToTicks="true" />
+      <Slider fx:id="mySlider" blockIncrement="1" majorTickUnit="1" max="6" min="2" minorTickCount="1" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
       <Button fx:id="myButton" mnemonicParsing="false" onAction="#onValidateButton" text="Valider" />
    </children>
 </VBox>

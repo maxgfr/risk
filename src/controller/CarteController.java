@@ -77,27 +77,15 @@ public class CarteController implements Initializable {
         this.imageView.setOnMouseClicked(event -> {
         	changeImageOnmouseClick(event);
         });
+       
         
-
-        this.imageView.setOnMouseMoved(event -> { try {
-
-            Territory terr = game.tellTerritory((int) event.getX(), (int) event.getY());
-            if (terr != null){
-                imageView.setImage(SwingFXUtils.toFXImage(ImageAssets.colorTerritoire(SwingFXUtils.fromFXImage(image, null), terr, Color.BLUE), null));
-                }
-            }
-            catch (Exception ignore) {
-                ignore.printStackTrace();
-        }});
-            final long startNanoTime = System.nanoTime();
+        final long startNanoTime = System.nanoTime();
         
         new AnimationTimer()
         {
             public void handle(long currentNanoTime)
             {
                 double t = (currentNanoTime - startNanoTime) / 1000000000.0; 
-                
-
             }
         }.start();
     }
@@ -121,7 +109,10 @@ public class CarteController implements Initializable {
     }
     
     public void onNextPlayer(ActionEvent event){
-    	current_player = players.get(current_player.getId() + 1);
+    	if (players.size() > current_player.getId() + 1)
+    		current_player = players.get(current_player.getId() + 1);
+    	else
+    		current_player = players.get(0);
     }
 
 }
