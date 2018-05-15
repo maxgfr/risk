@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -84,11 +83,7 @@ public class SelectJoueurController implements Initializable {
             List<Player> list_player = new ArrayList<Player>();
             for (int i = 0; i<listTextField.size() ; i++) {
                 String value = listTextField.get(i).getText();
-                if (value.isEmpty()) {
-                    value = randomString();
-                }
-                System.out.println(value);
-                Player p = new Player(value,i);
+                Player p = new Player(i,value);
                 list_player.add(p);
             }
             game.setList_player(list_player);
@@ -106,15 +101,6 @@ public class SelectJoueurController implements Initializable {
         }
     }
      
-    private String randomString() {
-        Random r = new Random();
-        String value="";
-        char random_Char ;
-        for(int i=0; i<10;i++) { 
-            random_Char = (char) (48 + r.nextInt(74));
-            value=value+random_Char;
-        }
-        return value;
-    }
+    
     
 }
