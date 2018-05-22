@@ -48,41 +48,41 @@ public class Territory {
 					terrAdjacent.put("North Canada", "West Canada");
 					terrAdjacent.put("North Canada", "Center Canada");
 					terrAdjacent.put("North Canada", "Greenland");
-					return "North Canada";
+					return "North_Canada";
 					 
 				case "java.awt.Color[r=255,g=255,b=0]":
 					terrAdjacent.put("West Canada", "Center Canada");
 					terrAdjacent.put("West Canada", "North Canada");
 					terrAdjacent.put("West Canada", "Alaska");
 					terrAdjacent.put("West Canada", "West USA");
-					return "West Canada";
+					return "West_Canada";
 					 
 				case "java.awt.Color[r=148,g=148,b=73]":
-					return "Center Canada";
+					return "Center_Canada";
 					 
 				case "java.awt.Color[r=184,g=184,b=61]":
-					return "East Canada";
+					return "East_Canada";
 					 
 				case "java.awt.Color[r=100,g=100,b=40]":
-					return "West USA";
+					return "West_USA";
 					 
 				case "java.awt.Color[r=128,g=128,b=0]":
-					return "East USA";
+					return "East_USA";
 					 
 				case "java.awt.Color[r=255,g=255,b=128]":
 					return "Mexico";
 					 
 				case "java.awt.Color[r=255,g=128,b=128]":
-					return "North Latin America";
+					return "North_Latin_America";
 					 
 				case "java.awt.Color[r=128,g=0,b=0]":
-					return "West Latin America";
+					return "West_Latin_America";
 					 
 				case "java.awt.Color[r=128,g=64,b=64]":
-					return "East Latin America";
+					return "East_Latin_America";
 					 
 				case "java.awt.Color[r=255,g=0,b=0]":
-					return "South Latin America";
+					return "South_Latin_America";
 					 
 				case "java.awt.Color[r=214,g=214,b=127]":
 					return "Greenland";
@@ -91,58 +91,58 @@ public class Territory {
 					return "Iceland";
 					 
 				case "java.awt.Color[r=255,g=145,b=91]":
-					return "West Africa";
+					return "West_Africa";
 					 
 				case "java.awt.Color[r=174,g=87,b=0]":
-					return "Center Africa";
+					return "Center_Africa";
 					 
 				case "java.awt.Color[r=203,g=148,b=92]":
-					return "South Africa";
+					return "South_Africa";
 					 
 				case "java.awt.Color[r=121,g=70,b=51]":
 					return "Madagascar";
 					 
 				case "java.awt.Color[r=255,g=128,b=0]":
-					return "East Africa";
+					return "East_Africa";
 					 
 				case "java.awt.Color[r=128,g=64,b=0]":
-					return "North Africa";
+					return "North_Africa";
 					 
 				case "java.awt.Color[r=0,g=64,b=128]":
 					return "UK";
 					 
 				case "java.awt.Color[r=0,g=128,b=255]":
-					return "West Europe";
+					return "West_Europe";
 					 
 				case "java.awt.Color[r=49,g=105,b=160]":
-					return "South Europe";
+					return "South_Europe";
 					 
 				case "java.awt.Color[r=165,g=201,b=236]":
 					return "Scandinavia";
 					 
 				case "java.awt.Color[r=0,g=0,b=255]":
-					return "Center Europe";
+					return "Center_Europe";
 					 
 				case "java.awt.Color[r=0,g=0,b=128]":
-					return "East Europe";
+					return "East_Europe";
 					 
 				case "java.awt.Color[r=0,g=128,b=0]":
-					return "Middle East";
+					return "Middle_East";
 					 
 				case "java.awt.Color[r=68,g=179,b=68]":
-					return "NW Russia";
+					return "NW_Russia";
 					 
 				case "java.awt.Color[r=93,g=145,b=145]":
-					return "NE Russia";
+					return "NE_Russia";
 					 
 				case "java.awt.Color[r=117,g=192,b=117]":
-					return "West Russia";
+					return "West_Russia";
 					 
 				case "java.awt.Color[r=96,g=179,b=137]":
-					return "East Russia";
+					return "East_Russia";
 					 
 				case "java.awt.Color[r=0,g=255,b=0]":
-					return "South Russia";
+					return "South_Russia";
 					 
 				case "java.awt.Color[r=0,g=64,b=0]":
 					return "Mongolia";
@@ -169,13 +169,13 @@ public class Territory {
 					return "Papua";
 					 
 				case "java.awt.Color[r=128,g=0,b=64]":
-					return "West Australia";
+					return "West_Australia";
 					 
 				case "java.awt.Color[r=64,g=0,b=64]":
-					return "East Australia";
+					return "East_Australia";
 					 
 				default:
-					return "Invalid country";
+					return "Invalid_country";
 					 
 			}
 		}
