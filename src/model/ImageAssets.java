@@ -8,7 +8,10 @@ package model;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
 
 /**
  *
@@ -68,4 +71,42 @@ public class ImageAssets {
       }
 	  return image;
   }
+  
+  
+  public static Image colorTerritoireInit (Image imageParam, List<Player> players, List<Territory> territories){
+      
+        BufferedImage buffImage = SwingFXUtils.fromFXImage(imageParam, null);
+        
+        int nb_players = players.size()+1;
+        int nb_territories = territories.size()+1;
+        int territories_modulo = nb_territories % nb_players;
+        int territory_per_player = nb_territories / nb_players;
+
+        
+        for (int i=0; i<territories.size(); i++) { // pour chaque territoire
+            for (int j=0; j<players.size(); j++) {
+                for (int k=0; k<territory_per_player; k++) {
+                    Collections.shuffle(territories);
+                    players.get(j).getTerritories().add(territories.get(i));
+                    for (Pixel pix : territories.get(i).pixelList) {
+                        buffImage.setRGB(pix.x, pix.y, players.get(j).getColor().getRGB());
+                    }
+                }             
+            }
+            while (territories_modulo > 0) {
+                Collections.shuffle(territories);
+                players.get(territories_modulo).getTerritories().add(territories.get(i));
+                for (Pixel pix : territories.get(i).pixelList) {
+                    buffImage.setRGB(pix.x, pix.y, players.get(territories_modulo).getColor().getRGB());
+                }
+                territories_modulo--;
+            }
+            
+        }
+     
+        Image image_final =  SwingFXUtils.toFXImage(buffImage, null);
+        
+        return image_final;
+  }
+  
 }

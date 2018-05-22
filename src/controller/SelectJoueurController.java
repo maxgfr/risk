@@ -5,6 +5,7 @@
  */
 package controller;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -83,9 +84,10 @@ public class SelectJoueurController implements Initializable {
         try {
             Game game = Game.getInstance();
             List<Player> list_player = new ArrayList<Player>();
+            List<Color> listColor = game.getListColor(listTextField.size()+1);
             for (int i = 0; i<listTextField.size() ; i++) {
                 String value = listTextField.get(i).getText();
-                Player p = new Player(i,value);
+                Player p = new Player(i, value, listColor.get(i));
                 list_player.add(p);
             }
             game.setList_player(list_player);

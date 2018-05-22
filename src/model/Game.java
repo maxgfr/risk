@@ -7,6 +7,7 @@ package model;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -141,6 +142,34 @@ public class Game {
     public void setTours(int num_tours) {
         this.num_tours = num_tours;
     }
+    
+    
+    public List<Color> getListColor (int nb_joueurs) {
+        List<Color> maListe = new ArrayList<Color>();
+        List<Color> final_list = new ArrayList<Color>();
+        Color color1 = new Color (47,79,79); //darkslategrey
+        Color color2 = new Color (128,0,128); //purple
+        Color color3 = new Color (128,128,0); //olive
+        Color color4 = new Color (0,100,0); //dark green
+        Color color5 = new Color (128,0,0); //maroon
+        Color color6 = new Color (0,0,128); //navy
+        
+        maListe.add(color1);
+        maListe.add(color2);
+        maListe.add(color3);
+        maListe.add(color4);
+        maListe.add(color5);
+        maListe.add(color6);
+        
+        for(int i=0; i<nb_joueurs-1; i++) {
+            Collections.shuffle(maListe);
+            final_list.add(maListe.get(i));
+        }
+        
+        
+        return final_list;
+    }
+
 
 
     

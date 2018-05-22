@@ -59,11 +59,9 @@ public class CarteController implements Initializable {
         imageView.setImage(image);
         
         
-        List<Territory> territories = ImageAssets.imageProcess(SwingFXUtils.fromFXImage(image, null));
-        game.setMaListeDeTerritoire(territories);
-        players = game.getList_player();
-        current_player = players.get(0);
-            
+        game.setMaListeDeTerritoire(ImageAssets.imageProcess(SwingFXUtils.fromFXImage(image, null)));
+        current_player = game.getList_player().get(0);
+        imageView.setImage(ImageAssets.colorTerritoireInit(imageView.getImage(), game.getList_player(), game.getMaListeDeTerritoire()));
     }
    
     

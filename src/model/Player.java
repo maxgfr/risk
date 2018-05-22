@@ -7,6 +7,7 @@ package model;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -20,16 +21,16 @@ public class Player {
     private int id;
     private List<Territory> mTerritories;
     private int nbSold;
-    public Color color;
+    private Color color;
 
-    public Player(int id, String name) {
+    public Player(int id, String name, Color color) {
             this.id = id;
             if(name.isEmpty()) {
                 this.name = randomName();
             } else {
                 this.name = name;
             }
-            this.color = randomColor();
+            this.color = color;
             mTerritories = new ArrayList<Territory>();
             nbSold = 0;
     }
@@ -42,7 +43,7 @@ public class Player {
             return name;
     }
 
-    public List<Territory> getOccupiedTerritories(){
+    public List<Territory> getTerritories(){
             return mTerritories;
     }
 
@@ -50,11 +51,11 @@ public class Player {
             return mTerritories.size();
     }
 
-    public void occupyTerritory(Territory t){
+    public void addTerritory(Territory t){
             mTerritories.add(t);
     }
 
-    public void looseTerritory(Territory t){
+    public void removeTerritory(Territory t){
             mTerritories.remove(t);
     }
 
@@ -72,6 +73,14 @@ public class Player {
 
     public void looseArmy(){
         nbSold--;
+    }
+    
+    public Color getColor () {
+        return color;
+    }
+    
+    public void setColor (Color color) {
+        this.color = color;
     }
     
     private String randomName() {
@@ -93,7 +102,6 @@ public class Player {
         Color randomColor = new Color(r, g, b);
         return randomColor;
     }
-
 	
 }
 
