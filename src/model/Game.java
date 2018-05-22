@@ -21,6 +21,7 @@ public class Game {
     private List<Pixel> maListeDePixel;
     private List<Territory> maListeDeTerritoire;
     private boolean finished;
+    private int num_tours;
     
     private static Game instance = null;
     
@@ -39,6 +40,7 @@ public class Game {
         maListeDePixel = new ArrayList<Pixel>();
         maListeDeTerritoire = new ArrayList<Territory>();
         finished = false;
+        num_tours = 0;
     }
 
     /**
@@ -125,6 +127,21 @@ public class Game {
     public void setMaListeDeTerritoire(List<Territory> maListeDeTerritoire) {
         this.maListeDeTerritoire = maListeDeTerritoire;
     }
+    
+     /**
+     * @return the num_tours
+     */
+    public int getNumTours() {
+        return num_tours;
+    }
+
+    /**
+     * @param num_tours the num_tours to set
+     */
+    public void setTours(int num_tours) {
+        this.num_tours = num_tours;
+    }
+
 
     
 }
