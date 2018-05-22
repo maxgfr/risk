@@ -6,33 +6,21 @@
 package controller;
 
 import java.awt.Color;
-import java.awt.MouseInfo;
-import java.awt.Point;
-import java.awt.Robot;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javafx.animation.AnimationTimer;
-import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
-
-import javax.imageio.ImageIO;
-
-import model.ColorUtils;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.event.ActionEvent;
 import model.Game;
 import model.ImageAssets;
 import model.Player;
@@ -56,7 +44,13 @@ public class CarteController implements Initializable {
     Image image;
     
     @FXML
-    Button btn_newPlayer;
+    Button btn_NextTurn;
+    
+    @FXML
+    AnchorPane GameAnchor;
+    
+    @FXML
+    AnchorPane imagePane;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -69,50 +63,30 @@ public class CarteController implements Initializable {
         game.setMaListeDeTerritoire(territories);
         players = game.getList_player();
         current_player = players.get(0);
-        
-        this.imageView.setOnMouseMoved(event -> {
-        		//changeImageOnmouse(event);
             
-        });
-        this.imageView.setOnMouseClicked(event -> {
-        	changeImageOnmouseClick(event);
-        });
-       
-        
-        final long startNanoTime = System.nanoTime();
-        
-        new AnimationTimer()
-        {
-            public void handle(long currentNanoTime)
-            {
-                double t = (currentNanoTime - startNanoTime) / 1000000000.0; 
-            }
-        }.start();
     }
+   
     
-    public void changeImageOnmouse(MouseEvent event){
-    	
+    @FXML
+    private void imagePaneMouseClicked(MouseEvent event){
     	Territory terr = game.tellTerritory((int) event.getX(), (int) event.getY());
-        if (terr != null){
-        	imageView.setImage(SwingFXUtils.toFXImage(ImageAssets.colorTerritoire(SwingFXUtils.fromFXImage(imageView.getImage(), null), terr, Color.BLUE), null));
-        }
-
-    }
-
-    public void changeImageOnmouseClick(MouseEvent event){
-    	
-    	Territory terr = game.tellTerritory((int) event.getX(), (int) event.getY());
+    	System.out.println("Mouse X : " + event.getX());
+    	System.out.println("Mouse Y : " + event.getY());
+    	if (terr !=null)
+    		System.out.println(terr.name);
+    	/*
         if (terr != null){
         	imageView.setImage(SwingFXUtils.toFXImage(ImageAssets.colorTerritoire(SwingFXUtils.fromFXImage(imageView.getImage(), null), terr, current_player.color), null));
-        }
-
+        }*/
     }
     
-    public void onNextPlayer(ActionEvent event){
+    @FXML
+    private void onNextTurn(ActionEvent event){
     	if (players.size() > current_player.getId() + 1)
     		current_player = players.get(current_player.getId() + 1);
     	else
     		current_player = players.get(0);
+    	
+    	System.out.println("Current player is : " + current_player.getName() );
     }
-
 }

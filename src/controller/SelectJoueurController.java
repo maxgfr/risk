@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -78,6 +79,7 @@ public class SelectJoueurController implements Initializable {
     }
     
      public void CarteView() {
+    	 
         try {
             Game game = Game.getInstance();
             List<Player> list_player = new ArrayList<Player>();
@@ -92,14 +94,24 @@ public class SelectJoueurController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/view/Carte.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
+            scene.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+
+				@Override
+				public void handle(MouseEvent event) {
+					// TODO Auto-generated method stub
+					
+				}
+            });
             Stage stage = new Stage();
-            stage.setTitle("Carte");
+            stage.setTitle("Risk");
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+     
+     
      
     
     

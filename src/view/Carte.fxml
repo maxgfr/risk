@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.image.*?>
@@ -8,57 +9,20 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.image.Image?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="696.0" prefWidth="1133.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CarteController">
    <children>
-      <ImageView fitHeight="573.0" fitWidth="1178.0" layoutX="7.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../ressources/image_fixed2.png" />
-         </image>
-      </ImageView>
-      <Button layoutX="1008.0" layoutY="20.0" mnemonicParsing="false" text="Tour suivant" />
-      <Label layoutX="272.0" layoutY="527.0" prefHeight="7.0" prefWidth="18.0" text="44" textFill="WHITE" />
-      <Label layoutX="290.0" layoutY="422.0" text="44" textFill="WHITE" />
-      <Label layoutX="245.0" layoutY="444.0" text="44" textFill="WHITE" />
-      <Label layoutX="236.0" layoutY="360.0" text="44" />
-      <Label layoutX="130.0" layoutY="287.0" text="44" textFill="#070707" />
-      <Label layoutX="122.0" layoutY="218.0" text="44" />
-      <Label layoutX="139.0" layoutY="163.0" text="44" />
-      <Label layoutX="69.0" layoutY="123.0" text="44" />
-      <Label layoutX="164.0" layoutY="123.0" text="44" textFill="WHITE" />
-      <Label layoutX="216.0" layoutY="171.0" text="44" />
-      <Label layoutX="290.0" layoutY="163.0" text="44" />
-      <Label layoutX="409.0" layoutY="96.0" text="44" />
-      <Label layoutX="199.0" layoutY="232.0" text="44" />
-      <Label layoutX="515.0" layoutY="312.0" text="44" />
-      <Label layoutX="598.0" layoutY="476.0" text="44" />
-      <Label layoutX="681.0" layoutY="459.0" text="44" textFill="WHITE" />
-      <Label layoutX="587.0" layoutY="386.0" text="44" />
-      <Label layoutX="640.0" layoutY="353.0" text="44" />
-      <Label layoutX="587.0" layoutY="272.0" text="44" textFill="WHITE" />
-      <Label layoutX="515.0" layoutY="196.0" text="44" textFill="WHITE" />
-      <Label layoutX="483.0" layoutY="116.0" text="44" />
-      <Label layoutX="483.0" layoutY="149.0" text="44" />
-      <Label layoutX="549.0" layoutY="138.0" text="44" />
-      <Label layoutX="549.0" layoutY="179.0" text="44" />
-      <Label layoutX="640.0" layoutY="156.0" text="44" textFill="WHITE" />
-      <Label layoutX="723.0" layoutY="138.0" text="44" />
-      <Label layoutX="587.0" layoutY="204.0" text="44" />
-      <Label layoutX="778.0" layoutY="123.0" text="44" />
-      <Label layoutX="872.0" layoutY="123.0" text="44" />
-      <Label layoutX="723.0" layoutY="203.0" text="44" />
-      <Label layoutX="664.0" layoutY="259.0" text="44" />
-      <Label layoutX="778.0" layoutY="279.0" text="44" />
-      <Label layoutX="864.0" layoutY="163.0" text="44" />
-      <Label layoutX="967.0" layoutY="131.0" text="44" />
-      <Label layoutX="872.0" layoutY="203.0" text="44" textFill="WHITE" />
-      <Label layoutX="864.0" layoutY="252.0" text="44" />
-      <Label layoutX="1016.0" layoutY="218.0" text="44" />
-      <Label layoutX="889.0" layoutY="312.0" text="44" />
-      <Label layoutX="940.0" layoutY="386.0" text="44" textFill="WHITE" />
-      <Label layoutX="1041.0" layoutY="407.0" text="44" textFill="WHITE" />
-      <Label layoutX="958.0" layoutY="499.0" text="44" textFill="WHITE" />
-      <Label layoutX="1024.0" layoutY="484.0" text="44" textFill="WHITE" />
-      <Button layoutX="63.0" layoutY="556.0" mnemonicParsing="false" text="Attaquer" />
-      <Button layoutX="63.0" layoutY="610.0" mnemonicParsing="false" text="Renforts" />
+      <AnchorPane fx:id="GameAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#imagePaneMouseClicked" prefHeight="628.0" prefWidth="1227.0">
+         <children>
+            <ImageView fx:id="imageView" fitHeight="628.0" fitWidth="1227.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <image>
+                  <Image fx:id="image" url="@../ressources/image_fixed2.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btn_NextTurn" layoutX="1113.0" layoutY="26.0" mnemonicParsing="false" onAction="#onNextTurn" text="Tour suivant" />
+            <Button fx:id="btn_Attack" layoutX="63.0" layoutY="556.0" mnemonicParsing="false" text="Attaquer" />
+            <Button fx:id="btn_renforcement" layoutX="63.0" layoutY="598.0" mnemonicParsing="false" text="Renforts" />
+         </children>
+      </AnchorPane>
    </children>
-</AnchorPane>
+</VBox>
