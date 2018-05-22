@@ -7,6 +7,7 @@ package model;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 /**
@@ -18,10 +19,12 @@ public class Territory {
 	    public Color color;
 	    public List<Pixel> pixelList;
 	    public String name;
+	    public Hashtable<String, String> terrAdjacent;
 	    
 	    public Territory (Color color) {
 	        this.color = color;
 	        this.pixelList = new ArrayList<Pixel>();
+	        this.terrAdjacent = new Hashtable<String,String>();
 			this.name = addName(color);
 	    }
 	    
@@ -36,6 +39,7 @@ public class Territory {
 		public String addName(Color color) {
 			switch (color.toString()) {
 				case "java.awt.Color[r=109,g=109,b=12]":
+					terrAdjacent.put("Alaska", "North Canada");
 					return "Alaska";
 					 
 				case "java.awt.Color[r=80,g=80,b=39]":
