@@ -99,7 +99,6 @@ public class ImageAssets {
                 Territory randomElement = territories.get(randomIndex);
                 players.get(j).getTerritories().add(randomElement);
                 Color color_player = players.get(j).getColor();
-                System.out.println(color_player);
                 for (Pixel pix : randomElement.pixelList) {
                     buffImage.setRGB(pix.x, pix.y, color_player.getRGB());
                 }
@@ -111,10 +110,9 @@ public class ImageAssets {
         while (territories_modulo > 0) {
             int randomIndex = rand.nextInt(territories.size());
             Territory randomElement = territories.get(randomIndex);
-            int randomIndexJoueur = rand.nextInt(players.size());
-            players.get(randomIndexJoueur).getTerritories().add(randomElement);
+            players.get(territories_modulo).getTerritories().add(randomElement);
             for (Pixel pix : randomElement.pixelList) {
-                buffImage.setRGB(pix.x, pix.y, players.get(randomIndexJoueur).getColor().getRGB());
+                buffImage.setRGB(pix.x, pix.y, players.get(territories_modulo).getColor().getRGB());
             }
             territories_modulo--;  
         }
