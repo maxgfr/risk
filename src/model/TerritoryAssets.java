@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TerritoryAssets {
@@ -27,7 +28,7 @@ public class TerritoryAssets {
 		}
 
 	public static void countRegions(List<Territory> territories) {
-		ArrayList controlledRegions = new ArrayList();
+		List<String>  controlledRegions = new ArrayList<>();
 		int northAmerica = 0;
 		int southAmerica = 0;
 		int europe = 0;
