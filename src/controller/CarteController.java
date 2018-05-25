@@ -14,7 +14,9 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -57,11 +59,23 @@ public class CarteController implements Initializable {
         
         image = new Image("/ressources/image_fixed2.png");
         imageView.setImage(image);
-        
+        players = game.getList_player();
         
         game.setMaListeDeTerritoire(ImageAssets.imageProcess(SwingFXUtils.fromFXImage(image, null)));
         current_player = game.getList_player().get(0);
         imageView.setImage(ImageAssets.colorTerritoireInit(imageView.getImage(), game.getList_player(), game.getMaListeDeTerritoire()));
+        
+        for (Node node : GameAnchor.getChildren()){
+        	System.out.println("Id: " + node.getId());
+        	
+        	if (node instanceof Label){
+        		((Label)node).setText("0");
+        		// TODO 
+        		// Generate random unit and put the value to label
+        	}
+        }
+            
+        	
     }
    
     
@@ -72,19 +86,21 @@ public class CarteController implements Initializable {
     	System.out.println("Mouse Y : " + event.getY());
     	if (terr !=null)
     		System.out.println(terr.name);
-    	/*
+    
         if (terr != null){
-        	imageView.setImage(SwingFXUtils.toFXImage(ImageAssets.colorTerritoire(SwingFXUtils.fromFXImage(imageView.getImage(), null), terr, current_player.color), null));
-        }*/
+        	imageView.setImage(SwingFXUtils.toFXImage(ImageAssets.colorTerritoire(SwingFXUtils.fromFXImage(imageView.getImage(), null), terr, current_player.getColor()), null));
+        }
     }
     
     @FXML
     private void onNextTurn(ActionEvent event){
+    	
     	if (players.size() > current_player.getId() + 1)
     		current_player = players.get(current_player.getId() + 1);
     	else
     		current_player = players.get(0);
     	
     	System.out.println("Current player is : " + current_player.getName() );
+    	
     }
 }

@@ -152,7 +152,7 @@ public class Territory {
 					 
 				case "java.awt.Color[r=121,g=70,b=51]":
 					terrAdjacent.put("Madagascar","East_Africa");
-					terrAdjacent.put("Madagascar","South_Africa")
+					terrAdjacent.put("Madagascar","South_Africa");
 					return "Madagascar";
 					 
 				case "java.awt.Color[r=255,g=128,b=0]":
@@ -330,7 +330,7 @@ public class Territory {
 					return "East_Australia";
 					 
 				default:
-					terrAdjacent.put(null);
+					//terrAdjacent.put(null);
 					return "Invalid_country";
 					 
 			}
