@@ -34,9 +34,9 @@ public class TerritoryAssets {
 		int europe = 0;
 		int africa = 0;
 		int asia = 0;
-		int australia =0;
+		int oceania =0;
 		for (Territory element: territories){
-			switch (element.region) {
+			switch (element.getRegion()) {
 				case "North_America": northAmerica++;
 					break;
 				case "South_America": southAmerica++;
@@ -47,24 +47,29 @@ public class TerritoryAssets {
 					break;
 				case "Asia": asia++;
 					break;
-				case "Australia": australia++;
+				case "Oceania": oceania++;
 					break;
 			}
 		}
-		if (northAmerica == 0){
+		if (northAmerica == 9){
 			controlledRegions.add("North_America");}
-		if (southAmerica == 0){
+		if (southAmerica == 4){
 			controlledRegions.add("South_America");}
-		if (europe == 0){
+		if (europe == 7){
 			controlledRegions.add("Europe");}
-		if (africa == 0){
+		if (africa == 6){
 			controlledRegions.add("Africa");}
-		if (asia == 0){
+		if (asia == 12){
 			controlledRegions.add("Asia");}
-		if (australia == 0){
-			controlledRegions.add("Australia");}
+		if (oceania== 4){
+			controlledRegions.add("Oceania");}
+		for (String element: controlledRegions){
+			System.out.println(element);
+		}
 	}
-		
+
+
+
 		/*list controlledRegions = [];
 		String[] str = new String[10];		
 		North America = 0/9;

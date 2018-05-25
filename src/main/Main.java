@@ -10,6 +10,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.Territory;
+import model.TerritoryAssets;
+
+import java.awt.*;
+import java.util.ArrayList;
+
 /**
  *
  * @author golfier
@@ -30,6 +36,18 @@ public class Main extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+        /*Territory tester = new Territory(new Color(255,128,128));
+        Territory tester2 = new Territory(new Color(128,0,0));
+        Territory tester3 = new Territory(new Color(128,64,64));
+        Territory tester4 = new Territory(new Color(255,0,0));
+        ArrayList<Territory> territories = new ArrayList<Territory>();
+        territories.add(tester);
+        territories.add(tester2);
+        territories.add(tester3);
+        territories.add(tester4);
+
+        TerritoryAssets.countRegions(territories);*/
+
     }
     
  

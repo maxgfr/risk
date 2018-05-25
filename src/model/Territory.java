@@ -38,6 +38,11 @@ public class Territory {
 	    	return pixelList;
 	    }
 
+	    public String getRegion(){
+	    	return this.region;
+
+		}
+
 		public String addName(Color color) {
 			switch (color.toString()) {
 				case "java.awt.Color[r=109,g=109,b=12]":
