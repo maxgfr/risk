@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -153,6 +154,7 @@ public class Game {
         Color color4 = new Color (0,100,0); //dark green
         Color color5 = new Color (128,0,0); //maroon
         Color color6 = new Color (0,0,128); //navy
+        Random rand = new Random();
         
         maListe.add(color1);
         maListe.add(color2);
@@ -162,8 +164,9 @@ public class Game {
         maListe.add(color6);
         
         for(int i=0; i<nb_joueurs-1; i++) {
-            Collections.shuffle(maListe);
-            final_list.add(maListe.get(i));
+            int randomIndex = rand.nextInt(maListe.size());
+            final_list.add(maListe.get(randomIndex));
+            maListe.remove(randomIndex);
         }
         
         
