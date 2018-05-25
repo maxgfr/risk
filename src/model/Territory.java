@@ -20,7 +20,8 @@ public class Territory {
 	    public List<Pixel> pixelList;
 	    public String name;
 	    public Hashtable<String, String> terrAdjacent;
-	    public List<Unit> unitList;
+		public List<Unit> unitList;
+		public String region;
 	    
 	    public Territory (Color color) {
 	        this.color = color;
@@ -43,12 +44,14 @@ public class Territory {
 					terrAdjacent.put("Alaska", "North_Canada");
 					terrAdjacent.put("Alaska", "West_Canada");
 					terrAdjacent.put("Alaska", "East_Russia");
+					this.region="North_America";
 					return "Alaska";
 					 
 				case "java.awt.Color[r=80,g=80,b=39]":
 					terrAdjacent.put("North_Canada", "West_Canada");
 					terrAdjacent.put("North_Canada", "Center_Canada");
 					terrAdjacent.put("North_Canada", "Greenland");
+					this.region="North_America";
 					return "North_Canada";
 					
 				case "java.awt.Color[r=255,g=255,b=0]":
@@ -56,6 +59,7 @@ public class Territory {
 					terrAdjacent.put("West_Canada", "North_Canada");
 					terrAdjacent.put("West_Canada", "Alaska");
 					terrAdjacent.put("West_Canada", "West_USA");
+					this.region="North_America";
 					return "West_Canada";
 					 
 				case "java.awt.Color[r=148,g=148,b=73]":
@@ -64,12 +68,14 @@ public class Territory {
 					terrAdjacent.put("Center_Canada", "West_USA");
 					terrAdjacent.put("Center_Canada", "East_USA");
 					terrAdjacent.put("Center_Canada", "East_Canada");
+					this.region="North_America";
 					return "Center_Canada";
 					 
 				case "java.awt.Color[r=184,g=184,b=61]":
 					terrAdjacent.put("East_Canada", "East_USA");
 					terrAdjacent.put("East_Canada", "Center_Canada");
 					terrAdjacent.put("East_Canada", "Greenland");
+					this.region="North_America";
 					return "East_Canada";
 					
 					 
@@ -78,6 +84,7 @@ public class Territory {
 					terrAdjacent.put("West_USA","Center_Canada");
 					terrAdjacent.put("West_USA","East_USA");
 					terrAdjacent.put("West_USA","Mexico");
+					this.region="North_America";
 					return "West_USA";
 					 
 				case "java.awt.Color[r=128,g=128,b=0]":
@@ -85,24 +92,28 @@ public class Territory {
 					terrAdjacent.put("East_USA","Mexico");
 					terrAdjacent.put("East_USA","Center_Canada");
 					terrAdjacent.put("East_USA","East_Canada");
+					this.region="North_America";
 					return "East_USA";
 					 
 				case "java.awt.Color[r=255,g=255,b=128]":
 					terrAdjacent.put("Mexico","East_USA");
 					terrAdjacent.put("Mexico","West_USA");
 					terrAdjacent.put("Mexico","North_Latin_America");
+					this.region="North_America";
 					return "Mexico";
 					 
 				case "java.awt.Color[r=255,g=128,b=128]":
 					terrAdjacent.put("North_Latin_America","Mexico");
 					terrAdjacent.put("North_Latin_America","West_Latin_America");
 					terrAdjacent.put("North_Latin_America","East_Latin_America");
+					this.region="South_America";
 					return "North_Latin_America";
 					 
 				case "java.awt.Color[r=128,g=0,b=0]":
 					terrAdjacent.put("West_Latin_America","East_Latin_America");
 					terrAdjacent.put("West_Latin_America","North_Latin_America");
 					terrAdjacent.put("West_Latin_America","South_Latin_America");
+					this.region="South_America";
 					return "West_Latin_America";
 					 
 				case "java.awt.Color[r=128,g=64,b=64]":
@@ -110,11 +121,13 @@ public class Territory {
 					terrAdjacent.put("East_Latin_America","North_Latin_America");
 					terrAdjacent.put("East_Latin_America","South_Latin_America");
 					terrAdjacent.put("East_Latin_America","West_Africa");
+					this.region="South_America";
 					return "East_Latin_America";
 					 
 				case "java.awt.Color[r=255,g=0,b=0]":
 					terrAdjacent.put("South_Latin_America","West_Latin_America");
 					terrAdjacent.put("South_Latin_America","East_Latin_America");
+					this.region="South_America";
 					return "South_Latin_America";
 					 
 				case "java.awt.Color[r=214,g=214,b=127]":
@@ -122,12 +135,14 @@ public class Territory {
 					terrAdjacent.put("Greenland","Center_Canada");
 					terrAdjacent.put("Greenland","East_Canada");
 					terrAdjacent.put("Greenland","Iceland");
+					this.region="North_America";
 					return "Greenland";
 					 
 				case "java.awt.Color[r=83,g=83,b=163]":
 					terrAdjacent.put("Iceland","Greenland");
 					terrAdjacent.put("Iceland","UK");
 					terrAdjacent.put("Iceland","Scandinavia");
+					this.region="Europe";
 					return "Iceland";
 					 
 				case "java.awt.Color[r=255,g=145,b=91]":
@@ -137,23 +152,27 @@ public class Territory {
 					terrAdjacent.put("West_Africa","North_Africa");
 					terrAdjacent.put("West_Africa","West_Europe");
 					terrAdjacent.put("West_Africa","South_Europe");
+					this.region="Africa";
 					return "West_Africa";
 					 
 				case "java.awt.Color[r=174,g=87,b=0]":
 					terrAdjacent.put("Center_Africa","East_Africa");
 					terrAdjacent.put("Center_Africa","West_Africa");
 					terrAdjacent.put("Center_Africa","South_Africa");
+					this.region="Africa";
 					return "Center_Africa";
 					 
 				case "java.awt.Color[r=203,g=148,b=92]":
 					terrAdjacent.put("South_Africa","East_Africa");
 					terrAdjacent.put("South_Africa","Center_Africa");
 					terrAdjacent.put("South_Africa","Madagascar");
+					this.region="Africa";
 					return "South_Africa";
 					 
 				case "java.awt.Color[r=121,g=70,b=51]":
 					terrAdjacent.put("Madagascar","East_Africa");
 					terrAdjacent.put("Madagascar","South_Africa");
+					this.region="Africa";
 					return "Madagascar";
 					 
 				case "java.awt.Color[r=255,g=128,b=0]":
@@ -163,6 +182,7 @@ public class Territory {
 					terrAdjacent.put("East_Africa","West_Africa");
 					terrAdjacent.put("East_Africa","Madagascar");
 					terrAdjacent.put("East_Africa","Middle_East");
+					this.region="Africa";
 					return "East_Africa";
 					 
 				case "java.awt.Color[r=128,g=64,b=0]":
@@ -170,6 +190,7 @@ public class Territory {
 					terrAdjacent.put("North_Africa","East_Africa");
 					terrAdjacent.put("North_Africa","Middle_East");
 					terrAdjacent.put("North_Africa","South_Europe");
+					this.region="Africa";
 					return "North_Africa";
 					 
 				case "java.awt.Color[r=0,g=64,b=128]":
@@ -177,6 +198,7 @@ public class Territory {
 					terrAdjacent.put("UK","Scandinavia");
 					terrAdjacent.put("UK","West_Europe");
 					terrAdjacent.put("UK","Center_Europe");
+					this.region="Europe";
 					return "UK";
 					 
 				case "java.awt.Color[r=0,g=128,b=255]":
@@ -184,6 +206,7 @@ public class Territory {
 					terrAdjacent.put("West_Europe","Center_Europe");
 					terrAdjacent.put("West_Europe","South_Europe");
 					terrAdjacent.put("West_Europe","West_Africa");
+					this.region="Europe";
 					return "West_Europe";
 					 
 				case "java.awt.Color[r=49,g=105,b=160]":
@@ -193,6 +216,7 @@ public class Territory {
 					terrAdjacent.put("South_Europe","West_Africa");
 					terrAdjacent.put("South_Europe","Middle_East");
 					terrAdjacent.put("South_Europe","North_Africa");
+					this.region="Europe";
 					return "South_Europe";
 					 
 				case "java.awt.Color[r=165,g=201,b=236]":
@@ -200,6 +224,7 @@ public class Territory {
 					terrAdjacent.put("Scandinavia","UK");
 					terrAdjacent.put("Scandinavia","Center_Europe");
 					terrAdjacent.put("Scandinavia","East_Europe");
+					this.region="Europe";
 					return "Scandinavia";
 					 
 				case "java.awt.Color[r=0,g=0,b=255]":
@@ -208,6 +233,7 @@ public class Territory {
 					terrAdjacent.put("Center_Europe","Scandinavia");
 					terrAdjacent.put("Center_Europe","South_Europe");
 					terrAdjacent.put("Center_Europe","East_Europe");
+					this.region="Europe";
 					return "Center_Europe";
 					 
 				case "java.awt.Color[r=0,g=0,b=128]":
@@ -217,6 +243,7 @@ public class Territory {
 					terrAdjacent.put("East_Europe","Middle_East");
 					terrAdjacent.put("East_Europe","West_Russia");
 					terrAdjacent.put("East_Europe","Kazakhstan");
+					this.region="Europe";
 					return "East_Europe";
 					 
 				case "java.awt.Color[r=0,g=128,b=0]":
@@ -226,6 +253,7 @@ public class Territory {
 					terrAdjacent.put("Middle_East","East_Europe");
 					terrAdjacent.put("Middle_East","Kazakhstan");
 					terrAdjacent.put("Middle_East","India");
+					this.region="Asia";
 					return "Middle_East";
 					 
 				case "java.awt.Color[r=68,g=179,b=68]":
@@ -234,12 +262,14 @@ public class Territory {
 					terrAdjacent.put("NW_Russia","South_Russia");
 					terrAdjacent.put("NW_Russia","China");
 					terrAdjacent.put("NW_Russia","Mongolia");
+					this.region="Asia";
 					return "NW_Russia";
 					 
 				case "java.awt.Color[r=93,g=145,b=145]":
 					terrAdjacent.put("NE_Russia","NW_Russia");
 					terrAdjacent.put("NE_Russia","South_Russia");
 					terrAdjacent.put("NE_Russia","East_Russia");
+					this.region="Asia";
 					return "NE_Russia";
 					 
 				case "java.awt.Color[r=117,g=192,b=117]":
@@ -247,6 +277,7 @@ public class Territory {
 					terrAdjacent.put("West_Russia","East_Europe");
 					terrAdjacent.put("West_Russia","Kazakhstan");
 					terrAdjacent.put("West_Russia","China");
+					this.region="Asia";
 					return "West_Russia";
 					 
 				case "java.awt.Color[r=96,g=179,b=137]":
@@ -255,6 +286,7 @@ public class Territory {
 					terrAdjacent.put("East_Russia","Mongolia");
 					terrAdjacent.put("East_Russia","Japan");
 					terrAdjacent.put("East_Russia","Alaska");
+					this.region="Asia";
 					return "East_Russia";
 					 
 				case "java.awt.Color[r=0,g=255,b=0]":
@@ -262,6 +294,7 @@ public class Territory {
 					terrAdjacent.put("South_Russia","NE_Russia");
 					terrAdjacent.put("South_Russia","East_Russia");
 					terrAdjacent.put("South_Russia","Mongolia");
+					this.region="Asia";
 					return "South_Russia";
 					 
 				case "java.awt.Color[r=0,g=64,b=0]":
@@ -270,6 +303,7 @@ public class Territory {
 					terrAdjacent.put("Mongolia","South_Russia");
 					terrAdjacent.put("Mongolia","NW_Russia");
 					terrAdjacent.put("Mongolia","East_Russia");
+					this.region="Asia";
 					return "Mongolia";
 					 
 				case "java.awt.Color[r=100,g=214,b=100]":
@@ -278,11 +312,13 @@ public class Territory {
 					terrAdjacent.put("Kazakhstan","India");
 					terrAdjacent.put("Kazakhstan","China");
 					terrAdjacent.put("Kazakhstan","East_Europe");
+					this.region="Asia";
 					return "Kazakhstan";
 					 
 				case "java.awt.Color[r=128,g=255,b=0]":
 					terrAdjacent.put("Japan","Mongolia");
 					terrAdjacent.put("Japan","East_Russia");
+					this.region="Asia";
 					return "Japan";
 					 
 				case "java.awt.Color[r=0,g=128,b=64]":
@@ -292,6 +328,7 @@ public class Territory {
 					terrAdjacent.put("China","Mongolia");
 					terrAdjacent.put("China","West_Russia");
 					terrAdjacent.put("China","NW_Russia");
+					this.region="Asia";
 					return "China";
 					 
 				case "java.awt.Color[r=0,g=128,b=128]":
@@ -299,35 +336,41 @@ public class Territory {
 					terrAdjacent.put("India","China");
 					terrAdjacent.put("India","Kazakhstan");
 					terrAdjacent.put("India","Middle_East");
+					this.region="Asia";
 					return "India";
 					 
 				case "java.awt.Color[r=128,g=255,b=128]":
 					terrAdjacent.put("Thailand","India");
 					terrAdjacent.put("Thailand","China");
 					terrAdjacent.put("Thailand","Indonesia");
+					this.region="Asia";
 					return "Thailand";
 					 
 				case "java.awt.Color[r=128,g=0,b=255]":
 					terrAdjacent.put("Indonesia","Thailand");
 					terrAdjacent.put("Indonesia","Papua");
 					terrAdjacent.put("Indonesia","Australia");
+					this.region="Asia";
 					return "Indonesia";
 					 
 				case "java.awt.Color[r=255,g=0,b=255]":
 					terrAdjacent.put("Papua","Indonesia");
 					terrAdjacent.put("Papua","West_Australia");
 					terrAdjacent.put("Papua","East_Australia");
+					this.region="Oceania";
 					return "Papua";
 					 
 				case "java.awt.Color[r=128,g=0,b=64]":
 					terrAdjacent.put("West_Australia","East_Australia");
 					terrAdjacent.put("West_Australia","Indonesia");
 					terrAdjacent.put("West_Australia","Papua");
+					this.region="Oceania";
 					return "West_Australia";
 					 
 				case "java.awt.Color[r=64,g=0,b=64]":
 					terrAdjacent.put("East_Australia","West_Australia");
 					terrAdjacent.put("East_Australia","Papua");
+					this.region="Oceania";
 					return "East_Australia";
 					 
 				default:
