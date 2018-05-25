@@ -5,7 +5,6 @@
  */
 package controller;
 
-import java.awt.Color;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -21,8 +20,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.event.ActionEvent;
 import model.Game;
 import model.ImageAssets;
 import model.Player;
@@ -66,8 +63,6 @@ public class CarteController implements Initializable {
         imageView.setImage(ImageAssets.colorTerritoireInit(imageView.getImage(), game.getList_player(), game.getMaListeDeTerritoire()));
         
         for (Node node : GameAnchor.getChildren()){
-        	System.out.println("Id: " + node.getId());
-        	
         	if (node instanceof Label){
         		((Label)node).setText("0");
         		// TODO 
