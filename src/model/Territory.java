@@ -20,6 +20,7 @@ public class Territory {
 	    public List<Pixel> pixelList;
 	    public String name;
 	    public Hashtable<String, String> terrAdjacent;
+	    public List<Unit> unitList;
 	    
 	    public Territory (Color color) {
 	        this.color = color;
@@ -336,7 +337,22 @@ public class Territory {
 			}
 		}
 
+		
+		/**
+		 * @return the unitList
+		 */
+		public List<Unit> getUnitList() {
+			return unitList;
+		}
 
+		/**
+		 * @param unitList the unitList to set
+		 */
+		public void setUnitList(List<Unit> unitList) {
+			this.unitList = unitList;
+		}
+
+		
 
 
 	}
