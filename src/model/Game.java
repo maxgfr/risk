@@ -163,11 +163,13 @@ public class Game {
         maListe.add(color5);
         maListe.add(color6);
         
-        for(int i=0; i<nb_joueurs-1; i++) {
+        for(int i=0; i<nb_joueurs; i++) {
             int randomIndex = rand.nextInt(maListe.size());
             final_list.add(maListe.get(randomIndex));
             maListe.remove(randomIndex);
         }
+        
+        System.out.println("List of Color for those players : "+final_list);
         
         
         return final_list;

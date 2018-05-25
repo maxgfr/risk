@@ -78,22 +78,34 @@ public class ImageAssets {
       
         BufferedImage buffImage = SwingFXUtils.fromFXImage(imageParam, null);
         
-        int nb_players = players.size()+1;
-        int nb_territories = territories.size()+1;
+        System.out.println("List of players in Game: "+ players);
+        
+        int nb = 0;
+        int nb_players = players.size();
+        int nb_territories = territories.size();
         int territories_modulo = nb_territories % nb_players;
         int territory_per_player = nb_territories / nb_players;
         Random rand = new Random();
         
+        System.out.println("Number of players : " + nb_players);
+        System.out.println("Number of territories : " + nb_territories);
+        System.out.println("Territories per player : " + territory_per_player);
+        System.out.println("Remaining Territories : " + territories_modulo);
+        
         for (int j=0; j<players.size(); j++) { // pour chaque joueur
-            for (int k=0; k<territory_per_player; k++) { // 
+            nb = 0;
+            while (nb < territory_per_player) {
                 int randomIndex = rand.nextInt(territories.size());
                 Territory randomElement = territories.get(randomIndex);
                 players.get(j).getTerritories().add(randomElement);
+                Color color_player = players.get(j).getColor();
+                System.out.println(color_player);
                 for (Pixel pix : randomElement.pixelList) {
-                    buffImage.setRGB(pix.x, pix.y, players.get(j).getColor().getRGB());
+                    buffImage.setRGB(pix.x, pix.y, color_player.getRGB());
                 }
-                territories.remove(randomIndex);        
-            }             
+                territories.remove(randomIndex);     
+                nb++;
+            }          
         }
         
         while (territories_modulo > 0) {

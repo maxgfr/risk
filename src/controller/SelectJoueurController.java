@@ -84,13 +84,15 @@ public class SelectJoueurController implements Initializable {
         try {
             Game game = Game.getInstance();
             List<Player> list_player = new ArrayList<Player>();
-            List<Color> listColor = game.getListColor(listTextField.size()+1);
+            System.out.println("Number of players in SelectJoueurController : "+listTextField.size());
+            List<Color> listColor = game.getListColor(listTextField.size());
             for (int i = 0; i<listTextField.size() ; i++) {
                 String value = listTextField.get(i).getText();
                 Player p = new Player(i, value, listColor.get(i));
                 list_player.add(p);
             }
             game.setList_player(list_player);
+            System.out.println("List of players in SelectViewController: "+ list_player);
             Stage stg = (Stage) myButton.getScene().getWindow();
             stg.close();  
             FXMLLoader fxmlLoader = new FXMLLoader();
