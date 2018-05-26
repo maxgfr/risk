@@ -70,8 +70,6 @@ public class ImageAssets {
   public static Image colorTerritoireInit (Image imageParam, List<Player> players, List<Territory> territorys){
       
         BufferedImage buffImage = SwingFXUtils.fromFXImage(imageParam, null);
-        
-        System.out.println("List of players in Game: "+ players);
         List<Territory> territories = new ArrayList<Territory>(territorys);
         int nb = 0;
         int nb_players = players.size();

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -11,6 +12,16 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CarteController">
    <children>
+      <ToolBar prefHeight="40.0" prefWidth="200.0">
+        <items>
+            <Label fx:id="lb_NamePlayer" contentDisplay="CENTER" prefHeight="44.0" prefWidth="137.0" text="NOM DU JOUEUR" textAlignment="CENTER">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label />
+        </items>
+      </ToolBar>
       <AnchorPane fx:id="GameAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#imagePaneMouseClicked" prefHeight="628.0" prefWidth="1227.0">
          <children>
             <ImageView fx:id="imageView" fitHeight="628.0" fitWidth="1227.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -64,6 +75,9 @@
             <Label fx:id="lb_East_Australia" layoutX="1124.0" layoutY="462.0" text="44" textFill="WHITE" />
             <Label fx:id="lb_Japan" layoutX="1108.0" layoutY="184.0" text="44" />
          </children>
+         <VBox.margin>
+            <Insets left="35.0" top="50.0" />
+         </VBox.margin>
       </AnchorPane>
    </children>
 </VBox>
