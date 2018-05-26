@@ -8,7 +8,6 @@ package model;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import javafx.embed.swing.SwingFXUtils;
@@ -54,12 +53,6 @@ public class ImageAssets {
         }
     }
     
-    /*
-    ColorUtils utils = new ColorUtils();
-	for (Territory terr : maListeDeTerritoire){
-		System.out.println(utils.getColorNameFromColor(terr.color));
-    }*/
-    
     System.out.println("Il y a " + maListeDeTerritoire.size() + " couleurs différentes.");
     
     return maListeDeTerritoire;
@@ -74,12 +67,12 @@ public class ImageAssets {
   }
   
   
-  public static Image colorTerritoireInit (Image imageParam, List<Player> players, List<Territory> territories){
+  public static Image colorTerritoireInit (Image imageParam, List<Player> players, List<Territory> territorys){
       
         BufferedImage buffImage = SwingFXUtils.fromFXImage(imageParam, null);
         
         System.out.println("List of players in Game: "+ players);
-        
+        List<Territory> territories = new ArrayList<Territory>(territorys);
         int nb = 0;
         int nb_players = players.size();
         int nb_territories = territories.size();
