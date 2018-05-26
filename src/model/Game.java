@@ -7,7 +7,6 @@ package model;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -102,6 +101,7 @@ public class Game {
     }
     
     public Territory tellTerritory(int x, int y) {
+    	System.out.println("Ma liste de territoire :  " + getMaListeDeTerritoire().size());
         for (Iterator<Territory> it = getMaListeDeTerritoire().iterator(); it.hasNext();) {
             Territory territory = it.next();
             List<Pixel> listPixel = territory.getListPixel();
@@ -173,6 +173,32 @@ public class Game {
         
         
         return final_list;
+    }
+    
+    public void initTerritory(List<Player> listPlayers){
+    	
+    	int nbUnit = 0;
+    	switch(listPlayers.size())
+    	{
+	    	case 2:
+	    		nbUnit = 40;
+	    		break;
+	    	case 3:
+	    		nbUnit = 35;
+	    		break;
+	    	case 4:
+	    		nbUnit = 30;
+	    		break;
+	    	case 5:
+	    		nbUnit = 25;
+	    		break;
+	    	case 6:
+	    		nbUnit = 20;
+	    		break;
+    	}
+    	
+    	
+    	
     }
 
 
