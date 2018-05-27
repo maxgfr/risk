@@ -175,29 +175,31 @@ public class Game {
         return final_list;
     }
     
-    public void initTerritory(List<Player> listPlayers){
+    public void initTerritory(){
     	
-    	int nbUnit = 0;
-    	switch(listPlayers.size())
+    	int nbUnitTodispatch = 0;
+    	switch(list_player.size())
     	{
 	    	case 2:
-	    		nbUnit = 40;
+	    		nbUnitTodispatch = 40;
 	    		break;
 	    	case 3:
-	    		nbUnit = 35;
+	    		nbUnitTodispatch = 35;
 	    		break;
 	    	case 4:
-	    		nbUnit = 30;
+	    		nbUnitTodispatch = 30;
 	    		break;
 	    	case 5:
-	    		nbUnit = 25;
+	    		nbUnitTodispatch = 25;
 	    		break;
 	    	case 6:
-	    		nbUnit = 20;
+	    		nbUnitTodispatch = 20;
 	    		break;
     	}
     	
-    	
+    	for (Player player : list_player) {
+    		player.setUnitToDispatch(nbUnitTodispatch);
+	    }
     	
     }
 

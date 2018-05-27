@@ -22,7 +22,9 @@ public class Player {
     private List<Territory> mTerritories;
     private int nbSold;
     private Color color;
-
+    
+    private int unitToDispatch;
+    
     public Player(int id, String name, Color color) {
             this.id = id;
             if(name.isEmpty()) {
@@ -94,14 +96,14 @@ public class Player {
         return value;
     }
     
-    private Color randomColor() {
-        Random rand = new Random();
-        float r = rand.nextFloat();
-        float g = rand.nextFloat();
-        float b = rand.nextFloat();
-        Color randomColor = new Color(r, g, b);
-        return randomColor;
-    }
+
+	public int getUnitToDispatch() {
+		return unitToDispatch;
+	}
+
+	public void setUnitToDispatch(int unitToDispatch) {
+		this.unitToDispatch = unitToDispatch;
+	}
 	
 }
 

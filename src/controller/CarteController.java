@@ -15,7 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -51,10 +51,23 @@ public class CarteController implements Initializable {
     
     @FXML
     AnchorPane imagePane;
-    
+
     @FXML
     Label lb_NamePlayer;
+    @FXML
+    Label lb_nb_unit;
+    @FXML
+    Label lb_nb_cannons;
+    @FXML
+    Label lb_nb_soldiers;
+    @FXML
+    Label lb_nb_horseRiders;
+
+    @FXML
+    ToggleButton btn_attack;
     
+    @FXML
+    ToggleButton btn_renfort;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -72,8 +85,12 @@ public class CarteController implements Initializable {
         lb_NamePlayer.setText(current_player.getName());
         lb_NamePlayer.setTextFill(javafx.scene.paint.Color.rgb(current_player.getColor().getRed(), current_player.getColor().getGreen(), current_player.getColor().getBlue(), current_player.getColor().getAlpha() / 255.0));
         
-        game.initTerritory(game.getList_player());
-        System.out.println("Nombre de territoires :  "+ game.getMaListeDeTerritoire().size());
+        // Unit
+        game.initTerritory();
+        lb_nb_unit.setText("" +current_player.getUnitToDispatch());
+        lb_nb_cannons.setText("0");
+        lb_nb_soldiers.setText("0");
+        lb_nb_horseRiders.setText("0");
         for (Node node : GameAnchor.getChildren()){
         	if (node instanceof Label){
         		((Label)node).setText("0");
@@ -108,8 +125,12 @@ public class CarteController implements Initializable {
     		current_player = players.get(0);
     	
     	System.out.println("Current player is : " + current_player.getName() );
+    	
     	lb_NamePlayer.setText(current_player.getName());
         lb_NamePlayer.setTextFill(javafx.scene.paint.Color.rgb(current_player.getColor().getRed(), current_player.getColor().getGreen(), current_player.getColor().getBlue(), current_player.getColor().getAlpha() / 255.0));
-        
+        lb_nb_unit.setText("" +current_player.getUnitToDispatch());
+        lb_nb_cannons.setText("0");
+        lb_nb_soldiers.setText("0");
+        lb_nb_horseRiders.setText("0");
     }
 }
