@@ -33,9 +33,13 @@
             <Label text="Cavaliers :" />
             <Label fx:id="lb_nb_horseRiders" text="5" />
             <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="110.0" />
-            <ToggleButton fx:id="btn_attack" mnemonicParsing="false" text="Attaque" />
+            <ToggleButton fx:id="btn_attack" mnemonicParsing="false" text="Attaque">
+               <toggleGroup>
+                  <ToggleGroup fx:id="tGroup" />
+               </toggleGroup></ToggleButton>
             <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="55.0" />
-            <ToggleButton fx:id="btn_renfort" mnemonicParsing="false" text="Renfort" />
+            <ToggleButton fx:id="btn_renfort" mnemonicParsing="false" text="Renfort" toggleGroup="$tGroup" />
+            <ToggleButton fx:id="btn_deplacement" mnemonicParsing="false" text="Déplacement" toggleGroup="$tGroup" />
         </items>
       </ToolBar>
       <AnchorPane fx:id="GameAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#imagePaneMouseClicked" prefHeight="628.0" prefWidth="1227.0">

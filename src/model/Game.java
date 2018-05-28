@@ -23,6 +23,7 @@ public class Game {
     private List<Territory> maListeDeTerritoire;
     private boolean finished;
     private int num_tours;
+    private GameState state;
     
     private static Game instance = null;
     
@@ -202,6 +203,16 @@ public class Game {
 	    }
     	
     }
+
+
+	public GameState getState() {
+		return state;
+	}
+
+
+	public void setState(GameState state) {
+		this.state = state;
+	}
 
 
 
