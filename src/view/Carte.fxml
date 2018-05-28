@@ -20,7 +20,7 @@
                </font>
             </Label>
             <Separator orientation="VERTICAL" prefHeight="44.0" prefWidth="73.0" />
-            <Label fx:id="lb_Mission" contentDisplay="CENTER" prefHeight="44.0" prefWidth="137.0" text="NOM DU JOUEUR" textAlignment="CENTER">
+            <Label fx:id="lb_Mission" contentDisplay="CENTER" prefHeight="44.0" prefWidth="237.0" text="MISSION DU JOUEUR" textAlignment="CENTER">
                <font>
                   <Font size="15.0" />
                </font>
