@@ -19,7 +19,7 @@ public class Mission {
    
    private boolean init;
    
-   private static final String MISSION_1 = "Détruire le joueur x";
+   private static final String MISSION_1 = "Détruire le joueur";
    private static final String MISSION_2 = "Conquérir tous les territoires";
    private static final String MISSION_3 = "Contrôler 3 régions et au moins 18 territoires";
    private static final String MISSION_4 = "Contrôler 18 territoires avec au moins 2 armées";
@@ -97,13 +97,56 @@ public class Mission {
                 default:
                     break;
             }
-            player.setMaMission(allMissions.get(randomIndex));
+            if (allMissions.get(randomIndex) == MISSION_1) {
+                String name_gamer_to_destroy = players.get(rdm.nextInt(players.size())).getName();
+                while (name_gamer_to_destroy == player.getName()) {
+                    name_gamer_to_destroy = players.get(rdm.nextInt(players.size())).getName();
+                }
+                player.setMaMission(allMissions.get(randomIndex)+" "+name_gamer_to_destroy);
+            } else {
+                player.setMaMission(allMissions.get(randomIndex));
+            } 
         }        
         init = true;  
     }
     
     public boolean isInit() {
         return init;
+    }
+    
+    public boolean hasWin (Player player) {
+        
+        String mission_joueur = player.getMaMission();
+        switch(mission_joueur) {
+            case MISSION_1:
+                String name_joueur_to_destroy = mission_joueur.replace("Détruire le joueur ","");
+                System.out.println("Name gamer to destroy : "+name_joueur_to_destroy);
+                break;
+            case MISSION_2:
+                System.out.println("two");
+                break;
+            case MISSION_3:
+                System.out.println("three");
+                break;
+            case MISSION_4:
+                System.out.println("one");
+                break;
+            case MISSION_5:
+                System.out.println("two");
+                break;
+            case MISSION_6:
+                System.out.println("three");
+                break;
+            case MISSION_7:
+                System.out.println("one");
+                break;
+            case MISSION_8:
+                System.out.println("one");
+                break;
+            default:
+                System.out.println("no match");
+        }
+        return false;
     }
    
     
