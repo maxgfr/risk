@@ -19,7 +19,12 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <Label />
+            <Separator orientation="VERTICAL" prefHeight="44.0" prefWidth="73.0" />
+            <Label fx:id="lb_Mission" contentDisplay="CENTER" prefHeight="44.0" prefWidth="137.0" text="NOM DU JOUEUR" textAlignment="CENTER">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
             <Separator orientation="VERTICAL" prefHeight="44.0" prefWidth="73.0" />
             <Label text="Nombre d'unités disponibles :" />
             <Label fx:id="lb_nb_unit" text="100" />

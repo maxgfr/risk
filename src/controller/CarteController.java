@@ -23,6 +23,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import model.Game;
 import model.ImageAssets;
+import model.Mission;
 import model.Player;
 import model.Territory;
 
@@ -55,6 +56,8 @@ public class CarteController implements Initializable {
     @FXML
     Label lb_NamePlayer;
     @FXML
+    Label lb_Mission;
+    @FXML
     Label lb_nb_unit;
     @FXML
     Label lb_nb_cannons;
@@ -84,6 +87,11 @@ public class CarteController implements Initializable {
         current_player = game.getList_player().get(0);
         lb_NamePlayer.setText(current_player.getName());
         lb_NamePlayer.setTextFill(javafx.scene.paint.Color.rgb(current_player.getColor().getRed(), current_player.getColor().getGreen(), current_player.getColor().getBlue(), current_player.getColor().getAlpha() / 255.0));
+        
+        //Mission Initialize
+        Mission missions = Mission.getInstance();
+        missions.initMission(game.getList_player());
+        lb_Mission.setText(current_player.getMaMission());
         
         // Unit
         game.initTerritory();
@@ -127,6 +135,7 @@ public class CarteController implements Initializable {
     	System.out.println("Current player is : " + current_player.getName() );
     	
     	lb_NamePlayer.setText(current_player.getName());
+        lb_Mission.setText(current_player.getMaMission());
         lb_NamePlayer.setTextFill(javafx.scene.paint.Color.rgb(current_player.getColor().getRed(), current_player.getColor().getGreen(), current_player.getColor().getBlue(), current_player.getColor().getAlpha() / 255.0));
         lb_nb_unit.setText("" +current_player.getUnitToDispatch());
         lb_nb_cannons.setText("0");

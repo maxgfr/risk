@@ -20,8 +20,9 @@ public class Player {
     private String name;
     private int id;
     private List<Territory> mTerritories;
-    private int nbSold;
+    private int nbSoldats;
     private Color color;
+    private String maMission;
     
     private int unitToDispatch;
     
@@ -34,7 +35,8 @@ public class Player {
             }
             this.color = color;
             mTerritories = new ArrayList<Territory>();
-            nbSold = 0;
+            nbSoldats = 0;
+            maMission = "";
     }
 
     public int getId(){
@@ -44,12 +46,16 @@ public class Player {
     public String getName(){
             return name;
     }
+    
+    public String getMaMission(){
+            return maMission;
+    }
 
     public List<Territory> getTerritories(){
             return mTerritories;
     }
 
-    public int numOfTerritories(){
+    public int numberOfTerritories(){
             return mTerritories.size();
     }
 
@@ -60,22 +66,6 @@ public class Player {
     public void removeTerritory(Territory t){
             mTerritories.remove(t);
     }
-
-    public void addArmies(int a){
-            nbSold += a;
-    }
-
-    public void addArmy(){
-        nbSold++;
-    }
-
-    public void looseArmies(int a){
-        nbSold -= a;
-    }
-
-    public void looseArmy(){
-        nbSold--;
-    }
     
     public Color getColor () {
         return color;
@@ -84,6 +74,11 @@ public class Player {
     public void setColor (Color color) {
         this.color = color;
     }
+    
+    public void setMaMission(String miss){
+        maMission = miss;
+    }
+
     
     private String randomName() {
         Random r = new Random();
