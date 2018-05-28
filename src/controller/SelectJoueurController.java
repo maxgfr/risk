@@ -111,7 +111,7 @@ public class SelectJoueurController implements Initializable {
             stage.setTitle("Risk");
             stage.setScene(scene);
             stage.setResizable(false);
-            stage.initStyle(StageStyle.UNDECORATED);
+            //stage.initStyle(StageStyle.UNDECORATED);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
