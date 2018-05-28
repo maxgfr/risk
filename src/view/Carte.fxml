@@ -19,14 +19,14 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <Separator orientation="VERTICAL" prefHeight="44.0" prefWidth="73.0" />
-            <Label fx:id="lb_Mission" contentDisplay="CENTER" prefHeight="44.0" prefWidth="237.0" text="MISSION DU JOUEUR" textAlignment="CENTER">
+            <Separator orientation="VERTICAL" prefHeight="44.0" prefWidth="18.0" />
+            <Label fx:id="lb_Mission" contentDisplay="CENTER" prefHeight="44.0" prefWidth="264.0" text="MISSION DU JOUEUR" textAlignment="CENTER">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <Separator orientation="VERTICAL" prefHeight="44.0" prefWidth="73.0" />
-            <Label text="Nombre d'unités disponibles :" />
+            <Separator orientation="VERTICAL" prefHeight="44.0" prefWidth="35.0" />
+            <Label text="Units" />
             <Label fx:id="lb_nb_unit" text="100" />
             <Separator orientation="VERTICAL" prefHeight="44.0" prefWidth="53.0" />
             <Label text="Canons:" />
@@ -37,7 +37,7 @@
             <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="55.0" />
             <Label text="Cavaliers :" />
             <Label fx:id="lb_nb_horseRiders" text="5" />
-            <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="110.0" />
+            <Separator orientation="VERTICAL" prefHeight="44.0" prefWidth="45.0" />
             <ToggleButton fx:id="btn_attack" mnemonicParsing="false" text="Attaque">
                <toggleGroup>
                   <ToggleGroup fx:id="tGroup" />
