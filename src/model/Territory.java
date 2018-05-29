@@ -400,8 +400,23 @@ public class Territory {
 			this.unitList = unitList;
 		}
 
-		
 
+
+
+
+
+/*		public String getPlayerID() {
+			for (Player dans maListedePlayer)
+				for (Territory2 : Player.listedeterritoires)
+					if Territory2.equals(this)
+						return Player.getID()
+					break
+				break
+*/
+
+
+
+		}
 
 	}
 

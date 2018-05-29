@@ -89,6 +89,27 @@ public class TerritoryAssets {
 
 		etc
 */
+
+
+/*		public void move(Territory territory1, Territory territory2){
+			if (territory2.getPlayerID()==territory1.getPlayerID())
+				déplacement des unités de combats
+			else
+				attack();
+
+
+		}
+		public void attack(Territory territory1, Territory territory2){
+			List<Unit> unitsPlayer1 = territory1.getUnitList();
+			List<Unit> unitsPlayer2 = territory2.getUnitList();
+
+*/
+
+
+		}
+
+
+
 	
 
 }
