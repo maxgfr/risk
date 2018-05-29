@@ -9,6 +9,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,6 +30,8 @@ import model.ImageAssets;
 import model.Mission;
 import model.Player;
 import model.Territory;
+import model.TypeUnit;
+import model.Unit;
 
 /**
  *
@@ -99,6 +103,7 @@ public class CarteController implements Initializable {
         //Mission Initialize
         Mission missions = Mission.getInstance();
         missions.initMission(game.getList_player());
+        
         lb_Mission.setText(current_player.getMaMission());
         
         // Unit
@@ -108,13 +113,27 @@ public class CarteController implements Initializable {
         lb_nb_soldiers.setText("0");
         lb_nb_horseRiders.setText("0");
        
-        
         tGroup.selectToggle(btn_renfort);
+        
+        game.setState(GameState.REINFORCEMENT);
+        btn_renfort.setSelected(true);
+        
+        btn_renfort.selectedProperty().addListener((p, ov, nv) -> {
+        	game.setState(GameState.REINFORCEMENT);
+        	lb_nb_unit.setText("" +current_player.getUnitToDispatch());
+        });
+        btn_attack.selectedProperty().addListener((p, ov, nv) -> {
+        	game.setState(GameState.ATTACK);
+         	}
+        );
+        btn_deplacement.selectedProperty().addListener((p, ov, nv) -> {
+        	game.setState(GameState.DEPLACEMENT);
+         	}
+        );
+
         for (Node node : GameAnchor.getChildren()){
         	if (node instanceof Label){
         		((Label)node).setText("0");
-        		// TODO 
-        		// Generate random unit and put the value to label
         	}
         }
             
@@ -126,9 +145,25 @@ public class CarteController implements Initializable {
     private void imagePaneMouseClicked(MouseEvent event){
     	Territory terr = game.tellTerritory((int) event.getX(), (int) event.getY());
     	
+    	
         if (terr != null){
+        	switch(game.getState().toString()){
+		    	case "ATTACK":
+		    		System.out.println("Attaque : " + terr.name);
+		    		break;
+		    	case "REINFORCEMENT":
+		    		terr.getUnitList().add(new Unit(TypeUnit.SOLDIER));
+		    		update_Territory_Labels();
+		    		break;
+		    	case "DEPLACEMENT":
+		    		break;
+		    	default:
+		    		System.out.println("Error in game state");
+        	}
         	imageView.setImage(SwingFXUtils.toFXImage(ImageAssets.colorTerritoire(SwingFXUtils.fromFXImage(imageView.getImage(), null), terr, current_player.getColor()), null));
         }
+        current_player.setUnitToDispatch(current_player.getUnitToDispatch() - 1);
+        lb_nb_unit.setText(""+current_player.getUnitToDispatch());
     }
     
     @FXML
@@ -150,28 +185,16 @@ public class CarteController implements Initializable {
         lb_nb_horseRiders.setText("0");
     }
     
-    @FXML
-    private void onChangeState(ActionEvent event){
-    	
-    
-    	//ChangeState();
-    	
-    }
-    
-    private void ChangeState(){
-    	if (game.getState().equals(GameState.REINFORCEMENT)){
-    		lb_nb_unit.setText("" +current_player.getUnitToDispatch());
-            lb_nb_cannons.setText("0");
-            lb_nb_soldiers.setText("0");
-            lb_nb_horseRiders.setText("0");
-            btn_attack.setSelected(true);
-            btn_renfort.setSelected(false);
-            game.setState(GameState.ATTACK);
-    	}
-    	else{
-    		game.setState(GameState.REINFORCEMENT);
-    		btn_attack.setSelected(false);
-            btn_renfort.setSelected(true);
+    private void update_Territory_Labels(){
+    	for (Node node : GameAnchor.getChildren()){
+        	if (node instanceof Label){
+        		String terr_name = ((Label)node).getId().replace("lb_", "");
+        		for (Territory terr : game.getMaListeDeTerritoire()) {
+    		        if (terr.name.equals(terr_name)) {
+    		        	((Label)node).setText("" + terr.getUnitList().size());
+    		        }
+    		    }
+        	}
     	}
     }
 }

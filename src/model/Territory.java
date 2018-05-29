@@ -28,6 +28,7 @@ public class Territory {
 	        this.pixelList = new ArrayList<Pixel>();
 	        this.terrAdjacent = new Hashtable<String,String>();
 			this.name = addName(color);
+			this.unitList = new ArrayList<Unit>();
 	    }
 	    
 	    public void addPixel(Pixel pixel){

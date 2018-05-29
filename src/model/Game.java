@@ -102,7 +102,6 @@ public class Game {
     }
     
     public Territory tellTerritory(int x, int y) {
-    	System.out.println("Ma liste de territoire :  " + getMaListeDeTerritoire().size());
         for (Iterator<Territory> it = getMaListeDeTerritoire().iterator(); it.hasNext();) {
             Territory territory = it.next();
             List<Pixel> listPixel = territory.getListPixel();
