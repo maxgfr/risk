@@ -88,6 +88,7 @@ public class ImageAssets {
 
         for (Player player : players ) { // pour chaque joueur
             while (nb < territory_per_player) {
+                System.out.println("Taille de la liste indexes : " + indexes.size());
                 int randomIndex = rand.nextInt(indexes.size());
                 territorys.get(randomIndex).setPlayer(player);
                 Color color_player = player.getColor();
@@ -95,6 +96,7 @@ public class ImageAssets {
                     buffImage.setRGB(pix.x, pix.y, color_player.getRGB());
                 }
                 indexes.remove(randomIndex);
+                nb++; //sisi
             }          
         }
 

@@ -91,7 +91,7 @@ public class TerritoryAssets {
 */
 
 
-	public void move(Territory territory1, Territory territory2){
+/*	public void move(Territory territory1, Territory territory2){
 		if (territory2.getPlayerID()==territory1.getPlayerID())
 			déplacement des unités de combats
 		else
@@ -111,7 +111,7 @@ public class TerritoryAssets {
 		}
 
 
-
+*/
 	
 
 }

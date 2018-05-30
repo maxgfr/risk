@@ -19,7 +19,6 @@ public class Player {
 	
     private String name;
     private int id;
-    private List<Territory> mTerritories;
     private int nbSoldats;
     private Color color;
     private String maMission;
@@ -34,7 +33,6 @@ public class Player {
                 this.name = name;
             }
             this.color = color;
-            mTerritories = new ArrayList<Territory>();
             nbSoldats = 0;
             maMission = "";
     }
@@ -51,22 +49,6 @@ public class Player {
             return maMission;
     }
 
-    public List<Territory> getTerritories(){
-            return mTerritories;
-    }
-
-    public int numberOfTerritories(){
-            return mTerritories.size();
-    }
-
-    public void addTerritory(Territory t){
-            mTerritories.add(t);
-    }
-
-    public void removeTerritory(Territory t){
-            mTerritories.remove(t);
-    }
-    
     public Color getColor () {
         return color;
     }
