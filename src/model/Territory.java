@@ -22,6 +22,8 @@ public class Territory {
 	    public Hashtable<String, String> terrAdjacent;
 		public List<Unit> unitList;
 		public String region;
+		public Player player;
+
 	    
 	    public Territory (Color color) {
 	        this.color = color;
@@ -401,22 +403,8 @@ public class Territory {
 			this.unitList = unitList;
 		}
 
-
-
-
-
-
-/*		public String getPlayerID() {
-			for (Player dans maListedePlayer)
-				for (Territory2 : Player.listedeterritoires)
-					if Territory2.equals(this)
-						return Player.getID()
-					break
-				break
-*/
-
-
-
+		public void setPlayer(Player player){
+			this.player = player;
 		}
 
 	}

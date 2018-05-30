@@ -82,32 +82,24 @@ public class ImageAssets {
         System.out.println("Number of territories : " + nb_territories);
         System.out.println("Territories per player : " + territory_per_player);
         System.out.println("Remaining Territories : " + territories_modulo);
-        
-        for (int j=0; j<players.size(); j++) { // pour chaque joueur
-            nb = 0;
+        ArrayList<Integer> indexes = new ArrayList<Integer>();
+        for (int i=0;i<territorys.size();i++)
+            indexes.add(i);
+
+        for (Player player : players ) { // pour chaque joueur
             while (nb < territory_per_player) {
-                int randomIndex = rand.nextInt(territories.size());
-                Territory randomElement = territories.get(randomIndex);
-                players.get(j).getTerritories().add(randomElement);
-                Color color_player = players.get(j).getColor();
-                for (Pixel pix : randomElement.pixelList) {
+                int randomIndex = rand.nextInt(indexes.size());
+                territorys.get(randomIndex).setPlayer(player);
+                Color color_player = player.getColor();
+                for (Pixel pix : territorys.get(randomIndex).pixelList) {
                     buffImage.setRGB(pix.x, pix.y, color_player.getRGB());
                 }
-                territories.remove(randomIndex);     
-                nb++;
+                indexes.remove(randomIndex);
             }          
         }
-        
-        while (territories_modulo > 0) {
-            int randomIndex = rand.nextInt(territories.size());
-            Territory randomElement = territories.get(randomIndex);
-            players.get(territories_modulo).getTerritories().add(randomElement);
-            for (Pixel pix : randomElement.pixelList) {
-                buffImage.setRGB(pix.x, pix.y, players.get(territories_modulo).getColor().getRGB());
-            }
-            territories_modulo--;  
-        }
-           
+
+        for (int i : indexes)
+            territorys.get(i).setPlayer(players.get(rand.nextInt(players.size())));
      
         Image image_final =  SwingFXUtils.toFXImage(buffImage, null);
         
