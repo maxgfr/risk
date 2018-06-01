@@ -25,7 +25,11 @@ public class Game {
     private int num_tours;
     private GameState state;
     
-    private static Game instance = null;
+    private Territory selectedTerritory1;
+    private Territory selectedTerritory2;
+    
+
+	private static Game instance = null;
     
 
     public static Game getInstance() {
@@ -43,6 +47,8 @@ public class Game {
         maListeDeTerritoire = new ArrayList<Territory>();
         finished = false;
         num_tours = 0;
+        selectedTerritory1 = new Territory();
+        selectedTerritory2 = new Territory();
     }
 
     /**
@@ -212,8 +218,38 @@ public class Game {
 	public void setState(GameState state) {
 		this.state = state;
 	}
+	
+    /**
+	 * @return the selectedTerritory1
+	 */
+	public Territory getSelectedTerritory1() {
+		return selectedTerritory1;
+	}
 
 
+	/**
+	 * @return the selectedTerritory2
+	 */
+	public Territory getSelectedTerritory2() {
+		return selectedTerritory2;
+	}
+
+
+	/**
+	 * @param selectedTerritory1 the selectedTerritory1 to set
+	 */
+	public void setSelectedTerritory1(Territory selectedTerritory1) {
+		this.selectedTerritory1 = selectedTerritory1;
+	}
+
+
+	/**
+	 * @param selectedTerritory2 the selectedTerritory2 to set
+	 */
+	public void setSelectedTerritory2(Territory selectedTerritory2) {
+		this.selectedTerritory2 = selectedTerritory2;
+	}
+	
 
     
 }
