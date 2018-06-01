@@ -115,38 +115,59 @@ public class Mission {
     }
     
     public boolean hasWin (Player player) {
-        
+        Game game = Game.getInstance();
         String mission_joueur = player.getMaMission();
+        List<Territory> territories = game.getMaListeDeTerritoire();
         switch(mission_joueur) {
             case MISSION_1:
                 String name_joueur_to_destroy = mission_joueur.replace("Détruire le joueur ","");
                 System.out.println("Name gamer to destroy : "+name_joueur_to_destroy);
-                break;
+                Player to_Destroy = game.getPlayerWithName(name_joueur_to_destroy);
+                boolean have_territory = false;
+                if (to_Destroy != null) {
+                    if (!TerritoryAssets.knowIfIhaveTerriority(territories, to_Destroy)) {
+                        return true;
+                    }    
+                }              
+                return false;
             case MISSION_2:
-                System.out.println("two");
-                break;
+                if (TerritoryAssets.hasAllTerritories(territories, player)) {
+                    return true;
+                }
+                return false;
             case MISSION_3:
-                System.out.println("three");
-                break;
+                if (TerritoryAssets.controlTerritoryWithRegion(territories, player, 18, 3)) {
+                    return true;
+                }
+                return false;
             case MISSION_4:
-                System.out.println("one");
-                break;
+                if (TerritoryAssets.controlTerritoryWithArmy(territories, player, 18, 2)) {
+                    return true;
+                }
+                return false;
             case MISSION_5:
-                System.out.println("two");
-                break;
+                if (TerritoryAssets.controlTerritory(territories, player, 30)) {
+                    return true;
+                }
+                return false;
             case MISSION_6:
-                System.out.println("three");
-                break;
+                 if (TerritoryAssets.controlTerritory(territories, player, 24)) {
+                    return true;
+                }
+                return false;
             case MISSION_7:
-                System.out.println("one");
-                break;
+                if (TerritoryAssets.controlTerritory(territories, player, 21)) {
+                    return true;
+                }
+                return false;
             case MISSION_8:
-                System.out.println("one");
-                break;
+                if (TerritoryAssets.controlBiggestRegionWithAnotherRegion(territories, player)) {
+                    return true;
+                }
+                return false;
             default:
-                System.out.println("no match");
+                return false;
         }
-        return false;
     }
    
     

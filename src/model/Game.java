@@ -213,7 +213,14 @@ public class Game {
 		this.state = state;
 	}
 
-
+        public Player getPlayerWithName (String name) {
+            List<Player> list = getList_player();
+            for (Player p : list) {
+                if (p.getName().equals(name)) 
+                    return p;
+            }
+            return null;
+        }
 
     
 }
