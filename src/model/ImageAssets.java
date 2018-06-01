@@ -87,17 +87,18 @@ public class ImageAssets {
             indexes.add(i);
 
         for (Player player : players ) { // pour chaque joueur
+        	System.out.println(player.getName());
             while (nb < territory_per_player) {
-                System.out.println("Taille de la liste indexes : " + indexes.size());
                 int randomIndex = rand.nextInt(indexes.size());
-                territorys.get(randomIndex).setPlayer(player);
+                territorys.get(indexes.get(randomIndex)).setPlayer(player);
                 Color color_player = player.getColor();
-                for (Pixel pix : territorys.get(randomIndex).pixelList) {
+                for (Pixel pix : territorys.get(indexes.get(randomIndex)).pixelList) {
                     buffImage.setRGB(pix.x, pix.y, color_player.getRGB());
                 }
                 indexes.remove(randomIndex);
-                nb++; //sisi
-            }          
+                nb++;
+            }
+            nb = 0;
         }
 
         for (int i : indexes)
