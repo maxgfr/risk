@@ -101,9 +101,12 @@ public class ImageAssets {
             nb = 0;
         }
 
-        for (int i : indexes)
+        for (int i : indexes){
             territorys.get(i).setPlayer(players.get(rand.nextInt(players.size())));
-     
+            for (Pixel pix : territorys.get(i).pixelList) {
+                buffImage.setRGB(pix.x, pix.y, territorys.get(i).player.getColor().getRGB());
+            }
+        }
         Image image_final =  SwingFXUtils.toFXImage(buffImage, null);
         
         return image_final;
