@@ -226,7 +226,6 @@ public class Game {
 		return selectedTerritory1;
 	}
 
-
 	/**
 	 * @return the selectedTerritory2
 	 */
@@ -234,6 +233,14 @@ public class Game {
 		return selectedTerritory2;
 	}
 
+        public Player getPlayerWithName (String name) {
+            List<Player> list = getList_player();
+            for (Player p : list) {
+                if (p.getName().equals(name)) 
+                    return p;
+            }
+            return null;
+        }
 
 	/**
 	 * @param selectedTerritory1 the selectedTerritory1 to set

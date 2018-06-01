@@ -19,10 +19,11 @@ public class Player {
 	
     private String name;
     private int id;
-    private int nbSoldats;
     private Color color;
     private String maMission;
-    
+    private int nbArmy;
+    private int nbRegion;
+    private boolean biggestRegion;
     private int unitToDispatch;
     
     public Player(int id, String name, Color color) {
@@ -33,8 +34,11 @@ public class Player {
                 this.name = name;
             }
             this.color = color;
-            nbSoldats = 0;
             maMission = "";
+            nbArmy = 0;
+            nbRegion = 0;
+            biggestRegion= false;
+            
     }
 
     public int getId(){
@@ -80,6 +84,30 @@ public class Player {
 
 	public void setUnitToDispatch(int unitToDispatch) {
 		this.unitToDispatch = unitToDispatch;
+	}
+        
+        public int getNbArmy() {
+		return nbArmy;
+	}
+
+	public void setNbArmy(int nb) {
+		this.nbArmy = nb;
+	}
+        
+        public int getNbRegion() {
+		return nbRegion;
+	}
+
+	public void setNbRegion(int nb) {
+		this.nbRegion = nb;
+	}
+        
+        public boolean getBiggestRegion() {
+		return biggestRegion;
+	}
+
+	public void setBiggestRegion(boolean b) {
+		this.biggestRegion = b;
 	}
 	
 }
