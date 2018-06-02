@@ -20,12 +20,12 @@ public class Territory {
 	    public List<Pixel> pixelList;
 	    public String name;
 	    public Hashtable<String, String> terrAdjacent;
-		public List<Unit> unitList;
-		public String region;
-		public Player player;
+            public List<Unit> unitList;
+            public String region;
+            public Player player;
 
-	    
-		public Territory(){}
+
+            public Territory(){}
 		
 	    public Territory (Color color) {
 	        this.color = color;
@@ -47,6 +47,11 @@ public class Territory {
 	    	return this.region;
 
 		}
+            
+            public void setBatailleTerritoire (Player player, List<Unit> unitList) {
+                this.player = player;
+                this.unitList = unitList;
+            }
 
 		public String addName(Color color) {
 			switch (color.toString()) {

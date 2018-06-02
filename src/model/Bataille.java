@@ -125,14 +125,68 @@ public class Bataille {
         //(Cf. Tableau 4) qui est prioritaire pour la comparaison la plus haute. On
         //notera que les priorité en défense et en attaque ne sont pas les mêmes !
         
-        
         Iterator<Integer> iterAtt = scoreAttacker.iterator();
         Iterator<Integer> iterDef = scoreDefenser.iterator();
         
-        while(iterAtt.hasNext() && iterDef.hasNext()) {
+        int i=0;
+        boolean attackeurWin = false;
+        
+        // Le combat n'est gagné que lorsque le défenseur n'a plus aucune unité
+        while(iterDef.hasNext()) {
+            if (unitForTheAttack.size() == 0) {
+                System.out.println("L'attaquant a perdu toutes ces unités");
+            }
+            if (unitForDefend.size() == 0) {
+                System.out.println("Le défenseur a perdu toutes ces unités");
+                attackeurWin = true;
+            }
             Integer unitAtt = iterAtt.next();
             Integer unitDef = iterDef.next();
+            // Pour chaque comparaison, l'unité ayant le score le plus élevé détruit 
+            // celle avec le score le moins élevé. L'égalité béné􏰃cie au défenseur.
+            if (unitAtt > unitDef) {
+                unitForDefend.remove(i);
+            } else  {//if (unitAtt < unitDef) or if (unitAtt == unitDef)  
+                unitForTheAttack.remove(i);
+            } 
+            i++;
         }
+       
+        
+        List<Unit> unitAfterAttack = new ArrayList<Unit>();
+        List<Unit> unitAfterDefend = new ArrayList<Unit>();
+        
+        if (attackeurWin) {
+            unitAfterAttack = unitForTheAttack;
+            //Il aura 50% de chance d'avoir 1 renfort supplémentaire lors de son prochain
+            //tour par territoire capturé.
+            Random ran = new Random();
+            int random = ran.nextInt(2);
+            if (random == 0) {
+                int rand2 =ran.nextInt(3);
+                if (rand2 == 0) {
+                     Unit unitRandom = new Unit(TypeUnit.SOLDIER);
+                     System.out.println("Le joueur a gagné un renfort suplémentaire de type : "+ TypeUnit.SOLDIER);
+                     unitAfterAttack.add(unitRandom);
+                } else if (rand2 == 1) {
+                    Unit unitRandom = new Unit(TypeUnit.HORSE_RIDER);
+                    System.out.println("Le joueur a gagné un renfort suplémentaire de type : "+ TypeUnit.HORSE_RIDER);
+                    unitAfterAttack.add(unitRandom);
+                } else {
+                    Unit unitRandom = new Unit(TypeUnit.CANNON);
+                    System.out.println("Le joueur a gagné un renfort suplémentaire de type : "+ TypeUnit.CANNON);
+                    unitAfterAttack.add(unitRandom);
+                }
+
+            } 
+            // En cas de capture d'un territoire, l'attaquant y place toutes les unités ayant
+            //participé et survécu à l'attaque.
+            territoryB.setBatailleTerritoire(attackeur, unitAfterAttack);
+        } else {
+            unitAfterDefend = unitForDefend;
+            territoryB.setBatailleTerritoire(defenseur, unitAfterDefend);
+            territoryA.setBatailleTerritoire(attackeur, unitAfterAttack);
+        }        
 
     }
 }
