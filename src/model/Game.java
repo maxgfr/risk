@@ -208,6 +208,11 @@ public class Game {
     	for (Player player : list_player) {
     		player.setUnitToDispatch(nbUnitTodispatch);
 	    }
+    	for (Territory terr: maListeDeTerritoire){
+    		Unit unitToDispatch = new Unit(TypeUnit.SOLDIER);
+    		terr.getUnitList().add(unitToDispatch);
+    		terr.player.setUnitToDispatch(terr.player.getUnitToDispatch() - unitToDispatch.getCost() );
+    	}
     	
     }
 
@@ -235,14 +240,14 @@ public class Game {
 		return selectedTerritory2;
 	}
 
-        public Player getPlayerWithName (String name) {
-            List<Player> list = getList_player();
-            for (Player p : list) {
-                if (p.getName().equals(name)) 
-                    return p;
-            }
-            return null;
+    public Player getPlayerWithName (String name) {
+        List<Player> list = getList_player();
+        for (Player p : list) {
+            if (p.getName().equals(name)) 
+                return p;
         }
+        return null;
+    }
 
 	/**
 	 * @param selectedTerritory1 the selectedTerritory1 to set

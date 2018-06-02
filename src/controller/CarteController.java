@@ -119,7 +119,7 @@ public class CarteController implements Initializable {
         lb_Mission.setText(current_player.getMaMission());
         
         // Unit
-        game.initTerritory();
+        
         lb_nb_unit.setText("" +current_player.getUnitToDispatch());
         lb_nb_cannons.setText("0");
         lb_nb_soldiers.setText("0");
@@ -166,7 +166,9 @@ public class CarteController implements Initializable {
         	}
         }
             
-        	
+        game.initTerritory();
+        lb_nb_unit.setText(""+current_player.getUnitToDispatch());
+        update_Territory_Labels();
     }
    
     
@@ -183,14 +185,15 @@ public class CarteController implements Initializable {
 		    		break;
 		    	case "REINFORCEMENT":
 		    		if (game.getSelectedTerritory1() != null){
-		    			Unit unitToDispatch = new Unit(game.getSelectedUnitType());
-		    			if(current_player.getUnitToDispatch() >= unitToDispatch.getCost()){
-		    				terr.getUnitList().add(unitToDispatch);
-		    				update_Territory_Labels();
-		    				current_player.setUnitToDispatch(current_player.getUnitToDispatch() - unitToDispatch.getCost());
-		    				update_Counters(terr);
+		    			if (terr.player.equals(current_player)){
+		    				Unit unitToDispatch = new Unit(game.getSelectedUnitType());
+			    			if(current_player.getUnitToDispatch() >= unitToDispatch.getCost()){
+			    				terr.getUnitList().add(unitToDispatch);
+			    				update_Territory_Labels();
+			    				current_player.setUnitToDispatch(current_player.getUnitToDispatch() - unitToDispatch.getCost());
+			    				update_Counters(terr);
+			    			}
 		    			}
-	    				
 		    		}
 		    		break;
 		    	case "DEPLACEMENT":
