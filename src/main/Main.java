@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.Territory;
 import model.TerritoryAssets;
+import model.Unit;
 
 import java.awt.*;
 import java.util.ArrayList;

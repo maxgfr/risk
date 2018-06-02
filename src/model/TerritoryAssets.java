@@ -91,27 +91,28 @@ public class TerritoryAssets {
 */
 
 
-/*	public void move(Territory territory1, Territory territory2){
-		if (territory2.getPlayerID()==territory1.getPlayerID())
-			déplacement des unités de combats
-		else
-			attack();
-
+	public void move(Territory territory1, Territory territory2) {
+	//déplacement des unités de combats
 	}
 
 
-	public void attack(Territory territory1, Territory territory2){
-		List<Unit> unitsPlayer1 = territory1.getUnitList();
-		List<Unit> unitsPlayer2 = territory2.getUnitList();
 
+	public void attack(Territory territory1, Territory territory2){
+		//List<Unit> unitsPlayer1 = territory1.getUnitList();
+		//List<Unit> unitsPlayer2 = territory2.getUnitList();
+		int nbCannons1 = territory1.nbOfUnits(TypeUnit.CANNON);
+		int nbHorses1 = territory1.nbOfUnits(TypeUnit.HORSE_RIDER);
+		int nbSoldiers1 = territory1.nbOfUnits(TypeUnit.SOLDIER);
+		int nbSoldiers2 = territory2.nbOfUnits(TypeUnit.SOLDIER);
+		int nbCannons2 = territory2.nbOfUnits(TypeUnit.CANNON);
+		int nbHorses2 = territory2.nbOfUnits(TypeUnit.HORSE_RIDER);
+		//faire un lot des 3 meilleurs att et 2 meilleurs def
+		//tirages
+		//
 
 
 
 
 		}
-
-
-*/
-	
 
 }

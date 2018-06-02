@@ -7,6 +7,7 @@ package model;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -405,6 +406,10 @@ public class Territory {
 
 		public void setPlayer(Player player){
 			this.player = player;
+		}
+
+		public int nbOfUnits(TypeUnit unit){
+			return (int) unitList.stream().filter(p -> p.getType().equals(unit)).count();
 		}
 
 	}

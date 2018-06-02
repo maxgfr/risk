@@ -6,6 +6,7 @@
 package controller;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -154,6 +155,7 @@ public class CarteController implements Initializable {
 		    	case "REINFORCEMENT":
 		    		terr.getUnitList().add(new Unit(TypeUnit.SOLDIER));
 		    		update_Territory_Labels();
+                    terr.nbOfUnits(TypeUnit.SOLDIER);
 		    		break;
 		    	case "DEPLACEMENT":
 		    		break;

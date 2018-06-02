@@ -19,7 +19,6 @@ public class Player {
 	
     private String name;
     private int id;
-    private int nbSoldats;
     private Color color;
     private String maMission;
     
@@ -33,7 +32,6 @@ public class Player {
                 this.name = name;
             }
             this.color = color;
-            nbSoldats = 0;
             maMission = "";
     }
 
