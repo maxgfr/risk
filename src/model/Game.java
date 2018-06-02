@@ -47,8 +47,8 @@ public class Game {
         maListeDeTerritoire = new ArrayList<Territory>();
         finished = false;
         num_tours = 0;
-        selectedTerritory1 = new Territory();
-        selectedTerritory2 = new Territory();
+        selectedTerritory1 = null;
+        selectedTerritory2 = null;
     }
 
     /**

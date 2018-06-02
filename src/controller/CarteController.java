@@ -196,18 +196,18 @@ public class CarteController implements Initializable {
     }
     
     private void SelectedTerritory(Territory terr){
-    	System.out.println("Selected territory 0 : " + game.getSelectedTerritory1());
     	if (game.getSelectedTerritory1() == null)
     		game.setSelectedTerritory1(terr);
-    	else if (game.getSelectedTerritory2() == null)
+    	else if (game.getSelectedTerritory2() == null && !terr.equals(game.getSelectedTerritory1()))
     		game.setSelectedTerritory2(terr);
-    	else if (terr.equals(game.getSelectedTerritory2()))
-    	else if (!terr.equals(game.getSelectedTerritory1()) || !terr.equals(game.getSelectedTerritory2())){
-    		game.setSelectedTerritory1(null);
+    	else if (terr.equals(game.getSelectedTerritory1())){
+    		if (game.getState() != GameState.REINFORCEMENT)
+    			game.setSelectedTerritory2(null);
+    	}
+    	else if (!terr.equals(game.getSelectedTerritory1()) && !terr.equals(game.getSelectedTerritory2())){
+    		game.setSelectedTerritory1(terr);
     		game.setSelectedTerritory2(null);
     	}
-    	System.out.println("Selected territory 1 : " + game.getSelectedTerritory1());
-    	System.out.println("Selected territory 2 : " + game.getSelectedTerritory2());
     }
     
     private void update_Territory_Labels(){
