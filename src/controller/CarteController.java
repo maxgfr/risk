@@ -75,6 +75,9 @@ public class CarteController implements Initializable {
     @FXML
     ToggleGroup tGroup;
     
+    @FXML
+    ToggleGroup unitGroup;
+    
     @FXML 
     ToggleButton btn_attack;
     
@@ -83,6 +86,15 @@ public class CarteController implements Initializable {
     
     @FXML
     ToggleButton btn_deplacement;
+    
+    @FXML
+    ToggleButton tgb_Cannon;
+    
+    @FXML
+    ToggleButton tgb_Soldier;
+    
+    @FXML
+    ToggleButton tgb_HorseRider;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -114,9 +126,13 @@ public class CarteController implements Initializable {
         lb_nb_horseRiders.setText("0");
        
         tGroup.selectToggle(btn_renfort);
+        unitGroup.selectToggle(tgb_Soldier);
         
         game.setState(GameState.REINFORCEMENT);
         btn_renfort.setSelected(true);
+        game.setSelectedUnitType(TypeUnit.SOLDIER);
+        tgb_Soldier.setSelected(true);
+        
         
         btn_renfort.selectedProperty().addListener((p, ov, nv) -> {
         	game.setState(GameState.REINFORCEMENT);
@@ -130,6 +146,19 @@ public class CarteController implements Initializable {
         	game.setState(GameState.DEPLACEMENT);
          	}
         );
+        
+        tgb_Cannon.selectedProperty().addListener((p, ov, nv) -> {
+        	game.setSelectedUnitType(TypeUnit.CANNON);
+        }
+        );
+        tgb_Soldier.selectedProperty().addListener((p, ov, nv) -> {
+        	game.setSelectedUnitType(TypeUnit.SOLDIER);
+        });
+        
+        tgb_HorseRider.selectedProperty().addListener((p, ov, nv) -> {
+        	game.setSelectedUnitType(TypeUnit.HORSE_RIDER);
+        });
+
 
         for (Node node : GameAnchor.getChildren()){
         	if (node instanceof Label){
@@ -146,16 +175,23 @@ public class CarteController implements Initializable {
     	Territory terr = game.tellTerritory((int) event.getX(), (int) event.getY());
     	
         if (terr != null){
-        	SelectedTerritory(terr);
+        	setSelectedTerritory(terr);
+        	update_Counters(terr);
         	switch(game.getState().toString()){
 		    	case "ATTACK":
 		    		System.out.println("Attaque : " + terr.name);
 		    		break;
 		    	case "REINFORCEMENT":
-		    		if (game.getSelectedTerritory2() != null)
-		    			if(game.getSelectedTerritory2().equals(terr))
-		    				terr.getUnitList().add(new Unit(TypeUnit.SOLDIER));
+		    		if (game.getSelectedTerritory1() != null){
+		    			Unit unitToDispatch = new Unit(game.getSelectedUnitType());
+		    			if(current_player.getUnitToDispatch() >= unitToDispatch.getCost()){
+		    				terr.getUnitList().add(unitToDispatch);
 		    				update_Territory_Labels();
+		    				current_player.setUnitToDispatch(current_player.getUnitToDispatch() - unitToDispatch.getCost());
+		    				update_Counters(terr);
+		    			}
+	    				
+		    		}
 		    		break;
 		    	case "DEPLACEMENT":
 		    		break;
@@ -164,8 +200,8 @@ public class CarteController implements Initializable {
         	}
         	
         }
-        current_player.setUnitToDispatch(current_player.getUnitToDispatch() - 1);
-        lb_nb_unit.setText(""+current_player.getUnitToDispatch());
+        
+        
     }
     
     @FXML
@@ -195,7 +231,7 @@ public class CarteController implements Initializable {
     			);
     }
     
-    private void SelectedTerritory(Territory terr){
+    private void setSelectedTerritory(Territory terr){
     	if (game.getSelectedTerritory1() == null)
     		game.setSelectedTerritory1(terr);
     	else if (game.getSelectedTerritory2() == null && !terr.equals(game.getSelectedTerritory1()))
@@ -208,8 +244,16 @@ public class CarteController implements Initializable {
     		game.setSelectedTerritory1(terr);
     		game.setSelectedTerritory2(null);
     	}
+    	System.out.println("Selected Territory 1 :" + game.getSelectedTerritory1());
+    	System.out.println("Selected Territory 2 :" + game.getSelectedTerritory2());
     }
     
+    private void update_Counters(Territory terr ){
+    	lb_nb_unit.setText(""+current_player.getUnitToDispatch());
+    	lb_nb_soldiers.setText(""+terr.getUnitNumberOfType(TypeUnit.SOLDIER));
+    	lb_nb_cannons.setText(""+terr.getUnitNumberOfType(TypeUnit.CANNON));
+    	lb_nb_horseRiders.setText(""+terr.getUnitNumberOfType(TypeUnit.HORSE_RIDER));
+    }
     private void update_Territory_Labels(){
     	for (Node node : GameAnchor.getChildren()){
         	if (node instanceof Label){

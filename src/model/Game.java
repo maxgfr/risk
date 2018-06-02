@@ -28,6 +28,7 @@ public class Game {
     private Territory selectedTerritory1;
     private Territory selectedTerritory2;
     
+    private TypeUnit selectedUnitType;
 
 	private static Game instance = null;
     
@@ -49,6 +50,7 @@ public class Game {
         num_tours = 0;
         selectedTerritory1 = null;
         selectedTerritory2 = null;
+        setSelectedUnitType(TypeUnit.SOLDIER);
     }
 
     /**
@@ -255,6 +257,16 @@ public class Game {
 	 */
 	public void setSelectedTerritory2(Territory selectedTerritory2) {
 		this.selectedTerritory2 = selectedTerritory2;
+	}
+
+
+	public TypeUnit getSelectedUnitType() {
+		return selectedUnitType;
+	}
+
+
+	public void setSelectedUnitType(TypeUnit selectedUnitType) {
+		this.selectedUnitType = selectedUnitType;
 	}
 	
 
