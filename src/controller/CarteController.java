@@ -6,7 +6,6 @@
 package controller;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -146,23 +145,24 @@ public class CarteController implements Initializable {
     private void imagePaneMouseClicked(MouseEvent event){
     	Territory terr = game.tellTerritory((int) event.getX(), (int) event.getY());
     	
-    	
         if (terr != null){
+        	SelectedTerritory(terr);
         	switch(game.getState().toString()){
 		    	case "ATTACK":
 		    		System.out.println("Attaque : " + terr.name);
 		    		break;
 		    	case "REINFORCEMENT":
-		    		terr.getUnitList().add(new Unit(TypeUnit.SOLDIER));
-		    		update_Territory_Labels();
-                    terr.nbOfUnits(TypeUnit.SOLDIER);
+		    		if (game.getSelectedTerritory2() != null)
+		    			if(game.getSelectedTerritory2().equals(terr))
+		    				terr.getUnitList().add(new Unit(TypeUnit.SOLDIER));
+		    				update_Territory_Labels();
 		    		break;
 		    	case "DEPLACEMENT":
 		    		break;
 		    	default:
 		    		System.out.println("Error in game state");
         	}
-        	imageView.setImage(SwingFXUtils.toFXImage(ImageAssets.colorTerritoire(SwingFXUtils.fromFXImage(imageView.getImage(), null), terr, current_player.getColor()), null));
+        	
         }
         current_player.setUnitToDispatch(current_player.getUnitToDispatch() - 1);
         lb_nb_unit.setText(""+current_player.getUnitToDispatch());
@@ -185,6 +185,29 @@ public class CarteController implements Initializable {
         lb_nb_cannons.setText("0");
         lb_nb_soldiers.setText("0");
         lb_nb_horseRiders.setText("0");
+    }
+    
+    private void update_Map(Territory terr){
+    	imageView.setImage(SwingFXUtils.toFXImage(ImageAssets.colorTerritoire(
+    			SwingFXUtils.fromFXImage(imageView.getImage(), null),
+    			terr, 
+    			terr.player.getColor()), null) //TODO Change to match new player color 
+    			);
+    }
+    
+    private void SelectedTerritory(Territory terr){
+    	System.out.println("Selected territory 0 : " + game.getSelectedTerritory1());
+    	if (game.getSelectedTerritory1() == null)
+    		game.setSelectedTerritory1(terr);
+    	else if (game.getSelectedTerritory2() == null)
+    		game.setSelectedTerritory2(terr);
+    	else if (terr.equals(game.getSelectedTerritory2()))
+    	else if (!terr.equals(game.getSelectedTerritory1()) || !terr.equals(game.getSelectedTerritory2())){
+    		game.setSelectedTerritory1(null);
+    		game.setSelectedTerritory2(null);
+    	}
+    	System.out.println("Selected territory 1 : " + game.getSelectedTerritory1());
+    	System.out.println("Selected territory 2 : " + game.getSelectedTerritory2());
     }
     
     private void update_Territory_Labels(){

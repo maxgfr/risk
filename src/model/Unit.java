@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Random;
+
 public class Unit {
 	
 	private TypeUnit type;
@@ -12,7 +14,7 @@ public class Unit {
 	public Unit(TypeUnit unitType){
 		if (unitType == TypeUnit.SOLDIER){
 			this.type = TypeUnit.SOLDIER;
-			this.Strength = 1;
+			this.Strength = giveRandomNumber(1,6);
 			this.cost = 1;
 			this.priorityAttack = 2;
 			this.priorityDefence = 1;
@@ -20,7 +22,7 @@ public class Unit {
 		}
 		else if (unitType == TypeUnit.HORSE_RIDER){
 			this.type = TypeUnit.HORSE_RIDER;
-			this.Strength = 2;
+			this.Strength = giveRandomNumber(2,7);
 			this.cost = 3;
 			this.priorityAttack = 1;
 			this.priorityDefence = 3;
@@ -29,7 +31,7 @@ public class Unit {
 		}
 		else if (unitType == TypeUnit.CANNON){
 			this.type = TypeUnit.CANNON;
-			this.Strength = 4;
+			this.Strength = giveRandomNumber(4,9);
 			this.cost = 7;
 			this.priorityAttack = 3;
 			this.priorityDefence = 2;
@@ -45,6 +47,11 @@ public class Unit {
 		this.priorityDefence = priorityDefence;
 		this.movementPerTour = movementpertour;
 	}
+        
+        public int giveRandomNumber(int leftLimit, int rightLimit ) {
+            Random rdm = new Random();
+            return rdm.nextInt((rightLimit - leftLimit) + 1) + leftLimit;
+        }
 
 	/**
 	 * @return the type

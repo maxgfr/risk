@@ -26,6 +26,8 @@ public class Territory {
 		public Player player;
 
 	    
+		public Territory(){}
+		
 	    public Territory (Color color) {
 	        this.color = color;
 	        this.pixelList = new ArrayList<Pixel>();
