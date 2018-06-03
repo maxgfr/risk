@@ -86,16 +86,16 @@ public class Player {
 		this.unitToDispatch = unitToDispatch;
 	}
         
-        public int getNbArmy() {
-		return nbArmy;
+    public int getNbArmy() {
+    	return nbArmy;
 	}
 
 	public void setNbArmy(int nb) {
 		this.nbArmy = nb;
 	}
         
-        public int getNbRegion() {
-		return nbRegion;
+    public int getNbRegion() {
+	return nbRegion;
 	}
 
 	public void setNbRegion(int nb) {

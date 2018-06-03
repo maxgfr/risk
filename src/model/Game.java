@@ -248,7 +248,13 @@ public class Game {
         }
         return null;
     }
-
+    
+    public void getReinforcement(Player player){
+    	int nb_terr_controlled = (int) getMaListeDeTerritoire().stream().filter(p -> p.player.equals(player)).count();
+    	int nb_region_controlled = player.getNbRegion();
+    	if (player.getUnitToDispatch() == 0)
+    		player.setUnitToDispatch((int) Math.floorDiv(nb_terr_controlled,3) + (int) Math.floorDiv(nb_region_controlled, 3));
+    }
 	/**
 	 * @param selectedTerritory1 the selectedTerritory1 to set
 	 */

@@ -133,17 +133,26 @@ public class CarteController implements Initializable {
         game.setSelectedUnitType(TypeUnit.SOLDIER);
         tgb_Soldier.setSelected(true);
         
+    	btn_attack.setDisable(true);
+    	btn_deplacement.setDisable(true);
         
         btn_renfort.selectedProperty().addListener((p, ov, nv) -> {
         	game.setState(GameState.REINFORCEMENT);
         	lb_nb_unit.setText("" +current_player.getUnitToDispatch());
+        	game.setSelectedTerritory1(null);
+    		game.setSelectedTerritory2(null);
         });
         btn_attack.selectedProperty().addListener((p, ov, nv) -> {
         	game.setState(GameState.ATTACK);
+        	game.setSelectedTerritory1(null);
+    		game.setSelectedTerritory2(null);
+	    	btn_deplacement.setDisable(true);
          	}
         );
         btn_deplacement.selectedProperty().addListener((p, ov, nv) -> {
         	game.setState(GameState.DEPLACEMENT);
+        	game.setSelectedTerritory1(null);
+    		game.setSelectedTerritory2(null);
          	}
         );
         
@@ -158,7 +167,7 @@ public class CarteController implements Initializable {
         tgb_HorseRider.selectedProperty().addListener((p, ov, nv) -> {
         	game.setSelectedUnitType(TypeUnit.HORSE_RIDER);
         });
-
+        
 
         for (Node node : GameAnchor.getChildren()){
         	if (node instanceof Label){
@@ -182,6 +191,7 @@ public class CarteController implements Initializable {
         	switch(game.getState().toString()){
 		    	case "ATTACK":
 		    		System.out.println("Attaque : " + terr.name);
+		    		if (game.getSelectedTerritory1().terrAdjacent.contains(game.getSelectedTerritory2().name)){}
 		    		break;
 		    	case "REINFORCEMENT":
 		    		if (game.getSelectedTerritory1() != null){
@@ -192,11 +202,35 @@ public class CarteController implements Initializable {
 			    				update_Territory_Labels();
 			    				current_player.setUnitToDispatch(current_player.getUnitToDispatch() - unitToDispatch.getCost());
 			    				update_Counters(terr);
+			    				if (current_player.getUnitToDispatch() < 1){
+	    							btn_renfort.setDisable(true);
+	    					    	btn_attack.setDisable(false);
+	    					    	btn_deplacement.setDisable(false);
+	    						}
 			    			}
 		    			}
 		    		}
 		    		break;
 		    	case "DEPLACEMENT":
+		    		if (game.getSelectedTerritory2() != null){
+		    			if (game.getSelectedTerritory1() != null){
+		    				if (terr.player.equals(current_player)){
+		    					if (game.getSelectedTerritory1().terrAdjacent.contains(game.getSelectedTerritory2().name)){
+		    						if (game.getSelectedTerritory1().getUnitNumberOfType(game.getSelectedUnitType()) > 1){
+			    						Unit unitToMov = terr.getUnitByType(game.getSelectedUnitType());
+			    						game.getSelectedTerritory2().getUnitList().add(unitToMov);
+			    						game.getSelectedTerritory1().getUnitList().remove(unitToMov);
+			    						update_Territory_Labels();
+			    						update_Counters(terr);
+			    					}
+		    					}
+		    					else{
+		    						game.setSelectedTerritory1(null);
+		    			    		game.setSelectedTerritory2(null);
+		    					}
+		    				}
+		    			}
+		    		}
 		    		break;
 		    	default:
 		    		System.out.println("Error in game state");
@@ -216,6 +250,14 @@ public class CarteController implements Initializable {
     		current_player = players.get(0);
     	
     	System.out.println("Current player is : " + current_player.getName() );
+    	game.getReinforcement(current_player);
+    	
+    	tGroup.selectToggle(btn_renfort);
+    	btn_renfort.setDisable(false);
+    	btn_attack.setDisable(true);
+    	btn_deplacement.setDisable(true);
+    	btn_renfort.setSelected(true);
+    
     	
     	lb_NamePlayer.setText(current_player.getName());
         lb_Mission.setText(current_player.getMaMission());
@@ -240,7 +282,7 @@ public class CarteController implements Initializable {
     	else if (game.getSelectedTerritory2() == null && !terr.equals(game.getSelectedTerritory1()))
     		game.setSelectedTerritory2(terr);
     	else if (terr.equals(game.getSelectedTerritory1())){
-    		if (game.getState() != GameState.REINFORCEMENT)
+    		if (game.getState() == GameState.REINFORCEMENT)
     			game.setSelectedTerritory2(null);
     	}
     	else if (!terr.equals(game.getSelectedTerritory1()) && !terr.equals(game.getSelectedTerritory2())){
