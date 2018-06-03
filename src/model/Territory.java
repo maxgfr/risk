@@ -413,6 +413,10 @@ public class Territory {
 		public void setPlayer(Player player){
 			this.player = player;
 		}
+		
+		public int getUnitNumberOfType(TypeUnit type){
+			return (int) unitList.stream().filter(p -> p.getType().equals(type)).count();
+		}
 
 	}
 
