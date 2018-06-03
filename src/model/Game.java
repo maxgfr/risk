@@ -31,6 +31,7 @@ public class Game {
     private TypeUnit selectedUnitType;
 
 	private static Game instance = null;
+	private Bataille bataille;
     
 
     public static Game getInstance() {

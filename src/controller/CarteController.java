@@ -24,6 +24,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import model.Bataille;
 import model.Game;
 import model.GameState;
 import model.ImageAssets;
@@ -41,6 +42,7 @@ public class CarteController implements Initializable {
     
     
     private static Game game = Game.getInstance();
+    private static Bataille bataille = Bataille.getInstance();
     Player current_player;
     List<Player> players;
     
@@ -190,8 +192,14 @@ public class CarteController implements Initializable {
         	update_Counters(terr);
         	switch(game.getState().toString()){
 		    	case "ATTACK":
-		    		System.out.println("Attaque : " + terr.name);
-		    		if (game.getSelectedTerritory1().terrAdjacent.contains(game.getSelectedTerritory2().name)){}
+		    		if (game.getSelectedTerritory1() != null && game.getSelectedTerritory2() != null){
+		    			if (game.getSelectedTerritory1().terrAdjacent.contains(game.getSelectedTerritory2().name)){
+			    			if (game.getSelectedTerritory1().player.equals(current_player) && !game.getSelectedTerritory2().player.equals(current_player))
+			    				bataille.attackBetweenTerritory(game.getSelectedTerritory1(), game.getSelectedTerritory2());
+			    				update_Territory_Labels();
+			    		}
+		    		}
+		    		
 		    		break;
 		    	case "REINFORCEMENT":
 		    		if (game.getSelectedTerritory1() != null){
@@ -244,8 +252,9 @@ public class CarteController implements Initializable {
     @FXML
     private void onNextTurn(ActionEvent event){
     	
-    	if (players.size() > current_player.getId() + 1)
+    	if (players.size() > current_player.getId() + 1){
     		current_player = players.get(current_player.getId() + 1);
+    	}
     	else
     		current_player = players.get(0);
     	

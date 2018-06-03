@@ -48,10 +48,10 @@ public class Territory {
 
 		}
             
-            public void setBatailleTerritoire (Player player, List<Unit> unitList) {
-                this.player = player;
-                this.unitList = unitList;
-            }
+        public void setBatailleTerritoire (Player player, List<Unit> unitList) {
+            this.player = player;
+            this.unitList = unitList;
+        }
 
 		public String addName(Color color) {
 			switch (color.toString()) {
