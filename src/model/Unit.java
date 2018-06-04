@@ -156,4 +156,13 @@ public class Unit{
 		this.cost = cost;
 	}
 	
+        @Override
+        public String toString() { 
+            String toDisplay = "Type :" + this.getType().toString() + "\n";
+            toDisplay += "Strength :" + this.getStrength() + "\n";
+            toDisplay += "Priority Attack :" + this.getPriorityAttack() + "\n";
+            toDisplay += "Priority Defence :" + this.getPriorityDefence() + "\n";
+            toDisplay += "Movement Per Tour :" + this.getMovementPerTour() + "\n";
+            return toDisplay;
+        } 
 }

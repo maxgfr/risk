@@ -6,8 +6,13 @@ import java.util.List;
 
 public class TerritoryAssets {
 
-  
-    
+    public static void displayListUnit(List<Unit> unitList) {
+        System.out.println("------\nDISPLAY UNIT LIST");
+        for (Unit unit : unitList) {
+              System.out.println(unit.toString());
+         }
+        System.out.println("END DISPLAY UNIT LIST\n------");
+    }
 
     public TerritoryAssets(){}
 

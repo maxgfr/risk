@@ -9,8 +9,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -196,6 +194,8 @@ public class CarteController implements Initializable {
 		    			if (game.getSelectedTerritory1().terrAdjacent.contains(game.getSelectedTerritory2().name)){
 			    			if (game.getSelectedTerritory1().player.equals(current_player) && !game.getSelectedTerritory2().player.equals(current_player))
 			    				bataille.attackBetweenTerritory(game.getSelectedTerritory1(), game.getSelectedTerritory2());
+                                                        update_Map(game.getSelectedTerritory1());
+                                                        update_Map(game.getSelectedTerritory2());
 			    				update_Territory_Labels();
 			    		}
 		    		}

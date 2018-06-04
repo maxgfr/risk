@@ -71,6 +71,10 @@ public class Bataille {
         }
         
         
+        TerritoryAssets.displayListUnit(unitAttackeur);
+        
+        
+        
         // Le défenseur défend avec au maximum 2 unités qui sont sélectionnés selon
         // leur niveau de priorité défensive : les soldats défendent en 1er, puis les
         // canons, puis les cavaliers.
