@@ -39,9 +39,8 @@ public class Bataille {
         List<Unit> unitAttackeur = territoryA.getUnitList();
         List<Unit> unitDefenseur = territoryB.getUnitList();
         
-        List<Unit> unitStandardAttack = territoryA.getUnitList();
-        List<Unit> unitStandardDefense = territoryB.getUnitList();
-        
+        List<Unit> unitStayAttack = territoryA.getUnitList();
+               
         // L'attaquant attaque avec au maximum 3 unités à la fois. Il doit toujours
         // rester au moins 1 unité sur le territoire de départ qui ne participe pas au
         // combat.
@@ -72,7 +71,7 @@ public class Bataille {
         for (int i = 0; i<maxUnittoAttack; i++) {
             if (i < size_max) {
                 unitForTheAttack.add(unitAttackeur.get(i));
-                unitStandardAttack.add(unitAttackeur.get(i));
+                unitStayAttack.remove(unitAttackeur.get(i));
             } 
         }
         
@@ -112,7 +111,6 @@ public class Bataille {
         for (int j = 0; j<maxUnittoAttack; j++) {
             if (j < size_max) {
                 unitForDefend.add(unitDefenseur.get(j));
-                unitStandardDefense.add(unitDefenseur.get(j));
             } 
         }
         
@@ -155,7 +153,7 @@ public class Bataille {
             // celle avec le score le moins élevé. L'égalité béné􏰃cie au défenseur.
             if (unitAtt > unitDef) {
                 System.out.println(unitAtt + " > " + unitDef + "Unit Attack win");
-                unitForDefend.remove(i);
+                unitForDefend.remove(i);          
             } else  {//if (unitAtt < unitDef) or if (unitAtt == unitDef)  
                 System.out.println(unitAtt + " < " + unitDef + "Unit Def win");
                 unitForTheAttack.remove(i);
@@ -171,7 +169,7 @@ public class Bataille {
             attackeurWin = true;
         }
         
-        System.out.println("Unit after  batail :");
+        System.out.println("Unit after  bataille :");
         TerritoryAssets.displayListUnit(unitForTheAttack);
         TerritoryAssets.displayListUnit(unitForDefend);
         
@@ -179,10 +177,10 @@ public class Bataille {
         List<Unit> unitAfterDefend = new ArrayList<Unit>();
         
         unitAfterAttack.addAll(unitForTheAttack);
-        unitAfterAttack.addAll(unitStandardAttack);
+        
         
         unitAfterDefend.addAll(unitForDefend);
-        unitAfterDefend.addAll(unitStandardDefense);
+        
         
         System.out.println("List Unit after  bataille :");
         TerritoryAssets.displayListUnit(unitAfterAttack);
@@ -212,6 +210,7 @@ public class Bataille {
             } 
             // En cas de capture d'un territoire, l'attaquant y place toutes les unités ayant
             //participé et survécu à l'attaque.
+            territoryA.setBatailleTerritoire(attackeur, unitStayAttack);
             territoryB.setBatailleTerritoire(attackeur, unitAfterAttack);
         } else {
             territoryB.setBatailleTerritoire(defenseur, unitAfterDefend);
