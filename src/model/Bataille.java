@@ -45,6 +45,8 @@ public class Bataille {
         int maxUnittoAttack = 3;
         int minToStay = 1;
         
+        TerritoryAssets.displayListUnit(unitAttackeur);
+        
         Collections.sort(unitAttackeur, new Comparator<Unit>() {
             @Override
             public int compare(Unit lhs, Unit rhs) {
@@ -71,7 +73,7 @@ public class Bataille {
         }
         
         
-        TerritoryAssets.displayListUnit(unitAttackeur);
+        TerritoryAssets.displayListUnit(unitForTheAttack);
         
         
         
@@ -81,6 +83,8 @@ public class Bataille {
         
         
         int maxUnittoDefend = 2;
+        
+        TerritoryAssets.displayListUnit(unitDefenseur);
         
         Collections.sort(unitDefenseur, new Comparator<Unit>() {
             @Override
@@ -106,6 +110,8 @@ public class Bataille {
                 unitForDefend.add(unitDefenseur.get(j));
             } 
         }
+        
+        TerritoryAssets.displayListUnit(unitForDefend);
         
         //Un nombre aléatoire est généré pour chaque unité selon les intervalles indi-
         //qués dans la colonne puissance du Tableau 4.
