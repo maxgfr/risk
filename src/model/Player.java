@@ -118,6 +118,10 @@ public class Player {
 	public void setFinished(boolean isFinished) {
 		this.isFinished = isFinished;
 	}
+
+    public void play() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 	
 }
 

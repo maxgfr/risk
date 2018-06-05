@@ -39,6 +39,7 @@ import model.TypeUnit;
 import model.Unit;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import model.AI;
 
 
 /**
@@ -183,7 +184,7 @@ public class CarteController implements Initializable {
         	if (node instanceof Label){
         		((Label)node).setText("0");
         	}
-        }
+        }    	
             
         game.initTerritory();
         lb_nb_unit.setText(""+current_player.getUnitToDispatch());
@@ -270,6 +271,10 @@ public class CarteController implements Initializable {
     	}
     	else
     		current_player = players.get(0);
+      
+        if(current_player instanceof AI) { // si c'est une IA
+            current_player.play();
+        }
     	
     	System.out.println("Current player is : " + current_player.getName() );
     	game.getReinforcement(current_player);
