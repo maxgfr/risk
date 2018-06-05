@@ -5,15 +5,20 @@
  */
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -22,6 +27,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Popup;
 import model.Bataille;
 import model.Game;
 import model.GameState;
@@ -31,6 +37,9 @@ import model.Player;
 import model.Territory;
 import model.TypeUnit;
 import model.Unit;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+
 
 /**
  *
@@ -43,6 +52,7 @@ public class CarteController implements Initializable {
     private static Bataille bataille = Bataille.getInstance();
     Player current_player;
     List<Player> players;
+    Mission mission = Mission.getInstance();
     
     @FXML
     ImageView imageView;
@@ -182,7 +192,7 @@ public class CarteController implements Initializable {
    
     
     @FXML
-    private void imagePaneMouseClicked(MouseEvent event){
+    private void imagePaneMouseClicked(MouseEvent event) throws IOException{
     	Territory terr = game.tellTerritory((int) event.getX(), (int) event.getY());
     	
         if (terr != null){
@@ -246,7 +256,10 @@ public class CarteController implements Initializable {
         	
         }
         
-        
+        if(mission.hasWin(current_player)) {
+            showMessage(Alert.AlertType.INFORMATION, "Fin de la partie", "Victoire du joueur " + current_player.getName());
+            Platform.exit();
+        }
     }
     
     @FXML
@@ -319,5 +332,16 @@ public class CarteController implements Initializable {
     		    }
         	}
     	}
+    }
+    
+    private Optional<ButtonType> showMessage(Alert.AlertType type,String header,String message,ButtonType... lesBoutonsDifferents){
+        Alert laFenetre = new Alert(type);
+        laFenetre.setHeaderText(header);
+        laFenetre.setContentText(message);
+        if (lesBoutonsDifferents.length > 0) {
+            laFenetre.getButtonTypes().clear();
+            laFenetre.getButtonTypes().addAll(lesBoutonsDifferents);
+        }
+        return laFenetre.showAndWait();
     }
 }
