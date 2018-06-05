@@ -142,7 +142,7 @@ public class Bataille {
         int length_attack =  unitForTheAttack.size();
         int length_remenber = 0;
         
-        if (length_attack < length_def) {
+        if (length_attack <= length_def) {
             length_remenber = length_attack;
         } else {
             length_remenber = length_def;
@@ -150,7 +150,7 @@ public class Bataille {
         
         System.out.println(length_attack+ "  " +length_def+ "  " +length_remenber);
         
-        for (int k=0; k<length_remenber; k++) {
+        for (int k=0; k<length_remenber-1; k++) {
             Unit unitNextAttack = unitForTheAttack.get(k);
             Unit unitNextDefenseuh = unitForDefend.get(k);
             //System.out.println("Unit to defend : " + unitNextDefense);
