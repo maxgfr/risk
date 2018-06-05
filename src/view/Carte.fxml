@@ -14,13 +14,13 @@
    <children>
       <ToolBar prefHeight="40.0" prefWidth="200.0">
         <items>
-            <Label fx:id="lb_NamePlayer" contentDisplay="CENTER" prefHeight="44.0" prefWidth="137.0" text="NOM DU JOUEUR" textAlignment="CENTER">
+            <Label fx:id="lb_NamePlayer" contentDisplay="CENTER" prefHeight="44.0" prefWidth="147.0" text="NOM DU JOUEUR" textAlignment="CENTER">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
             <Separator orientation="VERTICAL" prefHeight="44.0" prefWidth="18.0" />
-            <Label fx:id="lb_Mission" contentDisplay="CENTER" prefHeight="44.0" prefWidth="264.0" text="MISSION DU JOUEUR" textAlignment="CENTER">
+            <Label fx:id="lb_Mission" contentDisplay="CENTER" prefHeight="44.0" prefWidth="298.0" text="MISSION DU JOUEUR" textAlignment="CENTER">
                <font>
                   <Font size="15.0" />
                </font>
@@ -28,21 +28,34 @@
             <Separator orientation="VERTICAL" prefHeight="44.0" prefWidth="35.0" />
             <Label text="Units" />
             <Label fx:id="lb_nb_unit" text="100" />
-            <Separator orientation="VERTICAL" prefHeight="44.0" prefWidth="53.0" />
-            <Label text="Canons:" />
-            <Label fx:id="lb_nb_cannons" text="10" />
-            <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="55.0" />
-            <Label text="Soldats:" />
-            <Label fx:id="lb_nb_soldiers" text="15" />
-            <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="55.0" />
-            <Label text="Cavaliers :" />
-            <Label fx:id="lb_nb_horseRiders" text="5" />
+            <Separator orientation="VERTICAL" prefHeight="44.0" prefWidth="29.0" />
+            <ToggleButton fx:id="tgb_Cannon" mnemonicParsing="false" text="Cannons">
+               <toggleGroup>
+                  <ToggleGroup fx:id="unitGroup" />
+               </toggleGroup>
+            </ToggleButton>
+            <Label fx:id="lb_nb_cannons" text="10">
+               <padding>
+                  <Insets left="5.0" />
+               </padding></Label>
+            <Separator orientation="VERTICAL" prefHeight="44.0" prefWidth="30.0" />
+            <ToggleButton fx:id="tgb_Soldier" mnemonicParsing="false" text="Soldats" toggleGroup="$unitGroup" />
+            <Label fx:id="lb_nb_soldiers" text="15">
+               <opaqueInsets>
+                  <Insets left="5.0" />
+               </opaqueInsets></Label>
+            <Separator orientation="VERTICAL" prefHeight="44.0" prefWidth="30.0" />
+            <ToggleButton fx:id="tgb_HorseRider" mnemonicParsing="false" text="Cavaliers" toggleGroup="$unitGroup" />
+            <Label fx:id="lb_nb_horseRiders" text="5">
+               <opaqueInsets>
+                  <Insets left="5.0" />
+               </opaqueInsets></Label>
             <Separator orientation="VERTICAL" prefHeight="44.0" prefWidth="45.0" />
             <ToggleButton fx:id="btn_attack" mnemonicParsing="false" text="Attaque">
                <toggleGroup>
                   <ToggleGroup fx:id="tGroup" />
                </toggleGroup></ToggleButton>
-            <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="55.0" />
+            <Separator orientation="VERTICAL" prefHeight="44.0" prefWidth="27.0" />
             <ToggleButton fx:id="btn_renfort" mnemonicParsing="false" text="Renfort" toggleGroup="$tGroup" />
             <ToggleButton fx:id="btn_deplacement" mnemonicParsing="false" text="Déplacement" toggleGroup="$tGroup" />
         </items>

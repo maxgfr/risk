@@ -9,8 +9,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,6 +22,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import model.Bataille;
 import model.Game;
 import model.GameState;
 import model.ImageAssets;
@@ -41,6 +40,7 @@ public class CarteController implements Initializable {
     
     
     private static Game game = Game.getInstance();
+    private static Bataille bataille = Bataille.getInstance();
     Player current_player;
     List<Player> players;
     
@@ -75,6 +75,9 @@ public class CarteController implements Initializable {
     @FXML
     ToggleGroup tGroup;
     
+    @FXML
+    ToggleGroup unitGroup;
+    
     @FXML 
     ToggleButton btn_attack;
     
@@ -83,6 +86,15 @@ public class CarteController implements Initializable {
     
     @FXML
     ToggleButton btn_deplacement;
+    
+    @FXML
+    ToggleButton tgb_Cannon;
+    
+    @FXML
+    ToggleButton tgb_Soldier;
+    
+    @FXML
+    ToggleButton tgb_HorseRider;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -107,29 +119,55 @@ public class CarteController implements Initializable {
         lb_Mission.setText(current_player.getMaMission());
         
         // Unit
-        game.initTerritory();
+        
         lb_nb_unit.setText("" +current_player.getUnitToDispatch());
         lb_nb_cannons.setText("0");
         lb_nb_soldiers.setText("0");
         lb_nb_horseRiders.setText("0");
        
         tGroup.selectToggle(btn_renfort);
+        unitGroup.selectToggle(tgb_Soldier);
         
         game.setState(GameState.REINFORCEMENT);
         btn_renfort.setSelected(true);
+        game.setSelectedUnitType(TypeUnit.SOLDIER);
+        tgb_Soldier.setSelected(true);
+        
+    	btn_attack.setDisable(true);
+    	btn_deplacement.setDisable(true);
         
         btn_renfort.selectedProperty().addListener((p, ov, nv) -> {
         	game.setState(GameState.REINFORCEMENT);
         	lb_nb_unit.setText("" +current_player.getUnitToDispatch());
+        	game.setSelectedTerritory1(null);
+    		game.setSelectedTerritory2(null);
         });
         btn_attack.selectedProperty().addListener((p, ov, nv) -> {
         	game.setState(GameState.ATTACK);
+        	game.setSelectedTerritory1(null);
+    		game.setSelectedTerritory2(null);
+	    	btn_deplacement.setDisable(true);
          	}
         );
         btn_deplacement.selectedProperty().addListener((p, ov, nv) -> {
         	game.setState(GameState.DEPLACEMENT);
+        	game.setSelectedTerritory1(null);
+    		game.setSelectedTerritory2(null);
          	}
         );
+        
+        tgb_Cannon.selectedProperty().addListener((p, ov, nv) -> {
+        	game.setSelectedUnitType(TypeUnit.CANNON);
+        }
+        );
+        tgb_Soldier.selectedProperty().addListener((p, ov, nv) -> {
+        	game.setSelectedUnitType(TypeUnit.SOLDIER);
+        });
+        
+        tgb_HorseRider.selectedProperty().addListener((p, ov, nv) -> {
+        	game.setSelectedUnitType(TypeUnit.HORSE_RIDER);
+        });
+        
 
         for (Node node : GameAnchor.getChildren()){
         	if (node instanceof Label){
@@ -137,7 +175,9 @@ public class CarteController implements Initializable {
         	}
         }
             
-        	
+        game.initTerritory();
+        lb_nb_unit.setText(""+current_player.getUnitToDispatch());
+        update_Territory_Labels();
     }
    
     
@@ -146,37 +186,87 @@ public class CarteController implements Initializable {
     	Territory terr = game.tellTerritory((int) event.getX(), (int) event.getY());
     	
         if (terr != null){
-        	SelectedTerritory(terr);
+        	setSelectedTerritory(terr);
+        	update_Counters(terr);
         	switch(game.getState().toString()){
 		    	case "ATTACK":
-		    		System.out.println("Attaque : " + terr.name);
+		    		if (game.getSelectedTerritory1() != null && game.getSelectedTerritory2() != null){
+		    			if (game.getSelectedTerritory1().terrAdjacent.contains(game.getSelectedTerritory2().name)){
+			    			if (game.getSelectedTerritory1().player.equals(current_player) && !game.getSelectedTerritory2().player.equals(current_player))
+			    				bataille.attackBetweenTerritory(game.getSelectedTerritory1(), game.getSelectedTerritory2());
+                                                        update_Map(game.getSelectedTerritory1());
+                                                        update_Map(game.getSelectedTerritory2());
+			    				update_Territory_Labels();
+			    		}
+		    		}
+		    		
 		    		break;
 		    	case "REINFORCEMENT":
-		    		if (game.getSelectedTerritory2() != null)
-		    			if(game.getSelectedTerritory2().equals(terr))
-		    				terr.getUnitList().add(new Unit(TypeUnit.SOLDIER));
-		    				update_Territory_Labels();
+		    		if (game.getSelectedTerritory1() != null){
+		    			if (terr.player.equals(current_player)){
+		    				Unit unitToDispatch = new Unit(game.getSelectedUnitType());
+			    			if(current_player.getUnitToDispatch() >= unitToDispatch.getCost()){
+			    				terr.getUnitList().add(unitToDispatch);
+			    				update_Territory_Labels();
+			    				current_player.setUnitToDispatch(current_player.getUnitToDispatch() - unitToDispatch.getCost());
+			    				update_Counters(terr);
+			    				if (current_player.getUnitToDispatch() < 1){
+	    							btn_renfort.setDisable(true);
+	    					    	btn_attack.setDisable(false);
+	    					    	btn_deplacement.setDisable(false);
+	    						}
+			    			}
+		    			}
+		    		}
 		    		break;
 		    	case "DEPLACEMENT":
+		    		if (game.getSelectedTerritory2() != null){
+		    			if (game.getSelectedTerritory1() != null){
+		    				if (terr.player.equals(current_player)){
+		    					if (game.getSelectedTerritory1().terrAdjacent.contains(game.getSelectedTerritory2().name)){
+		    						if (game.getSelectedTerritory1().getUnitNumberOfType(game.getSelectedUnitType()) > 1){
+			    						Unit unitToMov = terr.getUnitByType(game.getSelectedUnitType());
+			    						game.getSelectedTerritory2().getUnitList().add(unitToMov);
+			    						game.getSelectedTerritory1().getUnitList().remove(unitToMov);
+			    						update_Territory_Labels();
+			    						update_Counters(terr);
+			    					}
+		    					}
+		    					else{
+		    						game.setSelectedTerritory1(null);
+		    			    		game.setSelectedTerritory2(null);
+		    					}
+		    				}
+		    			}
+		    		}
 		    		break;
 		    	default:
 		    		System.out.println("Error in game state");
         	}
         	
         }
-        current_player.setUnitToDispatch(current_player.getUnitToDispatch() - 1);
-        lb_nb_unit.setText(""+current_player.getUnitToDispatch());
+        
+        
     }
     
     @FXML
     private void onNextTurn(ActionEvent event){
     	
-    	if (players.size() > current_player.getId() + 1)
+    	if (players.size() > current_player.getId() + 1){
     		current_player = players.get(current_player.getId() + 1);
+    	}
     	else
     		current_player = players.get(0);
     	
     	System.out.println("Current player is : " + current_player.getName() );
+    	game.getReinforcement(current_player);
+    	
+    	tGroup.selectToggle(btn_renfort);
+    	btn_renfort.setDisable(false);
+    	btn_attack.setDisable(true);
+    	btn_deplacement.setDisable(true);
+    	btn_renfort.setSelected(true);
+    
     	
     	lb_NamePlayer.setText(current_player.getName());
         lb_Mission.setText(current_player.getMaMission());
@@ -195,21 +285,29 @@ public class CarteController implements Initializable {
     			);
     }
     
-    private void SelectedTerritory(Territory terr){
-    	System.out.println("Selected territory 0 : " + game.getSelectedTerritory1());
+    private void setSelectedTerritory(Territory terr){
     	if (game.getSelectedTerritory1() == null)
     		game.setSelectedTerritory1(terr);
-    	else if (game.getSelectedTerritory2() == null)
+    	else if (game.getSelectedTerritory2() == null && !terr.equals(game.getSelectedTerritory1()))
     		game.setSelectedTerritory2(terr);
-    	else if (terr.equals(game.getSelectedTerritory2()))
-    	else if (!terr.equals(game.getSelectedTerritory1()) || !terr.equals(game.getSelectedTerritory2())){
-    		game.setSelectedTerritory1(null);
+    	else if (terr.equals(game.getSelectedTerritory1())){
+    		if (game.getState() == GameState.REINFORCEMENT)
+    			game.setSelectedTerritory2(null);
+    	}
+    	else if (!terr.equals(game.getSelectedTerritory1()) && !terr.equals(game.getSelectedTerritory2())){
+    		game.setSelectedTerritory1(terr);
     		game.setSelectedTerritory2(null);
     	}
-    	System.out.println("Selected territory 1 : " + game.getSelectedTerritory1());
-    	System.out.println("Selected territory 2 : " + game.getSelectedTerritory2());
+    	System.out.println("Selected Territory 1 :" + game.getSelectedTerritory1());
+    	System.out.println("Selected Territory 2 :" + game.getSelectedTerritory2());
     }
     
+    private void update_Counters(Territory terr ){
+    	lb_nb_unit.setText(""+current_player.getUnitToDispatch());
+    	lb_nb_soldiers.setText(""+terr.getUnitNumberOfType(TypeUnit.SOLDIER));
+    	lb_nb_cannons.setText(""+terr.getUnitNumberOfType(TypeUnit.CANNON));
+    	lb_nb_horseRiders.setText(""+terr.getUnitNumberOfType(TypeUnit.HORSE_RIDER));
+    }
     private void update_Territory_Labels(){
     	for (Node node : GameAnchor.getChildren()){
         	if (node instanceof Label){

@@ -28,8 +28,10 @@ public class Game {
     private Territory selectedTerritory1;
     private Territory selectedTerritory2;
     
+    private TypeUnit selectedUnitType;
 
 	private static Game instance = null;
+	private Bataille bataille;
     
 
     public static Game getInstance() {
@@ -47,8 +49,9 @@ public class Game {
         maListeDeTerritoire = new ArrayList<Territory>();
         finished = false;
         num_tours = 0;
-        selectedTerritory1 = new Territory();
-        selectedTerritory2 = new Territory();
+        selectedTerritory1 = null;
+        selectedTerritory2 = null;
+        setSelectedUnitType(TypeUnit.SOLDIER);
     }
 
     /**
@@ -206,6 +209,11 @@ public class Game {
     	for (Player player : list_player) {
     		player.setUnitToDispatch(nbUnitTodispatch);
 	    }
+    	for (Territory terr: maListeDeTerritoire){
+    		Unit unitToDispatch = new Unit(TypeUnit.SOLDIER);
+    		terr.getUnitList().add(unitToDispatch);
+    		terr.player.setUnitToDispatch(terr.player.getUnitToDispatch() - unitToDispatch.getCost() );
+    	}
     	
     }
 
@@ -233,15 +241,21 @@ public class Game {
 		return selectedTerritory2;
 	}
 
-        public Player getPlayerWithName (String name) {
-            List<Player> list = getList_player();
-            for (Player p : list) {
-                if (p.getName().equals(name)) 
-                    return p;
-            }
-            return null;
+    public Player getPlayerWithName (String name) {
+        List<Player> list = getList_player();
+        for (Player p : list) {
+            if (p.getName().equals(name)) 
+                return p;
         }
-
+        return null;
+    }
+    
+    public void getReinforcement(Player player){
+    	int nb_terr_controlled = (int) getMaListeDeTerritoire().stream().filter(p -> p.player.equals(player)).count();
+    	int nb_region_controlled = player.getNbRegion();
+    	if (player.getUnitToDispatch() == 0)
+    		player.setUnitToDispatch((int) Math.floorDiv(nb_terr_controlled,3) + (int) Math.floorDiv(nb_region_controlled, 3));
+    }
 	/**
 	 * @param selectedTerritory1 the selectedTerritory1 to set
 	 */
@@ -255,6 +269,16 @@ public class Game {
 	 */
 	public void setSelectedTerritory2(Territory selectedTerritory2) {
 		this.selectedTerritory2 = selectedTerritory2;
+	}
+
+
+	public TypeUnit getSelectedUnitType() {
+		return selectedUnitType;
+	}
+
+
+	public void setSelectedUnitType(TypeUnit selectedUnitType) {
+		this.selectedUnitType = selectedUnitType;
 	}
 	
 

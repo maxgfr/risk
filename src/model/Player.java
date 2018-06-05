@@ -25,6 +25,7 @@ public class Player {
     private int nbRegion;
     private boolean biggestRegion;
     private int unitToDispatch;
+    private boolean isFinished;
     
     public Player(int id, String name, Color color) {
             this.id = id;
@@ -86,16 +87,16 @@ public class Player {
 		this.unitToDispatch = unitToDispatch;
 	}
         
-        public int getNbArmy() {
-		return nbArmy;
+    public int getNbArmy() {
+    	return nbArmy;
 	}
 
 	public void setNbArmy(int nb) {
 		this.nbArmy = nb;
 	}
         
-        public int getNbRegion() {
-		return nbRegion;
+    public int getNbRegion() {
+	return nbRegion;
 	}
 
 	public void setNbRegion(int nb) {
@@ -108,6 +109,14 @@ public class Player {
 
 	public void setBiggestRegion(boolean b) {
 		this.biggestRegion = b;
+	}
+
+	public boolean isFinished() {
+		return isFinished;
+	}
+
+	public void setFinished(boolean isFinished) {
+		this.isFinished = isFinished;
 	}
 	
 }

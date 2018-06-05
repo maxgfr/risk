@@ -2,7 +2,7 @@ package model;
 
 import java.util.Random;
 
-public class Unit {
+public class Unit{
 	
 	private TypeUnit type;
 	private int Strength;
@@ -10,6 +10,8 @@ public class Unit {
 	private int priorityDefence;
 	private int movementPerTour;
 	private int cost;
+	
+	public Unit(){}
 	
 	public Unit(TypeUnit unitType){
 		if (unitType == TypeUnit.SOLDIER){
@@ -48,10 +50,27 @@ public class Unit {
 		this.movementPerTour = movementpertour;
 	}
         
-        public int giveRandomNumber(int leftLimit, int rightLimit ) {
-            Random rdm = new Random();
-            return rdm.nextInt((rightLimit - leftLimit) + 1) + leftLimit;
-        }
+    public int giveRandomNumber(int leftLimit, int rightLimit ) {
+        Random rdm = new Random();
+        return rdm.nextInt((rightLimit - leftLimit) + 1) + leftLimit;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+      if (this == obj)
+        return true;
+      if (obj == null)
+        return false;
+      if (!(obj instanceof Unit))
+        return false;
+      Unit other = (Unit) obj;
+      if (type == null) {
+        if (other.type != null)
+          return false;
+      } else if (!type.equals(other.type))
+        return false;
+      return true;
+    }
 
 	/**
 	 * @return the type
@@ -71,7 +90,20 @@ public class Unit {
 	 * @return the strength
 	 */
 	public int getStrength() {
-		return Strength;
+            return Strength;
+	}
+        
+        public int getStrengthType(TypeUnit unitType) {
+            if (unitType == TypeUnit.SOLDIER){
+		return giveRandomNumber(1,6);
+            }
+            if (unitType == TypeUnit.HORSE_RIDER){
+		return giveRandomNumber(2,7);
+            }
+            if (unitType == TypeUnit.CANNON){
+		return giveRandomNumber(4,9);
+            }
+            return 0;
 	}
 
 	/**
@@ -137,4 +169,13 @@ public class Unit {
 		this.cost = cost;
 	}
 	
+        @Override
+        public String toString() { 
+            String toDisplay = "Type :" + this.getType().toString() + "\n";
+            toDisplay += "Strength :" + this.getStrength() + "\n";
+            toDisplay += "Priority Attack :" + this.getPriorityAttack() + "\n";
+            toDisplay += "Priority Defence :" + this.getPriorityDefence() + "\n";
+            toDisplay += "Movement Per Tour :" + this.getMovementPerTour() + "\n";
+            return toDisplay;
+        } 
 }
