@@ -156,13 +156,27 @@ public class TerritoryAssets {
 */
 
 
-	public void move(Territory territory1, Territory territory2) {
+/*	public void move(Territory territory1, Territory territory2) {
 	//déplacement des unités de combats
 	}
 
 
 
-	public void attack(Territory territory1, Territory territory2){
+début fonction attaque lancelot devenu useless
+
+
+public void attack(Territory territory1, Territory territory2){
+
+
+		/* qu'est ce qu'on veut concretement?
+		une fonction qui prend trois unités aléatoires d'un territoire,
+		deux unités choisies d'un autre
+		qui fait un tirage
+		qui dit quelles unités sont éliminées
+		qui supprime les unités
+		 
+
+
 		//List<Unit> unitsPlayer1 = territory1.getUnitList();
 		//List<Unit> unitsPlayer2 = territory2.getUnitList();
 		int nbCannons1 = territory1.nbOfUnits(TypeUnit.CANNON);
@@ -171,13 +185,20 @@ public class TerritoryAssets {
 		int nbSoldiers2 = territory2.nbOfUnits(TypeUnit.SOLDIER);
 		int nbCannons2 = territory2.nbOfUnits(TypeUnit.CANNON);
 		int nbHorses2 = territory2.nbOfUnits(TypeUnit.HORSE_RIDER);
+		for 3 fois;
+			switch case //unit.type
+			case
+			case
+		for 2 fois
+			switch case
+			case
+			case
 		//faire un lot des 3 meilleurs att et 2 meilleurs def
 		//tirages
-		//
+					*/
 
 
 
 
-		}
 
 }
