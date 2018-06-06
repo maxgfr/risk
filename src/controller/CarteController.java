@@ -259,7 +259,10 @@ public class CarteController implements Initializable {
         
         if(mission.hasWin(current_player)) {
             showMessage(Alert.AlertType.INFORMATION, "Fin de la partie", "Victoire du joueur " + current_player.getName());
-            Platform.exit();
+            current_player.setFinished(true);
+            if(game.isFinished()){
+                Platform.exit();
+            } 
         }
     }
     

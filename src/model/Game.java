@@ -100,6 +100,12 @@ public class Game {
      * @return the finished
      */
     public boolean isFinished() {
+        boolean finished = true;
+        for (Player p : list_player) {
+            if(!p.isFinished()) {
+                finished = false;
+            }  
+        }
         return finished;
     }
 

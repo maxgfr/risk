@@ -137,6 +137,7 @@ public class Bataille {
         //notera que les priorité en défense et en attaque ne sont pas les mêmes !
                 
         boolean attackeurWin = false;
+        boolean conquisTerritoire = false;
         
         int length_def =  unitForDefend.size();
         int length_attack =  unitForTheAttack.size();
@@ -150,17 +151,17 @@ public class Bataille {
         
         System.out.println(length_attack+ "  " +length_def+ "  " +length_remenber);
         
-        for (int k=0; k<length_remenber-1; k++) {
+        for (int k=0; k<length_remenber; k++) {
             Unit unitNextAttack = unitForTheAttack.get(k);
             Unit unitNextDefenseuh = unitForDefend.get(k);
             //System.out.println("Unit to defend : " + unitNextDefense);
             //System.out.println("Unit to attack : " + unitNextAttack);
-            /*
+            
             int unitAtt = unitNextAttack.getStrengthType(unitNextAttack.getType());
             int unitDef = unitNextDefenseuh.getStrengthType(unitNextDefenseuh.getType());
-            */
-            int unitAtt = unitNextAttack.getStrength();
-            int unitDef = unitNextDefenseuh.getStrength();
+            
+            //int unitAtt = unitNextAttack.getStrength();
+            //int unitDef = unitNextDefenseuh.getStrength();
             // Pour chaque comparaison, l'unité ayant le score le plus élevé détruit 
             // celle avec le score le moins élevé. L'égalité béné􏰃cie au défenseur.
             if (unitAtt > unitDef) {
@@ -168,11 +169,20 @@ public class Bataille {
                 if (unitForDefend.isEmpty()) {
                     System.out.println("Le défenseur a perdu toutes ces unités");
                     attackeurWin = true;
+                    conquisTerritoire = true;
                     break;
                 } else {
-                    System.out.println("Remove unit def" + unitNextDefenseuh);
+                    System.out.println("Remove unit def, length : " + unitForDefend.size() +  " and : "+unitStayDefense.size());
+                    if(unitForDefend.size() <= 1) {
+                        attackeurWin = true;
+                    }
+                    if (unitForDefend.size() <= 1 && unitStayDefense.size() <= 1) {
+                        System.out.println("Territoire conquis");
+                        conquisTerritoire = true;
+                    }
                     unitForDefend.remove(unitNextDefenseuh); 
                     unitStayDefense.remove(unitNextDefenseuh); 
+                    
                 }      
             } else  {//if (unitAtt < unitDef) or if (unitAtt == unitDef)  
                 System.out.println(unitAtt + " < ou == " + unitDef + " => Unit Def win");
@@ -180,18 +190,11 @@ public class Bataille {
                     System.out.println("L'attaquant a perdu toutes ces unités");
                     break;
                 } else {
-                    System.out.println("Remove unit attack" + unitNextAttack);
+                    System.out.println("Remove unit attack"+ unitForTheAttack.size());
                     unitForTheAttack.remove(unitNextAttack);
                 }
                 
             } 
-        }
-        
-        boolean conquisTerritoire = false;
-        if (unitForDefend.isEmpty() && unitStayDefense.isEmpty()) {
-            System.out.println("L'attackeur a conquis le territoire");
-            attackeurWin = true;
-            conquisTerritoire = true;
         }
         
    
@@ -236,9 +239,10 @@ public class Bataille {
             //participé et survécu à l'attaque.
             territoryA.setBatailleTerritoire(attackeur, unitStayAttack);
             if (conquisTerritoire) {
+                System.out.println("L'attackeur a gagné");
                 territoryB.setBatailleTerritoire(attackeur, unitAfterAttack);
             } else {
-                territoryB.setBatailleTerritoire(attackeur, territoryB.getUnitList());
+                territoryB.setBatailleTerritoire(defenseur, territoryB.getUnitList());
             }
             
         } else {
