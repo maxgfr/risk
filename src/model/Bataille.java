@@ -141,19 +141,16 @@ public class Bataille {
         
         int length_def =  unitForDefend.size();
         int length_attack =  unitForTheAttack.size();
-        int length_remenber = 0;
+        int length_remenber = Math.min(length_attack,length_def);
         
-        if (length_attack <= length_def) {
-            length_remenber = length_attack;
-        } else {
-            length_remenber = length_def;
-        }
+        List<Unit> copyUnitForAttack = unitForTheAttack;
+        List<Unit> copyUnitForDefense = unitForDefend;
         
         System.out.println(length_attack+ "  " +length_def+ "  " +length_remenber);
         
         for (int k=0; k<length_remenber; k++) {
-            Unit unitNextAttack = unitForTheAttack.get(k);
-            Unit unitNextDefenseuh = unitForDefend.get(k);
+            Unit unitNextAttack = copyUnitForAttack.get(k);
+            Unit unitNextDefenseuh = copyUnitForDefense.get(k);
             //System.out.println("Unit to defend : " + unitNextDefense);
             //System.out.println("Unit to attack : " + unitNextAttack);
             
@@ -182,7 +179,6 @@ public class Bataille {
                     }
                     unitForDefend.remove(unitNextDefenseuh); 
                     unitStayDefense.remove(unitNextDefenseuh); 
-                    
                 }      
             } else  {//if (unitAtt < unitDef) or if (unitAtt == unitDef)  
                 System.out.println(unitAtt + " < ou == " + unitDef + " => Unit Def win");
