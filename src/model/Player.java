@@ -119,7 +119,11 @@ public class Player {
 		this.isFinished = isFinished;
 	}
 
-    public void play() {
+    public void attack(Game game) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public Territory reinforcment(Game game) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 	

@@ -275,12 +275,25 @@ public class CarteController implements Initializable {
     	else
     		current_player = players.get(0);
       
-        if(current_player instanceof AI) { // si c'est une IA
-            current_player.play();
-        }
-    	
-    	System.out.println("Current player is : " + current_player.getName() );
+        System.out.println("Current player is : " + current_player.getName() );
     	game.getReinforcement(current_player);
+        
+        if(current_player instanceof AI) { // si c'est une IA
+            Territory terr = current_player.reinforcment(game);
+            update_Territory_Labels();
+            current_player.setUnitToDispatch(current_player.getUnitToDispatch() - terr.getUnitList().get(terr.getUnitList().size() - 1).getCost());
+            update_Counters(terr);
+            if (current_player.getUnitToDispatch() < 1){
+                btn_renfort.setDisable(true);
+                btn_attack.setDisable(false);
+                btn_deplacement.setDisable(false);
+            }
+            current_player.attack(game);
+            bataille.attackBetweenTerritory(game.getSelectedTerritory1(), game.getSelectedTerritory2());
+            update_Map(game.getSelectedTerritory1());
+            update_Map(game.getSelectedTerritory2());
+            update_Territory_Labels();
+        }
     	
     	tGroup.selectToggle(btn_renfort);
     	btn_renfort.setDisable(false);

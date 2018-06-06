@@ -419,6 +419,15 @@ public class Territory {
 		public Unit getUnitByType(TypeUnit type){
 			return (Unit) unitList.stream().filter(p -> p.getType().equals(type)).findFirst().get();
 		}
+                
+                public void couldAttack (List<Territory> list, Territory A) {
+                    for(Territory B : list) {
+                        if (B.terrAdjacent.contains(A.name)){
+                            
+                        }
+                    }
+                        
+                }
 
 	}
 
