@@ -25,26 +25,31 @@ public class AI extends Player {
     public void attack(Game game) {
     	
     	boolean findTerritory = false;
-        Territory attacker = null;
+        //Territory attacker = null;
         List<Territory> listTerritory = (List<Territory>) game.getMaListeDeTerritoire().stream().filter(
     			p -> p.player.equals(this)
     			&&
     			p.unitList.size() > 3
     			).collect(Collectors.toList());
         if (listTerritory.size() > 1){
-	        while(!findTerritory) {
-		    	
-	        	attacker = listTerritory.get(new Random().nextInt(listTerritory.size()));
-	        	String nameAttacker = attacker.terrAdjacent.get(Integer.toString(new Random().nextInt(attacker.terrAdjacent.size())));
-	        	List<Territory> listAttackable = (List<Territory>) game.getMaListeDeTerritoire().stream().filter(
-	        			p -> !p.player.equals(this) && 
-	        			p.name == nameAttacker
-	        			).collect(Collectors.toList());
-	        	if (!listAttackable.isEmpty()){
-	        		findTerritory = true;
-	        		game.setSelectedTerritory1(attacker);
-	                game.setSelectedTerritory2(listAttackable.get(new Random().nextInt(listAttackable.size())));
-	        	}
+        	int i = 0;
+	        while(!findTerritory && i < 250) {
+		    	for (Territory attacker: listTerritory){
+		    		String nameAttacker = attacker.terrAdjacent.get(Integer.toString(new Random().nextInt(attacker.terrAdjacent.size())));
+		        	List<Territory> listAttackable = (List<Territory>) game.getMaListeDeTerritoire().stream().filter(
+		        			p -> !p.player.equals(this) && 
+		        			p.name == nameAttacker
+		        			).collect(Collectors.toList());
+		        	if (!listAttackable.isEmpty()){
+		        		findTerritory = true;
+		        		game.setSelectedTerritory1(attacker);
+		                game.setSelectedTerritory2(listAttackable.get(new Random().nextInt(listAttackable.size())));
+		                break;
+		        	}
+		    	}
+	        	//attacker = listTerritory.get(new Random().nextInt(listTerritory.size()));
+	        	
+	        	i++;
 		    	
 		    }
         }
