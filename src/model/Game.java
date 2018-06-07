@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  *
@@ -261,7 +263,7 @@ public class Game {
     
     public void getReinforcement(Player player){
     	int nb_terr_controlled = (int) getMaListeDeTerritoire().stream().filter(p -> p.player.equals(player)).count();
-    	int nb_region_controlled = player.getNbRegion();
+    	int nb_region_controlled = TerritoryAssets.countRegions((List<Territory>) getMaListeDeTerritoire().stream().filter(p -> p.player.equals(player)).collect(Collectors.toList()) );
     	if (player.getUnitToDispatch() == 0)
     		player.setUnitToDispatch((int) Math.floorDiv(nb_terr_controlled,3) + (int) Math.floorDiv(nb_region_controlled, 3));
     }

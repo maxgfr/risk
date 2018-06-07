@@ -35,7 +35,7 @@ public class TerritoryAssets {
                 }
             }
 
-    public static void countRegions(List<Territory> territories) {
+    public static int countRegions(List<Territory> territories) {
             List<String>  controlledRegions = new ArrayList<>();
             int northAmerica = 0;
             int southAmerica = 0;
@@ -74,7 +74,9 @@ public class TerritoryAssets {
             for (String element: controlledRegions){
                     System.out.println(element);
             }
+            return controlledRegions.size();
     }
+    
         
         public static boolean knowIfIhaveTerriority(List<Territory> territories, Player to_Destroy) {   
             for(Territory ter : territories) {
