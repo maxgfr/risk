@@ -276,6 +276,10 @@ public class CarteController implements Initializable {
     @FXML
     private void onNextTurn(ActionEvent event){
     	
+
+		game.setSelectedTerritory1(null);
+		game.setSelectedTerritory2(null);
+		
     	if (players.size() > current_player.getId() + 1){
     		current_player = players.get(current_player.getId() + 1);
     	}
@@ -288,12 +292,16 @@ public class CarteController implements Initializable {
         if(current_player instanceof AI) { // si c'est une IA
             current_player.reinforcment(game);
             
-            for(int i = 0; i< (int) new Random().nextInt(3); i++){
+           for(int i = 0; i< (int) new Random().nextInt(3); i++){
 	            current_player.attack(game);
-	            bataille.attackBetweenTerritory(game.getSelectedTerritory1(), game.getSelectedTerritory2());
+	            if (game.getSelectedTerritory1() != null || game.getSelectedTerritory2() != null){
+	            	bataille.attackBetweenTerritory(game.getSelectedTerritory1(), game.getSelectedTerritory2());
+	            	update_Map(game.getSelectedTerritory1());
+		            update_Map(game.getSelectedTerritory2());
+	            }
+	            	
 
-	            update_Map(game.getSelectedTerritory1());
-	            update_Map(game.getSelectedTerritory2());
+	            
             }
             update_Territory_Labels();
             

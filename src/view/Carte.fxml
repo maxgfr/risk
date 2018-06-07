@@ -60,7 +60,7 @@
             <ToggleButton fx:id="btn_deplacement" mnemonicParsing="false" text="Déplacement" toggleGroup="$tGroup" />
         </items>
       </ToolBar>
-      <AnchorPane fx:id="GameAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#imagePaneMouseClicked" prefHeight="628.0" prefWidth="1227.0">
+      <AnchorPane fx:id="GameAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#imagePaneMouseClicked" prefHeight="628.0" prefWidth="1227.0">
          <children>
             <ImageView fx:id="imageView" fitHeight="628.0" fitWidth="1227.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <image>

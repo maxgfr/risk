@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -23,14 +24,31 @@ public class AI extends Player {
     @Override
     public void attack(Game game) {
     	
-
-    	/*List<Territory> listTerritory = (List<Territory>) game.getMaListeDeTerritoire().stream().filter(p -> p.player.equals(this));
-    	
-    	Territory attacker = listTerritory.get(new Random().nextInt(listTerritory.size()));
-    	
-    	attacker.terrAdjacent.get(Integer.toString(new Random().nextInt(attacker.terrAdjacent.size())));*/
-    		
-        boolean findTerritory1 = false;
+    	boolean findTerritory = false;
+        Territory attacker = null;
+        List<Territory> listTerritory = (List<Territory>) game.getMaListeDeTerritoire().stream().filter(
+    			p -> p.player.equals(this)
+    			&&
+    			p.unitList.size() > 3
+    			).collect(Collectors.toList());
+        if (listTerritory.size() > 1){
+	        while(!findTerritory) {
+		    	
+	        	attacker = listTerritory.get(new Random().nextInt(listTerritory.size()));
+	        	String nameAttacker = attacker.terrAdjacent.get(Integer.toString(new Random().nextInt(attacker.terrAdjacent.size())));
+	        	List<Territory> listAttackable = (List<Territory>) game.getMaListeDeTerritoire().stream().filter(
+	        			p -> !p.player.equals(this) && 
+	        			p.name == nameAttacker
+	        			).collect(Collectors.toList());
+	        	if (!listAttackable.isEmpty()){
+	        		findTerritory = true;
+	        		game.setSelectedTerritory1(attacker);
+	                game.setSelectedTerritory2(listAttackable.get(new Random().nextInt(listAttackable.size())));
+	        	}
+		    	
+		    }
+        }
+        /*boolean findTerritory1 = false;
         boolean findTerritory2 = false;
         Territory selectedTerritory1 = null;
         Territory selectedTerritory2 = null;
@@ -55,9 +73,8 @@ public class AI extends Player {
                     }
                 } 
             }
-        }
-        game.setSelectedTerritory1(selectedTerritory1);
-        game.setSelectedTerritory2(selectedTerritory2);
+        }*/
+        
     }
     
     @Override
