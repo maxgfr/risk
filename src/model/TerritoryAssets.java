@@ -162,7 +162,7 @@ public class TerritoryAssets {
         public static boolean controlTerritory(List<Territory> territories, Player player, int nbTerritory) {
             int i =0;
             for (Territory terr : territories) {
-               if (terr.player.getId() != player.getId()) {
+               if (terr.player.getId() == player.getId()) {
                    i++;
                }
             }
