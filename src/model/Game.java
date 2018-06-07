@@ -21,7 +21,9 @@ public class Game {
     private List<Color> maListeDeColor;
     private List<Pixel> maListeDePixel;
     private List<Territory> maListeDeTerritoire;
+    
     private boolean finished;
+    private boolean isFirstTour;
     private int num_tours;
     private GameState state;
     
@@ -52,6 +54,7 @@ public class Game {
         selectedTerritory1 = null;
         selectedTerritory2 = null;
         setSelectedUnitType(TypeUnit.SOLDIER);
+        isFirstTour = true;
     }
 
     /**

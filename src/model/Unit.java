@@ -93,17 +93,17 @@ public class Unit{
             return Strength;
 	}
         
-        public int getStrengthType(TypeUnit unitType) {
-            if (unitType == TypeUnit.SOLDIER){
-		return giveRandomNumber(1,6);
-            }
-            if (unitType == TypeUnit.HORSE_RIDER){
-		return giveRandomNumber(2,7);
-            }
-            if (unitType == TypeUnit.CANNON){
-		return giveRandomNumber(4,9);
-            }
-            return 0;
+    public int getStrengthType(TypeUnit unitType) {
+        if (unitType == TypeUnit.SOLDIER){
+	return giveRandomNumber(1,6);
+        }
+        if (unitType == TypeUnit.HORSE_RIDER){
+	return giveRandomNumber(2,7);
+        }
+        if (unitType == TypeUnit.CANNON){
+	return giveRandomNumber(4,9);
+        }
+        return 0;
 	}
 
 	/**

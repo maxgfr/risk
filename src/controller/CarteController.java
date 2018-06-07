@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 
@@ -203,12 +204,18 @@ public class CarteController implements Initializable {
 		    	case "ATTACK":
 		    		if (game.getSelectedTerritory1() != null && game.getSelectedTerritory2() != null){
 		    			if (game.getSelectedTerritory1().terrAdjacent.contains(game.getSelectedTerritory2().name)){
-			    			if (game.getSelectedTerritory1().player.equals(current_player) && !game.getSelectedTerritory2().player.equals(current_player))
+			    			if (game.getSelectedTerritory1().player.equals(current_player) && !game.getSelectedTerritory2().player.equals(current_player)){
 			    				bataille.attackBetweenTerritory(game.getSelectedTerritory1(), game.getSelectedTerritory2());
-                                                        update_Map(game.getSelectedTerritory1());
-                                                        update_Map(game.getSelectedTerritory2());
+                                update_Map(game.getSelectedTerritory1());
+                                update_Map(game.getSelectedTerritory2());
 			    				update_Territory_Labels();
+	    			    	}
+			    			game.setSelectedTerritory1(null);
+    			    		game.setSelectedTerritory2(null);
 			    		}
+		    			else{
+		    				System.out.println("Non Adjacent territory");
+		    			}
 		    		}
 		    		
 		    		break;
@@ -241,12 +248,12 @@ public class CarteController implements Initializable {
 			    						game.getSelectedTerritory1().getUnitList().remove(unitToMov);
 			    						update_Territory_Labels();
 			    						update_Counters(terr);
+			    						game.setSelectedTerritory1(null);
+			    			    		game.setSelectedTerritory2(null);
 			    					}
 		    					}
-		    					else{
-		    						game.setSelectedTerritory1(null);
-		    			    		game.setSelectedTerritory2(null);
-		    					}
+		    					else
+		    						System.out.println("Terr is not adjacent");
 		    				}
 		    			}
 		    		}
@@ -279,20 +286,17 @@ public class CarteController implements Initializable {
     	game.getReinforcement(current_player);
         
         if(current_player instanceof AI) { // si c'est une IA
-            Territory terr = current_player.reinforcment(game);
-            update_Territory_Labels();
-            current_player.setUnitToDispatch(current_player.getUnitToDispatch() - terr.getUnitList().get(terr.getUnitList().size() - 1).getCost());
-            update_Counters(terr);
-            if (current_player.getUnitToDispatch() < 1){
-                btn_renfort.setDisable(true);
-                btn_attack.setDisable(false);
-                btn_deplacement.setDisable(false);
+            current_player.reinforcment(game);
+            
+            for(int i = 0; i< (int) new Random().nextInt(3); i++){
+	            current_player.attack(game);
+	            bataille.attackBetweenTerritory(game.getSelectedTerritory1(), game.getSelectedTerritory2());
+
+	            update_Map(game.getSelectedTerritory1());
+	            update_Map(game.getSelectedTerritory2());
             }
-            current_player.attack(game);
-            bataille.attackBetweenTerritory(game.getSelectedTerritory1(), game.getSelectedTerritory2());
-            update_Map(game.getSelectedTerritory1());
-            update_Map(game.getSelectedTerritory2());
             update_Territory_Labels();
+            
         }
     	
     	tGroup.selectToggle(btn_renfort);
@@ -322,18 +326,23 @@ public class CarteController implements Initializable {
     private void setSelectedTerritory(Territory terr){
     	if (game.getSelectedTerritory1() == null)
     		game.setSelectedTerritory1(terr);
-    	else if (game.getSelectedTerritory2() == null && !terr.equals(game.getSelectedTerritory1()))
-    		game.setSelectedTerritory2(terr);
+    	else if (game.getState() == GameState.REINFORCEMENT)
+			game.setSelectedTerritory2(null);
     	else if (terr.equals(game.getSelectedTerritory1())){
     		if (game.getState() == GameState.REINFORCEMENT)
     			game.setSelectedTerritory2(null);
-    	}
+    		}
+    	else if (game.getSelectedTerritory2() == null && !terr.equals(game.getSelectedTerritory1()))
+    		game.setSelectedTerritory2(terr);
     	else if (!terr.equals(game.getSelectedTerritory1()) && !terr.equals(game.getSelectedTerritory2())){
     		game.setSelectedTerritory1(terr);
     		game.setSelectedTerritory2(null);
     	}
-    	System.out.println("Selected Territory 1 :" + game.getSelectedTerritory1());
-    	System.out.println("Selected Territory 2 :" + game.getSelectedTerritory2());
+    	
+    	if (game.getSelectedTerritory1() != null)
+    		System.out.println("Selected Territory 1 :" + game.getSelectedTerritory1().name);
+    	if (game.getSelectedTerritory2() != null)
+    		System.out.println("Selected Territory 2 :" + game.getSelectedTerritory2().name);
     }
     
     private void update_Counters(Territory terr ){

@@ -6,7 +6,9 @@
 package model;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -20,6 +22,14 @@ public class AI extends Player {
     
     @Override
     public void attack(Game game) {
+    	
+
+    	/*List<Territory> listTerritory = (List<Territory>) game.getMaListeDeTerritoire().stream().filter(p -> p.player.equals(this));
+    	
+    	Territory attacker = listTerritory.get(new Random().nextInt(listTerritory.size()));
+    	
+    	attacker.terrAdjacent.get(Integer.toString(new Random().nextInt(attacker.terrAdjacent.size())));*/
+    		
         boolean findTerritory1 = false;
         boolean findTerritory2 = false;
         Territory selectedTerritory1 = null;
@@ -29,8 +39,11 @@ public class AI extends Player {
             for(Territory terr : listTerritory) {
                 if(!findTerritory1) {
                     if(terr.player.getId() == this.getId()) {
-                        selectedTerritory1 = terr;
-                        findTerritory1 = true; 
+                    	if (terr.unitList.size() > 3){
+                    		selectedTerritory1 = terr;
+                            findTerritory1 = true; 
+                    	}
+                        
                     }
                 }
                 if(terr.player.getId() != this.getId()) {
@@ -48,19 +61,23 @@ public class AI extends Player {
     }
     
     @Override
-    public Territory reinforcment(Game game) {
-        List<Territory> listTerritory = game.getMaListeDeTerritoire();
-        for(Territory terr : listTerritory) {
-            if (terr.player.equals(this)){
-                Unit unitToDispatch = new Unit(game.getSelectedUnitType());
-                if(this.getUnitToDispatch() >= unitToDispatch.getCost()){
-                    terr.getUnitList().add(unitToDispatch);
-                    return terr;
-                }
+    public void reinforcment(Game game) {
+    	List<Territory> listTerritory = new ArrayList<Territory>();
+    	for (Territory terr : game.getMaListeDeTerritoire()) {
+            if (terr.player.equals(this)) {
+            	listTerritory.add(terr);
             }
         }
+        while(this.getUnitToDispatch() > 0){
+        	Unit[]  listUnit = {new Unit(TypeUnit.SOLDIER),new Unit(TypeUnit.CANNON), new Unit(TypeUnit.HORSE_RIDER)};
+        	Unit unitDispatched = listUnit[( (int) new Random().nextInt(listUnit.length))];
+        	if (unitDispatched.getCost() <= this.getUnitToDispatch()){
+        		listTerritory.get(new Random().nextInt(listTerritory.size())).getUnitList().add(unitDispatched);
+            	this.setUnitToDispatch(this.getUnitToDispatch() - unitDispatched.getCost());
+        	}
+        	
+        }
         
-        return null;
     }
     
 }

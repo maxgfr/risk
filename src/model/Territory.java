@@ -66,6 +66,7 @@ public class Territory {
 					terrAdjacent.put("1", "West_Canada");
 					terrAdjacent.put("2", "Center_Canada");
 					terrAdjacent.put("3", "Greenland");
+					terrAdjacent.put("4", "Alaska");
 					this.region="North_America";
 					return "North_Canada";
 					

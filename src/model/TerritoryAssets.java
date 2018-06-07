@@ -138,50 +138,6 @@ public class TerritoryAssets {
         }
 
 
-
-
-		/*list controlledRegions = [];
-		String[] str = new String[10];		
-		North America = 0/9;
-		South America =0/4;
-		Europe =0/7;
-		Africa =0/6;
-		Asia =0/12;
-		Australia =0/4;
-		for it in territories(){
-			if it.region = "North America"//avec un switch
-				North_America++
-
-
-		}
-		if North_America=9
-			controlledRegions+= "North_America"
-
-		etc
-*/
-
-
-/*	public void move(Territory territory1, Territory territory2){
-		if (territory2.getPlayerID()==territory1.getPlayerID())
-			déplacement des unités de combats
-		else
-			attack();
-
-	}
-
-
-	public void attack(Territory territory1, Territory territory2){
-		List<Unit> unitsPlayer1 = territory1.getUnitList();
-		List<Unit> unitsPlayer2 = territory2.getUnitList();
-
-
-
-
-
-		}
-
-
-*/
 	
 
 }

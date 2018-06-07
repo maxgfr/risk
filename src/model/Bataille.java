@@ -46,7 +46,22 @@ public class Bataille {
             System.out.println("L'attackeur ou défenseur n'a plus d'unités...");
             return;
         }
-               
+        if (unitAttackeur.size() < 3){
+        	System.out.println("L'attackeur n'a pas assez d'unités...");
+        	return;
+        }
+        
+        if (territoryA.equals(territoryB)){
+        	System.out.println("Impossible de s'attaquer soit même");
+        	return;
+        }
+        
+        if(!territoryA.terrAdjacent.contains(territoryB.name)){
+        	System.out.println("Impossible d'attaquer un territoire non adjacent");
+        	return;
+        }
+        	
+        System.out.println("Attaque de :" + territoryA.name + " vers : " + territoryB.name);
         // L'attaquant attaque avec au maximum 3 unités à la fois. Il doit toujours
         // rester au moins 1 unité sur le territoire de départ qui ne participe pas au
         // combat.
@@ -149,14 +164,17 @@ public class Bataille {
         System.out.println(length_attack+ "  " +length_def+ "  " +length_remenber);
         
         for (int k=0; k<length_remenber; k++) {
-            Unit unitNextAttack = copyUnitForAttack.get(k);
-            Unit unitNextDefenseuh = copyUnitForDefense.get(k);
+            Unit unitNextAttack = copyUnitForAttack.iterator().next();
+            Unit unitNextDefenseuh = copyUnitForDefense.iterator().next();
             //System.out.println("Unit to defend : " + unitNextDefense);
             //System.out.println("Unit to attack : " + unitNextAttack);
             
-            int unitAtt = unitNextAttack.getStrengthType(unitNextAttack.getType());
-            int unitDef = unitNextDefenseuh.getStrengthType(unitNextDefenseuh.getType());
-            
+            /*
+             * ICI tu avais fait une fonction qui etait en doublon, Tu generais un nouveau nombre aleatoire pour la force alors 
+             * que la force est aleatoire a la creation de l'unite
+             */
+            int unitAtt = unitNextAttack.getStrength();
+            int unitDef = unitNextDefenseuh.getStrength();
             //int unitAtt = unitNextAttack.getStrength();
             //int unitDef = unitNextDefenseuh.getStrength();
             // Pour chaque comparaison, l'unité ayant le score le plus élevé détruit 
