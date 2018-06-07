@@ -105,11 +105,17 @@ public class Game {
      * @return the finished
      */
     public boolean isFinished() {
-        boolean finished = true;
+        boolean finished = false;
+        int length = list_player.size();
+        int occurence = 0;
         for (Player p : list_player) {
             if(!p.isFinished()) {
-                finished = false;
+                occurence++;
             }  
+        }
+        int nb_joueur_restant = length - occurence ;
+        if (nb_joueur_restant <= 1) {
+            finished = true;
         }
         return finished;
     }

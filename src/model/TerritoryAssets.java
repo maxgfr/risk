@@ -3,6 +3,7 @@ package model;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TerritoryAssets {
 
@@ -77,6 +78,36 @@ public class TerritoryAssets {
             return controlledRegions.size();
     }
     
+    public static boolean hasBiggestRegion(List<Territory> territories) {
+            List<String>  controlledRegions = new ArrayList<>();
+            int northAmerica = 0;
+            int southAmerica = 0;
+            int europe = 0;
+            int africa = 0;
+            int asia = 0;
+            int oceania =0;
+            for (Territory element: territories){
+                    switch (element.getRegion()) {
+                            case "North_America": northAmerica++;
+                                    break;
+                            case "South_America": southAmerica++;
+                                    break;
+                            case "Europe": europe++;
+                                break;
+                            case "Africa": africa++;
+                                    break;
+                            case "Asia": asia++;
+                                    break;
+                            case "Oceania": oceania++;
+                                    break;
+                    }
+            }
+           if (asia == 12){
+               return true;
+           }
+            return false;
+    }
+    
         
         public static boolean knowIfIhaveTerriority(List<Territory> territories, Player to_Destroy) {   
             for(Territory ter : territories) {
@@ -98,12 +129,14 @@ public class TerritoryAssets {
         
         public static boolean controlTerritoryWithRegion(List<Territory> territories, Player player, int nbTerritory, int nbRegion) {
             int i =0;
+            List<Territory> territoriesOfGamer = new ArrayList<>();
             for (Territory terr : territories) {
                if (terr.player.getId() != player.getId()) {
                    i++;
+                   territoriesOfGamer.add(terr);
                }
             }
-            if (i>= nbTerritory && player.getNbRegion() >= nbRegion) {
+            if (i>= nbTerritory && countRegions(territoriesOfGamer) >= nbRegion) {
                 return true;
             }
             return false;
@@ -111,12 +144,16 @@ public class TerritoryAssets {
 
         public static boolean controlTerritoryWithArmy(List<Territory> territories, Player player, int nbTerritory, int nbArmy) {
             int i =0;
+            int nb_army = 0;
             for (Territory terr : territories) {
                if (terr.player.getId() != player.getId()) {
                    i++;
+                   if(terr.getUnitList().size() >= 2) {
+                       nb_army ++;
+                   }
                }
             }
-            if (i>= nbTerritory && player.getNbArmy() >= nbArmy) {
+            if (i>= nbTerritory &&  nb_army >= nbArmy) {
                 return true;
             }
             return false;
@@ -136,10 +173,19 @@ public class TerritoryAssets {
         }
 
         public static boolean controlBiggestRegionWithAnotherRegion(List<Territory> territories, Player player) {
-            return player.getBiggestRegion() && player.getNbRegion() >= 2;
+            int i =0;
+            List<Territory> territoriesOfGamer = new ArrayList<>();
+            for (Territory terr : territories) {
+               if (terr.player.getId() != player.getId()) {
+                   i++;
+                   territoriesOfGamer.add(terr);
+               }
+            }
+            if (hasBiggestRegion(territoriesOfGamer) && countRegions(territoriesOfGamer) >= 2) {
+                return true;
+            }
+            return false;
         }
 
-
-	
 
 }
