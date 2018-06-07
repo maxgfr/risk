@@ -128,7 +128,7 @@ public class TerritoryAssets {
         }
         
         public static boolean controlTerritoryWithRegion(List<Territory> territories, Player player, int nbTerritory, int nbRegion) {
-            int i =0;
+            int i =1;
             List<Territory> territoriesOfGamer = new ArrayList<>();
             for (Territory terr : territories) {
                if (terr.player.getId() == player.getId()) {
@@ -143,7 +143,7 @@ public class TerritoryAssets {
         }
 
         public static boolean controlTerritoryWithArmy(List<Territory> territories, Player player, int nbTerritory, int nbArmy) {
-            int i =0;
+            int i =1;
             int nb_army = 0;
             for (Territory terr : territories) {
                if (terr.player.getId() == player.getId()) {
@@ -160,7 +160,7 @@ public class TerritoryAssets {
         }
 
         public static boolean controlTerritory(List<Territory> territories, Player player, int nbTerritory) {
-            int i =0;
+            int i =1;
             for (Territory terr : territories) {
                if (terr.player.getId() == player.getId()) {
                    i++;
@@ -173,7 +173,7 @@ public class TerritoryAssets {
         }
 
         public static boolean controlBiggestRegionWithAnotherRegion(List<Territory> territories, Player player) {
-            int i =0;
+            int i =1;
             List<Territory> territoriesOfGamer = new ArrayList<>();
             for (Territory terr : territories) {
                if (terr.player.getId() == player.getId()) {
