@@ -188,7 +188,7 @@ public class TerritoryAssets {
         }
 
 
-<<<<<<< HEAD
+
 
 
 		/*list controlledRegions = [];
@@ -255,8 +255,4 @@ public void attack(Territory territory1, Territory territory2){
 
 
 
-
-
-=======
->>>>>>> 62713bbd68fb73b3db8e170a0836f976621f29d6
 }
