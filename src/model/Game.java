@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  *
@@ -21,7 +23,9 @@ public class Game {
     private List<Color> maListeDeColor;
     private List<Pixel> maListeDePixel;
     private List<Territory> maListeDeTerritoire;
+    
     private boolean finished;
+    private boolean isFirstTour;
     private int num_tours;
     private GameState state;
     
@@ -52,6 +56,7 @@ public class Game {
         selectedTerritory1 = null;
         selectedTerritory2 = null;
         setSelectedUnitType(TypeUnit.SOLDIER);
+        isFirstTour = true;
     }
 
     /**
@@ -100,6 +105,18 @@ public class Game {
      * @return the finished
      */
     public boolean isFinished() {
+        boolean finished = false;
+        int length = list_player.size();
+        int occurence = 0;
+        for (Player p : list_player) {
+            if(!p.isFinished()) {
+                occurence++;
+            }  
+        }
+        int nb_joueur_restant = length - occurence ;
+        if (nb_joueur_restant <= 1) {
+            finished = true;
+        }
         return finished;
     }
 
@@ -252,7 +269,7 @@ public class Game {
     
     public void getReinforcement(Player player){
     	int nb_terr_controlled = (int) getMaListeDeTerritoire().stream().filter(p -> p.player.equals(player)).count();
-    	int nb_region_controlled = player.getNbRegion();
+    	int nb_region_controlled = TerritoryAssets.countRegions((List<Territory>) getMaListeDeTerritoire().stream().filter(p -> p.player.equals(player)).collect(Collectors.toList()) );
     	if (player.getUnitToDispatch() == 0)
     		player.setUnitToDispatch((int) Math.floorDiv(nb_terr_controlled,3) + (int) Math.floorDiv(nb_region_controlled, 3));
     }

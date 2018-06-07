@@ -5,15 +5,21 @@
  */
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
+import java.util.Random;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -22,6 +28,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Popup;
 import model.Bataille;
 import model.Game;
 import model.GameState;
@@ -31,6 +38,10 @@ import model.Player;
 import model.Territory;
 import model.TypeUnit;
 import model.Unit;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import model.AI;
+
 
 /**
  *
@@ -43,6 +54,7 @@ public class CarteController implements Initializable {
     private static Bataille bataille = Bataille.getInstance();
     Player current_player;
     List<Player> players;
+    Mission mission = Mission.getInstance();
     
     @FXML
     ImageView imageView;
@@ -173,7 +185,7 @@ public class CarteController implements Initializable {
         	if (node instanceof Label){
         		((Label)node).setText("0");
         	}
-        }
+        }    	
             
         game.initTerritory();
         lb_nb_unit.setText(""+current_player.getUnitToDispatch());
@@ -182,7 +194,7 @@ public class CarteController implements Initializable {
    
     
     @FXML
-    private void imagePaneMouseClicked(MouseEvent event){
+    private void imagePaneMouseClicked(MouseEvent event) throws IOException{
     	Territory terr = game.tellTerritory((int) event.getX(), (int) event.getY());
     	
         if (terr != null){
@@ -192,12 +204,18 @@ public class CarteController implements Initializable {
 		    	case "ATTACK":
 		    		if (game.getSelectedTerritory1() != null && game.getSelectedTerritory2() != null){
 		    			if (game.getSelectedTerritory1().terrAdjacent.contains(game.getSelectedTerritory2().name)){
-			    			if (game.getSelectedTerritory1().player.equals(current_player) && !game.getSelectedTerritory2().player.equals(current_player))
+			    			if (game.getSelectedTerritory1().player.equals(current_player) && !game.getSelectedTerritory2().player.equals(current_player)){
 			    				bataille.attackBetweenTerritory(game.getSelectedTerritory1(), game.getSelectedTerritory2());
-                                                        update_Map(game.getSelectedTerritory1());
-                                                        update_Map(game.getSelectedTerritory2());
+                                update_Map(game.getSelectedTerritory1());
+                                update_Map(game.getSelectedTerritory2());
 			    				update_Territory_Labels();
+	    			    	}
+			    			game.setSelectedTerritory1(null);
+    			    		game.setSelectedTerritory2(null);
 			    		}
+		    			else{
+		    				System.out.println("Non Adjacent territory");
+		    			}
 		    		}
 		    		
 		    		break;
@@ -230,12 +248,12 @@ public class CarteController implements Initializable {
 			    						game.getSelectedTerritory1().getUnitList().remove(unitToMov);
 			    						update_Territory_Labels();
 			    						update_Counters(terr);
+			    						game.setSelectedTerritory1(null);
+			    			    		game.setSelectedTerritory2(null);
 			    					}
 		    					}
-		    					else{
-		    						game.setSelectedTerritory1(null);
-		    			    		game.setSelectedTerritory2(null);
-		    					}
+		    					else
+		    						System.out.println("Terr is not adjacent");
 		    				}
 		    			}
 		    		}
@@ -246,7 +264,13 @@ public class CarteController implements Initializable {
         	
         }
         
-        
+        if(mission.hasWin(current_player)) {
+            showMessage(Alert.AlertType.INFORMATION, "Fin de la partie", "Victoire du joueur " + current_player.getName());
+            current_player.setFinished(true);
+            if(game.isFinished()){
+                Platform.exit();
+            } 
+        }
     }
     
     @FXML
@@ -257,9 +281,23 @@ public class CarteController implements Initializable {
     	}
     	else
     		current_player = players.get(0);
-    	
-    	System.out.println("Current player is : " + current_player.getName() );
+      
+        System.out.println("Current player is : " + current_player.getName() );
     	game.getReinforcement(current_player);
+        
+        if(current_player instanceof AI) { // si c'est une IA
+            current_player.reinforcment(game);
+            
+            for(int i = 0; i< (int) new Random().nextInt(3); i++){
+	            current_player.attack(game);
+	            bataille.attackBetweenTerritory(game.getSelectedTerritory1(), game.getSelectedTerritory2());
+
+	            update_Map(game.getSelectedTerritory1());
+	            update_Map(game.getSelectedTerritory2());
+            }
+            update_Territory_Labels();
+            
+        }
     	
     	tGroup.selectToggle(btn_renfort);
     	btn_renfort.setDisable(false);
@@ -288,18 +326,23 @@ public class CarteController implements Initializable {
     private void setSelectedTerritory(Territory terr){
     	if (game.getSelectedTerritory1() == null)
     		game.setSelectedTerritory1(terr);
-    	else if (game.getSelectedTerritory2() == null && !terr.equals(game.getSelectedTerritory1()))
-    		game.setSelectedTerritory2(terr);
+    	else if (game.getState() == GameState.REINFORCEMENT)
+			game.setSelectedTerritory2(null);
     	else if (terr.equals(game.getSelectedTerritory1())){
     		if (game.getState() == GameState.REINFORCEMENT)
     			game.setSelectedTerritory2(null);
-    	}
+    		}
+    	else if (game.getSelectedTerritory2() == null && !terr.equals(game.getSelectedTerritory1()))
+    		game.setSelectedTerritory2(terr);
     	else if (!terr.equals(game.getSelectedTerritory1()) && !terr.equals(game.getSelectedTerritory2())){
     		game.setSelectedTerritory1(terr);
     		game.setSelectedTerritory2(null);
     	}
-    	System.out.println("Selected Territory 1 :" + game.getSelectedTerritory1());
-    	System.out.println("Selected Territory 2 :" + game.getSelectedTerritory2());
+    	
+    	if (game.getSelectedTerritory1() != null)
+    		System.out.println("Selected Territory 1 :" + game.getSelectedTerritory1().name);
+    	if (game.getSelectedTerritory2() != null)
+    		System.out.println("Selected Territory 2 :" + game.getSelectedTerritory2().name);
     }
     
     private void update_Counters(Territory terr ){
@@ -319,5 +362,16 @@ public class CarteController implements Initializable {
     		    }
         	}
     	}
+    }
+    
+    private Optional<ButtonType> showMessage(Alert.AlertType type,String header,String message,ButtonType... lesBoutonsDifferents){
+        Alert laFenetre = new Alert(type);
+        laFenetre.setHeaderText(header);
+        laFenetre.setContentText(message);
+        if (lesBoutonsDifferents.length > 0) {
+            laFenetre.getButtonTypes().clear();
+            laFenetre.getButtonTypes().addAll(lesBoutonsDifferents);
+        }
+        return laFenetre.showAndWait();
     }
 }

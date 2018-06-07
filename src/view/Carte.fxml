@@ -109,7 +109,7 @@
             <Label fx:id="lb_West_Australia" layoutX="1043.0" layoutY="470.0" text="44" textFill="WHITE" />
             <Label fx:id="lb_East_Australia" layoutX="1124.0" layoutY="462.0" text="44" textFill="WHITE" />
             <Label fx:id="lb_Japan" layoutX="1108.0" layoutY="184.0" text="44" />
-            <Button fx:id="btn_NextTurn" layoutX="1133.0" layoutY="597.0" mnemonicParsing="false" onAction="#onNextTurn" text="Tour suivant" />
+            <Button fx:id="btn_NextTurn" layoutX="1132.0" layoutY="571.0" mnemonicParsing="false" onAction="#onNextTurn" text="Tour suivant" />
          </children>
          <VBox.margin>
             <Insets left="35.0" top="50.0" />

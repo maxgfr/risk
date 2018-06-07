@@ -46,7 +46,22 @@ public class Bataille {
             System.out.println("L'attackeur ou défenseur n'a plus d'unités...");
             return;
         }
-               
+        if (unitAttackeur.size() < 3){
+        	System.out.println("L'attackeur n'a pas assez d'unités...");
+        	return;
+        }
+        
+        if (territoryA.equals(territoryB)){
+        	System.out.println("Impossible de s'attaquer soit même");
+        	return;
+        }
+        
+        if(!territoryA.terrAdjacent.contains(territoryB.name)){
+        	System.out.println("Impossible d'attaquer un territoire non adjacent");
+        	return;
+        }
+        	
+        System.out.println("Attaque de :" + territoryA.name + " vers : " + territoryB.name);
         // L'attaquant attaque avec au maximum 3 unités à la fois. Il doit toujours
         // rester au moins 1 unité sur le territoire de départ qui ne participe pas au
         // combat.
@@ -137,30 +152,31 @@ public class Bataille {
         //notera que les priorité en défense et en attaque ne sont pas les mêmes !
                 
         boolean attackeurWin = false;
+        boolean conquisTerritoire = false;
         
         int length_def =  unitForDefend.size();
         int length_attack =  unitForTheAttack.size();
-        int length_remenber = 0;
+        int length_remenber = Math.min(length_attack,length_def);
         
-        if (length_attack <= length_def) {
-            length_remenber = length_attack;
-        } else {
-            length_remenber = length_def;
-        }
+        List<Unit> copyUnitForAttack = unitForTheAttack;
+        List<Unit> copyUnitForDefense = unitForDefend;
         
         System.out.println(length_attack+ "  " +length_def+ "  " +length_remenber);
         
-        for (int k=0; k<length_remenber-1; k++) {
-            Unit unitNextAttack = unitForTheAttack.get(k);
-            Unit unitNextDefenseuh = unitForDefend.get(k);
+        for (int k=0; k<length_remenber; k++) {
+            Unit unitNextAttack = copyUnitForAttack.iterator().next();
+            Unit unitNextDefenseuh = copyUnitForDefense.iterator().next();
             //System.out.println("Unit to defend : " + unitNextDefense);
             //System.out.println("Unit to attack : " + unitNextAttack);
+            
             /*
-            int unitAtt = unitNextAttack.getStrengthType(unitNextAttack.getType());
-            int unitDef = unitNextDefenseuh.getStrengthType(unitNextDefenseuh.getType());
-            */
+             * ICI tu avais fait une fonction qui etait en doublon, Tu generais un nouveau nombre aleatoire pour la force alors 
+             * que la force est aleatoire a la creation de l'unite
+             */
             int unitAtt = unitNextAttack.getStrength();
             int unitDef = unitNextDefenseuh.getStrength();
+            //int unitAtt = unitNextAttack.getStrength();
+            //int unitDef = unitNextDefenseuh.getStrength();
             // Pour chaque comparaison, l'unité ayant le score le plus élevé détruit 
             // celle avec le score le moins élevé. L'égalité béné􏰃cie au défenseur.
             if (unitAtt > unitDef) {
@@ -168,9 +184,17 @@ public class Bataille {
                 if (unitForDefend.isEmpty()) {
                     System.out.println("Le défenseur a perdu toutes ces unités");
                     attackeurWin = true;
+                    conquisTerritoire = true;
                     break;
                 } else {
-                    System.out.println("Remove unit def" + unitNextDefenseuh);
+                    System.out.println("Remove unit def, length : " + unitForDefend.size() +  " and : "+unitStayDefense.size());
+                    if(unitForDefend.size() <= 1) {
+                        attackeurWin = true;
+                    }
+                    if (unitForDefend.size() <= 1 && unitStayDefense.size() <= 1) {
+                        System.out.println("Territoire conquis");
+                        conquisTerritoire = true;
+                    }
                     unitForDefend.remove(unitNextDefenseuh); 
                     unitStayDefense.remove(unitNextDefenseuh); 
                 }      
@@ -180,18 +204,11 @@ public class Bataille {
                     System.out.println("L'attaquant a perdu toutes ces unités");
                     break;
                 } else {
-                    System.out.println("Remove unit attack" + unitNextAttack);
+                    System.out.println("Remove unit attack"+ unitForTheAttack.size());
                     unitForTheAttack.remove(unitNextAttack);
                 }
                 
             } 
-        }
-        
-        boolean conquisTerritoire = false;
-        if (unitForDefend.isEmpty() && unitStayDefense.isEmpty()) {
-            System.out.println("L'attackeur a conquis le territoire");
-            attackeurWin = true;
-            conquisTerritoire = true;
         }
         
    
@@ -236,9 +253,10 @@ public class Bataille {
             //participé et survécu à l'attaque.
             territoryA.setBatailleTerritoire(attackeur, unitStayAttack);
             if (conquisTerritoire) {
+                System.out.println("L'attackeur a gagné");
                 territoryB.setBatailleTerritoire(attackeur, unitAfterAttack);
             } else {
-                territoryB.setBatailleTerritoire(attackeur, territoryB.getUnitList());
+                territoryB.setBatailleTerritoire(defenseur, territoryB.getUnitList());
             }
             
         } else {

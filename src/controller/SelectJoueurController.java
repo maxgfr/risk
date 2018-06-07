@@ -18,6 +18,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -25,6 +27,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.AI;
 import model.Game;
 import model.Player;
 
@@ -45,6 +48,8 @@ public class SelectJoueurController implements Initializable {
     VBox myVBox;
     
     List<TextField> listTextField;
+    
+    List<CheckBox> listCheckBox;
   
     /**
      * Initializes the controller class.
@@ -61,12 +66,16 @@ public class SelectJoueurController implements Initializable {
         Integer res = d.intValue();
         System.out.println(res);
         listTextField = new ArrayList<TextField>();
+        listCheckBox = new ArrayList<CheckBox>();
         for(int i = 0 ; i< res ; i++ ) {
             int val = i +1;
             myVBox.getChildren().add(new Text("Nom du Joueur "+val));
             TextField tf = new TextField();
             listTextField.add(tf);
+            CheckBox cb = new CheckBox("Intelligence artifielle");
+            listCheckBox.add(cb);
             myVBox.getChildren().add(listTextField.get(listTextField.size()-1));
+            myVBox.getChildren().add(listCheckBox.get(listCheckBox.size()-1));
         }
         Button b_final = new Button("Valider le nom des joueurs");
         b_final.setId("b_final");
@@ -89,8 +98,15 @@ public class SelectJoueurController implements Initializable {
             List<Color> listColor = game.getListColor(listTextField.size());
             for (int i = 0; i<listTextField.size() ; i++) {
                 String value = listTextField.get(i).getText();
-                Player p = new Player(i, value, listColor.get(i));
-                list_player.add(p);
+                boolean checked = listCheckBox.get(i).isSelected();
+                if(checked) {
+                    Player p = new AI(i, value, listColor.get(i));
+                    list_player.add(p);
+                    System.out.println("IA");
+                } else {
+                    Player p = new Player(i, value, listColor.get(i));
+                    list_player.add(p);
+                }
             }
             game.setList_player(list_player);
             System.out.println("List of players in SelectViewController: "+ list_player);

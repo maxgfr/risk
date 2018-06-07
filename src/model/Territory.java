@@ -67,6 +67,7 @@ public class Territory {
 					terrAdjacent.put("1", "West_Canada");
 					terrAdjacent.put("2", "Center_Canada");
 					terrAdjacent.put("3", "Greenland");
+					terrAdjacent.put("4", "Alaska");
 					this.region="North_America";
 					return "North_Canada";
 					
@@ -420,6 +421,15 @@ public class Territory {
 		public Unit getUnitByType(TypeUnit type){
 			return (Unit) unitList.stream().filter(p -> p.getType().equals(type)).findFirst().get();
 		}
+                
+        public void couldAttack (List<Territory> list, Territory A) {
+            for(Territory B : list) {
+                if (B.terrAdjacent.contains(A.name)){
+                    
+                }
+            }
+                
+        }
 
 		public int nbOfUnits(TypeUnit unit){
 			return (int) unitList.stream().filter(p -> p.getType().equals(unit)).count();
