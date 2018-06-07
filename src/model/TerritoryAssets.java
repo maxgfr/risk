@@ -131,7 +131,7 @@ public class TerritoryAssets {
             int i =0;
             List<Territory> territoriesOfGamer = new ArrayList<>();
             for (Territory terr : territories) {
-               if (terr.player.getId() != player.getId()) {
+               if (terr.player.getId() == player.getId()) {
                    i++;
                    territoriesOfGamer.add(terr);
                }
@@ -146,7 +146,7 @@ public class TerritoryAssets {
             int i =0;
             int nb_army = 0;
             for (Territory terr : territories) {
-               if (terr.player.getId() != player.getId()) {
+               if (terr.player.getId() == player.getId()) {
                    i++;
                    if(terr.getUnitList().size() >= 2) {
                        nb_army ++;
@@ -176,7 +176,7 @@ public class TerritoryAssets {
             int i =0;
             List<Territory> territoriesOfGamer = new ArrayList<>();
             for (Territory terr : territories) {
-               if (terr.player.getId() != player.getId()) {
+               if (terr.player.getId() == player.getId()) {
                    i++;
                    territoriesOfGamer.add(terr);
                }
